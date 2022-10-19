@@ -3,7 +3,7 @@ from Entidades.usuario import Usuario
 
 class ControladorUsuario():
     def __init__(self, controlador_sistema: ControladorSistema):
-        self.__cotrolador_sistema = contolador_sistema
+        self.__cotrolador_sistema = controlador_sistema
         self.__usuarios = []
     
     @property

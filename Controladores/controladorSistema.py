@@ -28,4 +28,4 @@ class ControladorSistema():
         self.abre_tela()
     
     def abre_tela(self):
-        lista_opcoes = 
+        pass

@@ -1,3 +1,4 @@
+from re import T
 from controladorEventos import ControladorEventos
 from controladorUsuarios import ControladorUsuario
 from controladorDispositivos import ControladorDispositivos
@@ -28,4 +29,16 @@ class ControladorSistema():
         self.abre_tela()
     
     def abre_tela(self):
+        lista_opcoes = {1: self.entra_usuario, 2: self.cadastra_usuario, 0: self.encerrar_sistema}
+
+        while True:
+            opcao_escolhida = self.__tela_sistema.tela_opcoes()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+    
+    def entra_usuario(self):
+        #entrar com o usuario é no sistema eventos ou no sistema usuario??
         pass
+
+    def cadastra_usuario(self):
+        self.__controlador_usuarios.cadastra_usuario

@@ -42,6 +42,18 @@ class ControladorUsuario():
             codigo = randint(1000,2000)
             if codigo not in self.__lista_codigos:
                 self.__lista_codigos.append(codigo)
-                codigo_usuario = codigo
+                codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        usuario = Usuario(nome_usuario, codigo_usuario)
+        self.__usuarios.append(usuario)
+    
+    def entrar_usuario(self):
+        nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario
+        for usuario in self.__usuarios:
+            if nome_usuario == usuario.nome and codigo_usuario == usuario.codigo:
+                usuario_atual = usuario
+        return usuario_atual
+    
+    
 
 

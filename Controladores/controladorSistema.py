@@ -1,4 +1,3 @@
-from re import T
 from controladorEventos import ControladorEventos
 from controladorUsuarios import ControladorUsuario
 from controladorDispositivos import ControladorDispositivos
@@ -37,8 +36,11 @@ class ControladorSistema():
             funcao_escolhida()
     
     def entra_usuario(self):
+        usuario_atual = self.__controlador_usuarios.entrar_usuario
         #entrar com o usuario é no sistema eventos ou no sistema usuario??
-        pass
 
     def cadastra_usuario(self):
         self.__controlador_usuarios.cadastra_usuario
+    
+
+    

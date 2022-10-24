@@ -29,19 +29,16 @@ class ControladorUsuario():
         for user in self.__usuarios:
             if user == usuario:
                 user.nome = novo_nome
-                user.codigo = novo_codigo
     
     def find_usuario(self, codigo: int):
         for usuario in self.__usuarios:
             if usuario.codigo_usuario == codigo:
                 return usuario
-<<<<<<< HEAD
-=======
-    
+#------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
         nome_usuario = self.__tela.tela_cadastra_usuario
         while codigo not in self.__lista_codigos:
-            codigo = randint(1000,2000)
+            codigo = randint(100,999)
             if codigo not in self.__lista_codigos:
                 self.__lista_codigos.append(codigo)
                 codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -51,12 +48,13 @@ class ControladorUsuario():
     
     def entrar_usuario(self):
         nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario
-        for usuario in self.__usuarios:
-            if nome_usuario == usuario.nome and codigo_usuario == usuario.codigo:
-                usuario_atual = usuario
-        return usuario_atual
-    
+        try:
+            for usuario in self.__usuarios:
+                if nome_usuario == usuario.nome and codigo_usuario == usuario.codigo:
+                    usuario_atual = usuario
+            return usuario_atual
+        except:
+            self.__tela.mostrar_mensagem("Usuário não Cadastrado")
     
 
->>>>>>> 1eceaf3590c8b004e8e5d00996dd08ed04285b00
 

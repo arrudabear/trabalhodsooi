@@ -1,6 +1,6 @@
-#from tela import Tela
+from tela import Tela
 
-class TelaUsuario('''Tela'''):
+class TelaUsuario(Tela):
 
 
     def tela_cadastra_usuario(self):
@@ -13,3 +13,4 @@ class TelaUsuario('''Tela'''):
         nome_usuario = input("Nome do Usuário").title()
         codigo_usuario = int(input("Codigo do Usuário"))
         return nome_usuario, codigo_usuario
+    

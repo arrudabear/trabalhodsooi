@@ -1,7 +1,7 @@
 from controladorEventos import ControladorEventos
 from controladorUsuarios import ControladorUsuario
 from controladorDispositivos import ControladorDispositivos
-#from controladorComodos import ControladorComodos
+from controladorComodos import ControladorComodos
 from Limites.telaSistema import TelaSistema
 
 class ControladorSistema():
@@ -9,8 +9,9 @@ class ControladorSistema():
         self.__controlador_usuarios = ControladorUsuario(self)
         self.__controlador_eventos = ControladorEventos(self)
         self.__controlador_dispositivos = ControladorDispositivos(self)
-        #self.__controlador_comodos = ControladorComodos(self)
+        self.__controlador_comodos = ControladorComodos(self)
         self.__tela_sistema = TelaSistema(self)
+        self.__usuario_atual = None
     
     @property
     def controlador_usuarios(self) -> ControladorUsuario:
@@ -28,19 +29,33 @@ class ControladorSistema():
         self.abre_tela()
     
     def abre_tela(self):
-        lista_opcoes = {1: self.entra_usuario, 2: self.cadastra_usuario, 0: self.encerrar_sistema}
-
         while True:
-            opcao_escolhida = self.__tela_sistema.tela_opcoes()
-            funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+
+            if self.__usuario_atual == None:
+                lista_opcoes = {1: self.entrar_usuario, 2: self.cadastra_usuario, 0: self.encerrar_sistema}
+
+                while True:
+                    opcao_escolhida = self.__tela_sistema.login
+                    funcao_escolhida = lista_opcoes[opcao_escolhida]
+                    funcao_escolhida()
+        
+            else:
+                lista_opcoes = {1: self.controlar_dispositivos, 2: self.controlar_comodos, 3: self.relatorios, 0: self.encerrar_sistema}
+
+                while True:
+                    opcao_escolhida = self.__tela_sistema.opcoes_usuario(self.__usuario_atual.nome)
+                    funcao_escolhida = lista_opcoes[opcao_escolhida]
+                    funcao_escolhida()
     
-    def entra_usuario(self):
-        usuario_atual = self.__controlador_usuarios.entrar_usuario
-        #entrar com o usuario é no sistema eventos ou no sistema usuario??
+    def entrar_usuario(self):
+        self.__usuario_atual = self.__controlador_usuarios.entrar_usuario
+
 
     def cadastra_usuario(self):
         self.__controlador_usuarios.cadastra_usuario
+    
+    def encerrar_sistema(self):
+        exit(0)
     
 
     

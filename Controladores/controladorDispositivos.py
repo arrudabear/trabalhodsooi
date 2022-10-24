@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 from Limites.tela_dispositivos import TelaDispositivos
 from Entidades.dispositivo import Dispositivo
@@ -40,12 +39,3 @@ class ControladorDispositivos():
             opcoes[self.__tela_dispositivos.tela_opcoes()]() 
 
 
-=======
-from Controladores.controladorSistema import ControladorSistema
-
-
-class ControladorDispositivos():
-    def __init__(self, controlador_sistema: ControladorSistema):
-        if isinstance(controlador_sistema, ControladorSistema):
-            self.__controlador_sistema = controlador_sistema
->>>>>>> 1eceaf3590c8b004e8e5d00996dd08ed04285b00

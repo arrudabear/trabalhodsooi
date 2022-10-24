@@ -20,3 +20,13 @@ class TelaSistema(Tela):
         print("0 - Finalizar sistema")
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
         return opcao
+
+    def relatorios(self):
+        print("--- RELATÓRIOS ---")
+        print("Escolha sua opção:")
+        print("1 - ")
+        print("2 - ")
+        print("3 - ")
+        print("0 - Finalizar sistema")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
+        return opcao

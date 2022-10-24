@@ -53,6 +53,22 @@ class ControladorSistema():
 
     def cadastra_usuario(self):
         self.__controlador_usuarios.cadastra_usuario
+
+    def controlar_dispositivos(self):
+        #self.__controlador_dispositivos.
+        pass
+    
+    def controlar_comodos(self):
+        #self.__controlador_comodos
+        pass
+
+    def relatorios(self):
+        lista_opcoes = {}
+        opcao_escolhida = self.__tela_sistema.relatorios
+        funcao_escolhida = lista_opcoes[opcao_escolhida]
+        funcao_escolhida()
+
+
     
     def encerrar_sistema(self):
         exit(0)

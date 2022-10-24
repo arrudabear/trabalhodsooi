@@ -10,8 +10,7 @@ class ControladorEventos():
     def eventos(self) -> list:
         return self.__eventos
     
-    def incluir_evento(self):
-        
+    def incluir_evento(self, evento: Evento):
         if isinstance(evento, Evento):
             self.__eventos.append(Evento)
     
@@ -22,4 +21,5 @@ class ControladorEventos():
         for evento in self.__eventos:
             if evento.data == data and evento.horario == horario:
                 return evento
+    
     

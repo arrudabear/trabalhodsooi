@@ -16,5 +16,5 @@ class Tela(ABC):
                     print("Valores válidos: ", ints_validos)
 
     
-    def monstrar_mensagem(self, msg):
+    def mostrar_mensagem(self, msg):
         print(msg)

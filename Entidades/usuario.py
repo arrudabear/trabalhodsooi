@@ -1,10 +1,10 @@
 
 class Usuario():
-    def __init__(self, nome: str, codigo_usuario: int):
+    def __init__(self, nome: str, codigo: int):
         if isinstance(nome, str):
             self.__nome = nome
-        if isinstance(codigo_usuario, int):
-            self.__codigo_usuario = codigo_usuario
+        if isinstance(codigo, int):
+            self.__codigo = codigo
     
     @property
     def nome(self) -> str:
@@ -16,11 +16,11 @@ class Usuario():
             self.__nome = nome
     
     @property
-    def codigo_usuario(self) -> int:
-        return self.__codigo_usuario
+    def codigo(self) -> int:
+        return self.__codigo
     
-    @codigo_usuario.setter
-    def codigo_usuario(self, codigo_usuario: int):
-        if isinstance(codigo_usuario, int):
-            self.__codigo_usuario = codigo_usuario
+    @codigo.setter
+    def codigo(self, codigo: int):
+        if isinstance(codigo, int):
+            self.__codigo = codigo
     

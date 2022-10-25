@@ -1,18 +1,12 @@
 from dispositivo import Dispositivo
 
 class ArCondicionado(Dispositivo):
-    def __init__(self, estado: bool,
-                potencia: float,
-                tempo_ligado: float,
-                timer_ligar: float,
-                timer_desligar: float,
-                codigo_dispositivo: int,
-                modelo: str,
-                temperatura: float):
-        super().__init__(estado, potencia,
-                        tempo_ligado, tempo_ligado,
-                        timer_ligar, timer_desligar,
-                        codigo_dispositivo, modelo)
+    def __init__(self, potencia: float,
+                 codigo_dispositivo: int, 
+                 modelo: str, temperatura: float):
+        super().__init__(potencia,
+                        codigo_dispositivo,
+                        modelo)
         if isinstance(temperatura, float):
             self.__temperatura = temperatura
     

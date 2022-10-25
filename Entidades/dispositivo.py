@@ -1,27 +1,23 @@
+from abc import ABC, abstractmethod
+
 
 class Dispositivo:
     #deletar tempo_ligado no UML 
-    def __init__(self, estado: bool,
-                 potencia: float, 
-                 tempo_ligado: float, 
-                 timer_ligar: float, 
-                 timer_desligar: float,
+
+    @abstractmethod
+    def __init__(self, potencia: float,
                  codigo_dispositivo: int, 
                  modelo: str):
-        if isinstance(estado, bool): 
-            self.__estado = estado
         if isinstance(potencia, float): 
-            self.__potencia = potencia 
-        if isinstance(tempo_ligado, float): 
-            self.__tempo_ligado = tempo_ligado 
-        if isinstance(timer_ligar, float): 
-            self.__timer_ligar = timer_ligar
-        if isinstance(timer_desligar, float): 
-            self.__timer_desligar = timer_desligar
+            self.__potencia = potencia  
         if isinstance(codigo_dispositivo, int): 
             self.__codigo_dispositivo = codigo_dispositivo
         if isinstance(modelo, str): 
-            self.__modelo = modelo 
+            self.__modelo = modelo
+        self.__estado = False 
+        self.__tempo_ligado = 0
+        self.__timer_ligar = 0
+        self.__timer_desligar = 0
         
         @property 
         def estado(self): 
@@ -85,15 +81,14 @@ class Dispositivo:
         def modelo(self, modelo: str):
             if isinstance(modelo, str):
                 self.__modelo = modelo 
-        
+    
         def ligar(self): 
             self.__estado = True 
-            return self.__estado 
-        
+            
+
         def desligar(self):
             self.__estado = False 
-            return self.__estado
+            
 
 
-
-                
+                    

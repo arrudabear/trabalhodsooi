@@ -1,12 +1,12 @@
 
-from Limites.tela_comodos import TelaComodos
+from Limites.telaComodos import TelaComodos
 from Entidades.comodo import Comodo
 
 class ControladorComodos(): 
     #colocar contolador sistema no UML 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__comodos = [] 
-        #self.__controlador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__tela_comodos = TelaComodos() 
     
     def find_comodo(self, nome_comodo: str): 
@@ -69,6 +69,10 @@ class ControladorComodos():
         continua = True
         while continua: 
             opcoes[self.__tela_comodos.tela_opcoes()]() 
+
+    def adicionar_dispositivo_comodo(self): 
+        self.__controlador_sistema.controlador_
+
 
     #def voltar(self):
         #self.__controlador_sistema.abre_tela()

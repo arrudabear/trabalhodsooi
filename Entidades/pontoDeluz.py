@@ -1,14 +1,18 @@
 from dispositivo import Dispositivo
 
-class Ponto(Dispositivo): 
+class PontoDeLuz(Dispositivo): 
     # Metodo mudar cor ?
-    def __init__(self, estado: bool,
-                 potencia: float, 
-                 tempo_ligado: float, 
-                 timer_ligar: float, 
-                 timer_desligar: float,
+    def __init__(self, potencia: float,
                  codigo_dispositivo: int, 
                  modelo: str):
-        super().__init__(estado, potencia, tempo_ligado, 
-                         timer_ligar, timer_desligar, 
-                         codigo_dispositivo, modelo)
+        super().__init__(potencia,
+                        codigo_dispositivo,
+                        modelo)
+    
+    def ligar(self): 
+        self.__estado = True 
+        return self.__estado 
+
+    def desligar(self):
+        self.__estado = False 
+        return self.__estado

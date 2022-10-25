@@ -1,4 +1,3 @@
-
 from Controladores.controladorComodos import ControladorComodos
 
 c = ControladorComodos()

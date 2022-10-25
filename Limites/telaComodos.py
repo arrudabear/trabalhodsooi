@@ -1,4 +1,4 @@
-from tela import Tela 
+from Limites.tela import Tela 
 
 class TelaComodos(Tela): 
     # metodo mostrar opcoes em todas as telas; 

@@ -1,6 +1,6 @@
 from abc import ABC
 
-class Tela(ABC):
+class Tela():
     
     def le_num_inteiro(self, mensagem = "", ints_validos = None):
         while True:

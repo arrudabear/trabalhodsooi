@@ -29,7 +29,7 @@ class ControladorComodos():
             self.__tela_comodos.mostrar_mensagem("Cômodo já existente na lista!") 
     
     def lista_comodos(self):
-        self.__tela_comodos.mensagem("-------- CÔMODOS CADASTRADOS ----------")
+        self.__tela_comodos.mostrar_mensagem("-------- CÔMODOS CADASTRADOS ----------")
         for comodo in self.__comodos: 
             self.__tela_comodos.mostra_comodo({"nome_comodo": comodo.nome_comodo})
 

@@ -31,3 +31,4 @@ class ControladorUsuario():
         for usuario in self.__usuarios:
             if usuario.codigo_usuario == codigo:
                 return usuario
+

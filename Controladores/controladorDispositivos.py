@@ -1,5 +1,5 @@
 
-from Limites.tela_dispositivos import TelaDispositivos
+from Limites.telaDispositivos import TelaDispositivos
 from Entidades.dispositivo import Dispositivo
 
 class ControladorDispositivos(): 
@@ -20,16 +20,15 @@ class ControladorDispositivos():
         dispositivo = self.find_dispositivo(dados_dispositivo["codigo_dispositivo"], dados_dispositivo["modelo"])
         try:
             if dispositivo == None:
-                dispositivo = Dispositivo(dados_dispositivo["estado"], dados_dispositivo["potencia"],
-                                          dados_dispositivo["tempo_ligado"], dados_dispositivo["timer_ligar"],
-                                          dados_dispositivo["timer_desligar"], dados_dispositivo["codigo_dispositivo"],
+                dispositivo = Dispositivo(dados_dispositivo["codigo_dispositivo"], dados_dispositivo["potencia"],
                                           dados_dispositivo["modelo"])
+
                 self.__dispositivos.append(dispositivo)
-                self.__tela_dispositivos.mensagem("Dispositivo adicionado na lista!")
+                self.__tela_dispositivos.mostrar_mensagem("Dispositivo adicionado na lista!")
             else:
                 raise KeyError
         except KeyError:
-            self.__tela_dispositivos.mensagem("Dispositivo já existente na lista!") 
+            self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
     
     def abre_tela(self):
         opcoes = {1: self.incluir_dispositivo}

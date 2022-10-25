@@ -1,4 +1,6 @@
-class TelaComodos(): 
+from tela import Tela 
+
+class TelaComodos(Tela): 
     # metodo mostrar opcoes em todas as telas; 
     # metodo pegar dados em todas as telas;
     # metodo seleciona em todas as telas
@@ -32,5 +34,3 @@ class TelaComodos():
     def mostra_comodo(self, dados_comodo):
       print("Nome do cômodo: ", dados_comodo["nome_comodo"])
 
-    def mensagem(self, msg): 
-      print(msg) 

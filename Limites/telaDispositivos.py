@@ -1,4 +1,7 @@
-class TelaDispositivos(): 
+from calendar import c
+from tela import Tela 
+
+class TelaDispositivos(Tela): 
     #metodo mostrar opcoes em todas as telas; 
     #metodo pegar dados em todas as telas;
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -18,17 +21,8 @@ class TelaDispositivos():
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_dispositivo(self):
       print("-------- DADOS DISPOSITIVO ----------")
-      estado = input("Estado: ")
-      potencia = input("Potência: ")
-      tempo_ligado = input("Tempo ligado: ")
-      timer_ligar = input("Timer para ligar: ")
-      timer_desligar = input("Timer para desligar: ")
       codigo_dispositivo = input("Código dispositivo: ")
+      potencia = input("Potência: ")
       modelo = input("Modelo: ")
 
-      return {"estado": estado, "potencia": potencia, "tempo_ligado": tempo_ligado, 
-              "timer_ligar": timer_ligar, "timer_desligar": timer_desligar,
-              "codigo_dispositivo": codigo_dispositivo, "modelo": modelo}
-
-    def mensagem(self, msg): 
-      print(msg) 
+      return {"codigo_dispositivo": codigo_dispositivo, "potencia": potencia, "modelo": modelo}

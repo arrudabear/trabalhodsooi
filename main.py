@@ -1,4 +1,6 @@
-from Controladores.controladorSistema import ControladorSistema
 
-c = ControladorSistema()
-c.inicializa_sistema() 
+from Controladores.controladorComodos import ControladorComodos
+
+c = ControladorComodos()
+c.abre_tela()
+

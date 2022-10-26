@@ -35,6 +35,23 @@ class ControladorDispositivos():
 
         continua = True
         while continua: 
-            opcoes[self.__tela_dispositivos.tela_opcoes()]() 
+            opcoes[self.__tela_dispositivos.tela_opcoes()]()
+    
+    def mostra_dispositivo(self, dispositivo: Dispositivo):
+        self.__tela_dispositivos(dispositivo.nome, dispositivo.codigo_dispositivo, dispositivo.modelo)
+    
+    def pega_dispositivo(self):
+        dispositivo = self.__tela_dispositivos.escolhe_dispositivo
+        self.controla_dispositivo(dispositivo)
+    
+    def controla_dispositivo(self, dispositivo: Dispositivo):
+        self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
+        self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo_dispositivo, dispositivo.modelo)
+        self.__tela_dispositivos.controle
+    
+    '''def dipositivos_comodo(self, comodo):
+        for dispositivo in self.__dipositivos:
+            if dispositivo.comodo == comodo:'''
+
 
 

@@ -40,6 +40,13 @@ class TelaDispositivos(Tela):
         except:
             raise execption # fazer aqui tratamento da exceção da entrada nao ser int
     
-    def controle(self):
-      pass
-        
+    def controle_temp(self, nome, codigo):
+        print("CONTROLE: ", nome)
+        print("Código: ", codigo)
+        print("1 - Ligar/Desligar")
+        print("2 - Temperatura")
+        print("3 - Timer")
+        print("4 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        return opcao

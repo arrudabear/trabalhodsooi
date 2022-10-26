@@ -1,12 +1,16 @@
 
+from Controladores.controladorSistema import ControladorSistema
 from Limites.telaDispositivos import TelaDispositivos
 from Entidades.dispositivo import Dispositivo
+from Entidades.arCondicionado import ArCondicionado
+from Entidades.geladeira import Geladeira
+from Entidades.forno import Forno
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
-    def __init__(self):
+    def __init__(self, controlador_sistema: ControladorSistema):
         self.__dispositivos = [] 
-        #self.__controlador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__tela_dispositivos = TelaDispositivos() 
     
     def find_dispositivo(self, codigo_dispositivo: int, modelo: str): 
@@ -42,12 +46,15 @@ class ControladorDispositivos():
     
     def pega_dispositivo(self):
         dispositivo = self.__tela_dispositivos.escolhe_dispositivo
-        self.controla_dispositivo(dispositivo)
+        return dispositivo
     
     def controla_dispositivo(self, dispositivo: Dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
         self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo_dispositivo, dispositivo.modelo)
-        self.__tela_dispositivos.controle
+        if type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira or type(dispositivo) == Forno:
+            self.__tela_dispositivos.controle_temp(dispositivo.nome, dispositivo.codigo_dispositivo)
+        else:
+            self.__tela_dispositivos.controle
     
     '''def dipositivos_comodo(self, comodo):
         for dispositivo in self.__dipositivos:

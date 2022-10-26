@@ -23,7 +23,7 @@ class TelaComodos(Tela):
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_comodo(self):
       print("-------- DADOS CÔMODO ----------")
-      nome_comodo = input("Nome do Cômodo: ")
+      nome_comodo = input("Nome do cômodo: ")
 
       return {"nome_comodo": nome_comodo} 
 

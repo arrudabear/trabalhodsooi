@@ -50,12 +50,14 @@ class ControladorComodos():
 
     def altera_comodo(self): 
         self.lista_comodos()
-        nome_comodo_selecionado = self.__tela_comodos.pega_comodo()
-        comodo = self.find_comodo(nome_comodo_selecionado) 
+        nome_comodo = self.__tela_comodos.pega_comodo()
+        comodo = self.find_comodo(nome_comodo) 
         try:
             if (comodo is not None): 
                 novo_nome_comodo = self.__tela_comodos.pega_dados_comodo()
-                comodo = novo_nome_comodo["nome_comodo"]
+                novo_comodo = Comodo(novo_nome_comodo["nome_comodo"])
+                self.__comodos.remove(comodo)
+                self.__comodos.append(novo_comodo)
                 self.__tela_comodos.mostrar_mensagem("CÔMODO ALTERADO!!")
                 self.lista_comodos()
             else:

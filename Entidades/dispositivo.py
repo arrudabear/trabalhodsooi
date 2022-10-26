@@ -5,9 +5,11 @@ class Dispositivo:
     #deletar tempo_ligado no UML 
 
     @abstractmethod
-    def __init__(self, potencia: float,
+    def __init__(self,nome: str, potencia: float,
                  codigo_dispositivo: int, 
                  modelo: str):
+        if isinstance(nome, str):
+            self.__nome = nome
         if isinstance(potencia, float): 
             self.__potencia = potencia  
         if isinstance(codigo_dispositivo, int): 
@@ -19,6 +21,10 @@ class Dispositivo:
         self.__timer_ligar = 0
         self.__timer_desligar = 0
         
+        @property
+        def nome(self) -> str:
+            return self.__nome
+
         @property 
         def estado(self): 
             return self.__estado 
@@ -46,6 +52,11 @@ class Dispositivo:
         @property
         def modelo(self):
             return self.__modelo 
+        
+        @nome.setter
+        def nome(self, nome: str):
+            if isinstance(nome, str):
+                self.__nome = nome
         
         @estado.setter
         def estado(self, estado: bool): 

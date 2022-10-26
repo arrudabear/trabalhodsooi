@@ -1,4 +1,3 @@
-from calendar import c
 from tela import Tela 
 
 class TelaDispositivos(Tela): 
@@ -20,9 +19,27 @@ class TelaDispositivos(Tela):
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_dispositivo(self):
-      print("-------- DADOS DISPOSITIVO ----------")
-      codigo_dispositivo = input("Código dispositivo: ")
-      potencia = input("Potência: ")
-      modelo = input("Modelo: ")
+        print("-------- DADOS DISPOSITIVO ----------")
+        codigo_dispositivo = input("Código dispositivo: ")
+        potencia = input("Potência: ")
+        modelo = input("Modelo: ")
 
-      return {"codigo_dispositivo": codigo_dispositivo, "potencia": potencia, "modelo": modelo}
+        return {"codigo_dispositivo": codigo_dispositivo, "potencia": potencia, "modelo": modelo}
+    
+    def mostra_dispositivo(self, nome, codigo, modelo):
+        print("Nome do Dispositivo: ", nome)
+        print("Código: ", codigo)
+        print("Modelo: ", modelo)
+
+    def escolhe_dispositivo(self):
+        print("--- Escolha o Dispositivo ---")
+        codigo = input("Digite o código do dispositivo que deseja acessar: ")
+        try:
+            codigo = int(codigo)
+            return codigo
+        except:
+            raise execption # fazer aqui tratamento da exceção da entrada nao ser int
+    
+    def controle(self):
+      pass
+        

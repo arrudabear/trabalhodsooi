@@ -1,7 +1,7 @@
-from controladorEventos import ControladorEventos
-from controladorUsuarios import ControladorUsuario
-from controladorDispositivos import ControladorDispositivos
-from controladorComodos import ControladorComodos
+from Controladores.controladorEventos import ControladorEventos
+from Controladores.controladorUsuarios import ControladorUsuario
+from Controladores.controladorDispositivos import ControladorDispositivos
+from Controladores.controladorComodos import ControladorComodos
 from Limites.telaSistema import TelaSistema
 
 class ControladorSistema():
@@ -40,7 +40,7 @@ class ControladorSistema():
                     funcao_escolhida()
         
             else:
-                lista_opcoes = {1: self.controlar_dispositivos, 2: self.controlar_comodos, 3: self.relatorios, 0: self.encerrar_sistema}
+                lista_opcoes = {1: self.comodos, 2: self.todos_dispositivos, 3: self.relatorios, 0: self.encerrar_sistema}
 
                 while True:
                     opcao_escolhida = self.__tela_sistema.opcoes_usuario(self.__usuario_atual.nome)
@@ -54,12 +54,19 @@ class ControladorSistema():
     def cadastra_usuario(self):
         self.__controlador_usuarios.cadastra_usuario
 
-    def controlar_dispositivos(self):
-        #self.__controlador_dispositivos.
-        pass
+    def comodos(self):
+        self.__controlador_comodos.lista_comodos
+        comodo = self.__controlador_comodos.__tela_comodos.pega_comodo
+        self.__controlador_comodos.dispositivos_comodo(comodo)
+        #self.dispositivos_comodo(comodo)
     
-    def controlar_comodos(self):
-        #self.__controlador_comodos
+    def dispositivos_comodo(self, comodo):
+        pass
+
+
+    
+    def todos_dispositivos(self):
+        self.__controlador_dispositivos.listar_dispositivos
         pass
 
     def relatorios(self):

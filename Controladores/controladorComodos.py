@@ -4,9 +4,9 @@ from Entidades.comodo import Comodo
 
 class ControladorComodos(): 
     #colocar contolador sistema no UML 
-    def __init__(self):
+    def __init__(self, controlador_sistema: ControladorSistema):
         self.__comodos = [] 
-        #self.__controlador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__tela_comodos = TelaComodos() 
     
     def find_comodo(self, nome_comodo: str): 
@@ -69,6 +69,16 @@ class ControladorComodos():
         continua = True
         while continua: 
             opcoes[self.__tela_comodos.tela_opcoes()]() 
+    
+    def dispositivos_comodo(self, comodo: Comodo):
+        self.__tela_comodos.mostrar_mensagem("Dispositivos no Comodo: ", comodo.nome_comodo)
+        for dispositivo in comodo.dispositivos:
+            self.__controlador_sistema.__controlador_dispositivos.mostra_dispositivo(dispositivo)
+        #self.__controlador_sistema.__controlador_dispositivos
+
+
+
+    
 
     #def adicionar_dispositivo_comodo(self): 
         #self.__controlador_sistema.controlador_

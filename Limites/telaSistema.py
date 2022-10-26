@@ -14,11 +14,12 @@ class TelaSistema(Tela):
     def opcoes_usuario(self, usuario):
         print("BEM VINDO ", usuario)
         print("Escolha sua opção:")
-        print("1 - Controlar Dispositivos")
-        print("2 - Controlar Cômodos")
+        print("1 - Listar Dispositivo por Cômodos")
+        print("2 - Listar Todos os Dispositivos")
         print("3 - Gerar Relatório")
+        print("4 - Usuários da Casa")
         print("0 - Finalizar sistema")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
         return opcao
 
     def relatorios(self):

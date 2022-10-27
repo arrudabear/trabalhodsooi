@@ -1,8 +1,8 @@
-from controladorSistema import ControladorSistema
+#from Controladores.controladorSistema import ControladorSistema
 from Entidades.evento import Evento
 
 class ControladorEventos():
-    def __init__(self, controlador_sistema: ControladorSistema):
+    def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__eventos = []
     

@@ -1,4 +1,4 @@
-from tela import Tela
+from Limites.tela import Tela
 
 class TelaUsuario(Tela):
 

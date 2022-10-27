@@ -1,10 +1,10 @@
-from controladorSistema import ControladorSistema
+#from Controladores.controladorSistema import ControladorSistema
 from Entidades.usuario import Usuario
 from Limites.telaUsuario import TelaUsuario
 from random import randint
 
 class ControladorUsuario():
-    def __init__(self, controlador_sistema: ControladorSistema):
+    def __init__(self, controlador_sistema):
         self.__cotrolador_sistema = controlador_sistema
         self.__usuarios = []
         self.__lista_codigos = []

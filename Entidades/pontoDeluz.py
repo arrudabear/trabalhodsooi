@@ -1,4 +1,4 @@
-from dispositivo import Dispositivo
+from Entidades.dispositivo import Dispositivo
 
 class PontoDeLuz(Dispositivo): 
     # Metodo mudar cor ?

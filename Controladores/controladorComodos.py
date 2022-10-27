@@ -1,11 +1,11 @@
 
-from Controladores.controladorSistema import ControladorSistema
+#from Controladores.controladorSistema import ControladorSistema
 from Limites.telaComodos import TelaComodos
 from Entidades.comodo import Comodo
 
 class ControladorComodos(): 
     #colocar contolador sistema no UML 
-    def __init__(self, controlador_sistema = ControladorSistema):
+    def __init__(self, controlador_sistema):
         self.__comodos = [] 
         self.__controlador_sistema = controlador_sistema
         self.__tela_comodos = TelaComodos() 
@@ -79,7 +79,6 @@ class ControladorComodos():
             self.__controlador_sistema.__controlador_dispositivos.mostra_dispositivo(dispositivo)
         disp = self.__controlador_sistema.__controlador_dispositivos.pega_dispositivo
         self.__controlador_sistema.__controlador_dispositivos.controla_dispositivo(disp)
-
 
 
     

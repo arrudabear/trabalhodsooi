@@ -10,7 +10,7 @@ class ControladorSistema():
         self.__controlador_eventos = ControladorEventos(self)
         self.__controlador_dispositivos = ControladorDispositivos(self)
         self.__controlador_comodos = ControladorComodos(self)
-        self.__tela_sistema = TelaSistema(self)
+        self.__tela_sistema = TelaSistema()
         self.__usuario_atual = None
     
     @property

@@ -1,5 +1,4 @@
 
-from Controladores.controladorSistema import ControladorSistema
 from Limites.telaDispositivos import TelaDispositivos
 from Entidades.dispositivo import Dispositivo
 from Entidades.arCondicionado import ArCondicionado
@@ -8,7 +7,7 @@ from Entidades.forno import Forno
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
-    def __init__(self, controlador_sistema: ControladorSistema):
+    def __init__(self, controlador_sistema):
         self.__dispositivos = [] 
         self.__controlador_sistema = controlador_sistema
         self.__tela_dispositivos = TelaDispositivos() 
@@ -56,6 +55,18 @@ class ControladorDispositivos():
         else:
             self.__tela_dispositivos.controle
     
+    def liga_desliga(self, dispositivo):
+        pass
+
+    def controlar_temperatura(self, dispositivo):
+        pass
+    
+    def controlar_timer(self, dispositivo):
+        pass
+
+    def info_disp(self, dispositivo):
+        pass
+
     '''def dipositivos_comodo(self, comodo):
         for dispositivo in self.__dipositivos:
             if dispositivo.comodo == comodo:'''

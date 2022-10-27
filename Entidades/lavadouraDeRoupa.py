@@ -1,4 +1,4 @@
-from dispositivo import Dispositivo
+from Entidades.dispositivo import Dispositivo
 
 class LavadoraDeRoupa(Dispositivo):
     def __init__(self, potencia: float,

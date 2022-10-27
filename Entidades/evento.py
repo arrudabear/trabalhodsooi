@@ -1,5 +1,5 @@
-from usuario import Usuario
-from dispositivo import Dispositivo
+from Entidades.usuario import Usuario
+from Entidades.dispositivo import Dispositivo
 
 class Evento():
     def __init__(self, usuario: Usuario, dispositivo: Dispositivo, data: str, horario: str):

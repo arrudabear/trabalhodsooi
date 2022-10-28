@@ -19,23 +19,51 @@ class ControladorDispositivos():
         #self.__controlador_sistema = controlador_sistema
         self.__tela_dispositivos = TelaDispositivos() 
     
-    def find_dispositivo(self, codigo: int, modelo: str): 
+    def find_dispositivo(self, codigo: int, nome: str): 
         for dispositivo in self.__dispositivos:
-            if (dispositivo.codigo_dispositivo == codigo) and (dispositivo.modelo == modelo): 
+            if (dispositivo.codigo == codigo) and (dispositivo.nome == nome): 
                 return dispositivo
         return None 
 
     def incluir_dispositivo(self): 
         dados_dispositivo = self.__tela_dispositivos.pega_dados_dispositivo()
-        dispositivo = self.find_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["modelo"])
-        #tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
+        tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
         try:
             if dispositivo == None:
-                dispositivo = Dispositivo(dados_dispositivo["nome"], dados_dispositivo["codigo"], dados_dispositivo["potencia"],
+                if tipo_dispositivo == 1:
+                    dispositivo = ArCondicionado(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                 dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 2: 
+                    dispositivo = Cafeteira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                            dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 3:
+                    dispositivo = Cortina(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                           dados_dispositivo["modelo"])
-            
+                elif tipo_dispositivo == 4:
+                    dispositivo = Forno(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                        dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 5:
+                    dispositivo = Geladeira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                            dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 6: 
+                    dispositivo = LavadoraDeRoupa(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                            dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 7: 
+                    dispositivo = PontoDeLuz(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                            dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 8: 
+                    dispositivo = Som(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                      dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 9: 
+                    dispositivo = TV(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                     dados_dispositivo["modelo"])
+                elif tipo_dispositivo == 10: 
+                    dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                             dados_dispositivo["modelo"])
+
                 self.__dispositivos.append(dispositivo)
-                self.__tela_dispositivos.mostrar_mensagem("Dispositivo adicionado na lista!")
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
             else:
                 raise KeyError
         except KeyError:
@@ -44,15 +72,44 @@ class ControladorDispositivos():
     def lista_dispositivos(self): 
         self.__tela_dispositivos.mostrar_mensagem("-------- DISPOSITIVOS CADASTRADOS ----------")
         for dispositivo in self.__dispositivos:
-            self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo_dispositivo": dispositivo.codigo_dispositivo, "modelo": dispositivo.modelo})
+            self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo, "modelo": dispositivo.modelo})
+            self.__tela_dispositivos.mostrar_mensagem(f"--------------------------------")
+
+    def excluir_dispositivo(self):
+        self.lista_dispositivos()
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo()  
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        try: 
+            if (dispositivo is not None): 
+                self.__dispositivos.remove(dispositivo)
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO EXCLUIDO!!")
+                self.lista_dispositivos()
+            else:
+                raise KeyError
+        except KeyError: 
+            self.__tela_comodos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
+
+    def altera_dispositivo(self):
+        self.lista_dispositivos()
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo()  
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        try:
+            if (dispositivo is not None):
+                self.__dispositivos.remove(dispositivo)
+                self.incluir_dispositivo() 
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO ALTERADO!!")
+                self.lista_dispositivos() 
+            else:
+                raise KeyError 
+        except KeyError: 
+            self.__tela_comodos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
     def abre_tela(self):
-        opcoes = {1: self.incluir_dispositivo, 3: self.lista_dispositivos}
+        opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo}
 
         continua = True
         while continua: 
             opcoes[self.__tela_dispositivos.tela_opcoes()]()
-    
     
     def controla_dispositivo(self, dispositivo: Dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")

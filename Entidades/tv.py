@@ -2,11 +2,9 @@ from Entidades.dispositivo import Dispositivo
 
 class TV(Dispositivo):
     def __init__(self, nome:str, potencia: float,
-                 codigo_dispositivo: int, 
-                 modelo: str):
+                 codigo: int, modelo: str):
         super().__init__(nome, potencia,
-                         codigo_dispositivo,
-                         modelo)
+                         codigo, modelo)
         self.__volume = 0 
         self.__canal = 0.0 
             

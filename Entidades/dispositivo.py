@@ -1,17 +1,19 @@
+from abc import ABC, abstractmethod
 
-
-class Dispositivo:
+class Dispositivo(ABC):
     # deletar tempo ligado no UML 
-
-    def __init__(self, nome: str, potencia: float, codigo: int, modelo: str):
+    # codigo str 
+    
+    @abstractmethod
+    def __init__(self, nome: str, codigo: int, potencia: float, modelo: str): 
         if isinstance(nome, str):
             self.__nome = nome 
+        if isinstance(codigo, int):
+            self.__codigo = codigo 
         if isinstance(potencia, float):
             self.__potencia = potencia 
-        if isinstance(codigo, int): 
-            self.__codigo = codigo
         if isinstance(modelo, str): 
-            self.__modelo = modelo 
+            self.__modelo = modelo
         self.__estado = False 
         self.__tempo_ligado = 0
         self.__timer_ligar = 0 
@@ -22,17 +24,17 @@ class Dispositivo:
         return self.__nome 
     
     @property
+    def codigo(self):
+        return self.__codigo 
+
+    @property
     def potencia(self):
         return self.__potencia
 
     @property
-    def codigo(self):
-        return self.__codigo
-    
-    @property
     def modelo(self):
         return self.__modelo 
-    
+
     @property 
     def estado(self): 
         return self.__estado 
@@ -54,21 +56,21 @@ class Dispositivo:
         if isinstance(nome, str):
             self.__nome = nome
 
+    @codigo.setter
+    def codigo(self, codigo: int): 
+        if isinstance(codigo, int): 
+            self.__codigo = codigo 
+
     @potencia.setter
     def potencia(self, potencia: float): 
         if isinstance(potencia, float): 
             self.__potencia = potencia
-    
-    @codigo.setter
-    def codigo_dispositivo(self, codigo):
-        if isinstance(codigo, int): 
-            self.__codigo = codigo
         
     @modelo.setter
-    def modelo(self, modelo: str):
-        if isinstance(modelo, str):
+    def modelo(self, modelo: int):
+        if isinstance(modelo, int):
             self.__modelo = modelo 
-    
+
     @estado.setter
     def estado(self, estado: bool): 
         if isinstance(estado, bool): 

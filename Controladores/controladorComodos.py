@@ -36,7 +36,7 @@ class ControladorComodos():
 
     def excluir_comodo(self): 
         self.lista_comodos()
-        nome_comodo = self.__tela_comodos.pega_comodo()
+        nome_comodo = self.__tela_comodos.escolhe_comodo() 
         comodo = self.find_comodo(nome_comodo) 
         try: 
             if(comodo is not None):
@@ -51,7 +51,7 @@ class ControladorComodos():
 
     def altera_comodo(self): 
         self.lista_comodos()
-        nome_comodo = self.__tela_comodos.pega_comodo()
+        nome_comodo = self.__tela_comodos.escolhe_comodo()
         comodo = self.find_comodo(nome_comodo) 
         try:
             if (comodo is not None): 

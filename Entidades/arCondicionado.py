@@ -1,11 +1,10 @@
 from Entidades.dispositivo import Dispositivo
 
 class ArCondicionado(Dispositivo):
-    def __init__(self, nome: str, potencia: float,
-                 codigo_dispositivo: int, 
-                 modelo: str):
-        super().__init__(nome, potencia,
-                         codigo_dispositivo,
+    def __init__(self, nome: str, codigo: int, 
+                 potencia: float, modelo: str):
+        super().__init__(nome, codigo,
+                         potencia,
                          modelo)
         self.__temperatura = 0.0
     

@@ -5,12 +5,12 @@ class TelaDispositivos(Tela):
     #metodo pegar dados em todas as telas;
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def tela_opcoes(self):
-        print("-------- DISPOSITIVOS ----------")
+        print("-------- MENU DISPOSITIVOS ----------")
         print("Escolha uma opcao")
         print("1 - Incluir Dispositivo")
-        print("2 - Alterar Dispositivo")
+        print("2 - Excluir Dispositivo")
         print("3 - Listar Dispositvos")
-        print("4 - Excluir Dispositivo")
+        print("4 - Alterar Dispositivo")
         print("5 - Calcular Gasto")
         print("0 - Voltar")
 
@@ -21,25 +21,23 @@ class TelaDispositivos(Tela):
     def pega_dados_dispositivo(self):
         print("-------- DADOS DISPOSITIVO ----------")
         nome = input("Nome do dipositivo: ")
+        codigo = input("Codigo: ")
         potencia = input("Potência: ")
-        codigo = input("Código dispositivo: ")
         modelo = input("Modelo: ")
 
-        return {"nome": nome, "potencia": potencia, "codigo": codigo, "modelo": modelo}
+        return {"nome": nome,"codigo": codigo, "potencia": potencia, "modelo": modelo}
     
     def mostra_dispositivo(self, dados_dispositivo):
         print("Nome do dispositivo: ", dados_dispositivo["nome"])
-        print("Código: ", dados_dispositivo["codigo"])
-        print("Modelo: ", dados_dispositivo["modelo"])
+        print("Codigo: ", dados_dispositivo["codigo"])
+        print("Modelo", dados_dispositivo["modelo"])
 
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")
+        nome = input("Digite o nome do dispositivo que deseja acessar: ")
         codigo = input("Digite o código do dispositivo que deseja acessar: ")
-        try:
-            codigo = int(codigo)
-            return codigo
-        except:
-            raise execption # fazer aqui tratamento da exceção da entrada nao ser int
+
+        return {"nome": nome, "codigo": codigo}
     
     def controle_temp(self, nome, codigo):
         print("CONTROLE: ", nome)

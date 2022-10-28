@@ -27,8 +27,8 @@ class TelaComodos(Tela):
 
       return {"nome_comodo": nome_comodo} 
 
-    def pega_comodo(self): 
-      nome_comodo = input("Cômodo que deseja escolher: ")
+    def escolhe_comodo(self): 
+      nome_comodo = input("Digite o nome do cômodo  que deseja acessar: ")
       return nome_comodo 
     
     def mostra_comodo(self, dados_comodo):

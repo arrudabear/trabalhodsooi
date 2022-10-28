@@ -36,12 +36,14 @@ class ControladorUsuario():
                 return usuario
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
-        nome_usuario = self.__tela.tela_cadastra_usuario
-        while codigo not in self.__lista_codigos:
-            codigo = randint(100,999)
-            if codigo not in self.__lista_codigos:
-                self.__lista_codigos.append(codigo)
-                codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        print('cadastrando 2') #prints pra ver onde ta indo a função
+        codigo = 0
+        nome_usuario = self.__tela.tela_cadastra_usuario()
+        #while codigo not in self.__lista_codigos:
+        #    codigo = randint(100,999)
+        #    if codigo not in self.__lista_codigos:
+        self.__lista_codigos.append(codigo)
+        codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         usuario = Usuario(nome_usuario, codigo_usuario)
         self.__usuarios.append(usuario)

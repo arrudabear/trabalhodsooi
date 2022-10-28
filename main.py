@@ -5,5 +5,5 @@ from Controladores.controladorDispositivos import ControladorDispositivos
 c = ControladorComodos()
 c.abre_tela()'''
 
-c = ControladorDispositivos() 
+c = ControladorSistema() 
 c.abre_tela() 

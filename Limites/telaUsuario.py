@@ -6,7 +6,8 @@ class TelaUsuario(Tela):
     def tela_cadastra_usuario(self):
         print("--- Cadastro de Usuario ---")
         nome_usuario = input("Nome do Usuário: ").title()
-        return nome_usuario
+        codigo_usuario = input("Codigo do Usuário:")
+        return nome_usuario, codigo_usuario 
     
     def tela_entrar_usuario(self):
         print("--- Entrar com Usuário ---")
@@ -20,3 +21,21 @@ class TelaUsuario(Tela):
             print("Digite apenas números.")
         return nome_usuario, codigo_usuario
     
+    def pega_dados_usuario(self): 
+        print("------------")
+        nome = input("Nome do usuario: ")
+        codigo = input("Codigo do usuario")
+
+        return {"nome": nome, "codigo": codigo}
+
+    def mostra_usuario(self, dados_usuario):
+        print("--------")
+        print("Nome", dados_usuario["nome"])
+        print("Codigo", dados_usuario["codigo"])
+    
+    def escolher_usuario(self):
+        print("------")
+        nome = input("Digite o nome do usuario que deseja acessar: ")
+        codigo = input("Digite o codigo do usuario que deseja acessar: ")
+
+        return {"nome": nome, "codigo": codigo}

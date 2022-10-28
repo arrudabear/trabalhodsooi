@@ -14,9 +14,9 @@ from Entidades.tv import TV
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__dispositivos = [] 
-        #self.__controlador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__tela_dispositivos = TelaDispositivos() 
     
     def find_dispositivo(self, codigo: int, nome: str): 

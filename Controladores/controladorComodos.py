@@ -5,9 +5,9 @@ from Entidades.comodo import Comodo
 
 class ControladorComodos(): 
     #colocar contolador sistema no UML 
-    def __init__(self):
+    def __init__(self, controlador_sistema):
         self.__comodos = [] 
-        #self.__controlador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__tela_comodos = TelaComodos() 
     
     def find_comodo(self, nome_comodo: str): 
@@ -67,7 +67,7 @@ class ControladorComodos():
             self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
 
     def abre_tela(self):
-        opcoes = {1: self.incluir_comodo, 2: self.excluir_comodo, 3: self.lista_comodos, 4: self.altera_comodo}
+        opcoes = {1: self.incluir_comodo, 2: self.excluir_comodo, 3: self.lista_comodos, 4: self.altera_comodo, 5: self.adicionar_dispositivo_comodo}
 
         continua = True
         while continua: 
@@ -81,10 +81,8 @@ class ControladorComodos():
         self.__controlador_sistema.__controlador_dispositivos.controla_dispositivo(disp)
 
 
-    
-
-    #def adicionar_dispositivo_comodo(self): 
-        #self.__controlador_sistema.controlador_
+    def adicionar_dispositivo_comodo(self): 
+        self.__controlador_sistema.controlador_dispositivos.lista_dispositivos() 
 
 
     #def voltar(self):

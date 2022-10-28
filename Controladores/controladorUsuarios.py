@@ -14,15 +14,32 @@ class ControladorUsuario():
     def usuarios(self):
         return self.__usuarios
 
-    def incluir_usuario(self, usuario: Usuario):
-        if isinstance(usuario, Usuario):
-            self.__usuarios.append(usuario)
-    
+    def find_usuario(self, nome: str, codigo: int): 
+        for usuario in self.__usuarios: 
+            if (usuario.nome == nome) and (usuario.codigo == codigo):
+                return usuario 
+        return None 
+
+    def incluir_usuario(self):
+        dados_usuario = self.__tela.pega_dados_usuario() 
+        usuario = self.find_usuario(dados_usuario["nome"], int(dados_usuario["codigo"]))
+        try:
+            if usuario == None:
+                usuario = Usuario(dados_usuario["nome"], int(dados_usuario["codigo"]))
+                self.__usuarios.append(usuario)
+                self.__tela.mostrar_mensagem("Usuario Cadastrado")
+            else:
+                raise KeyError
+        except KeyError:
+            self.__tela.mostrar_mensagem("Usuario ja cadastrado")
+
     def excluir_usuario(self, usuario: Usuario):
         if isinstance(usuario, Usuario):
             self.__usuarios.remove(usuario)
     
     def lista_usuarios(self):
+        for usuario in self.__usuarios: 
+            self.__tela.mostra_usuario({"nome": usuario.nome, "codigo": usuario.codigo})
         return self.__usuarios
     
     def altera_usuario(self, usuario: Usuario, novo_nome, novo_codigo):
@@ -49,6 +66,8 @@ class ControladorUsuario():
         self.__usuarios.append(usuario)
     
     def entrar_usuario(self):
+        self.lista_usuarios()
+        usuario_atual = self.__tela.escolher_usuario() 
         nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:

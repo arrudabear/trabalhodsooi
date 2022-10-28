@@ -31,11 +31,12 @@ class ControladorSistema():
     def abre_tela(self):
         if self.__usuario_atual == None:
             lista_opcoes = {1: self.entrar_usuario, 2: self.cadastra_usuario, 0: self.encerrar_sistema}
+            login_feito = False 
             while True:#ARRUMAR ---------------- MESMO DEPOIS DE FAZER LOGIN VOLTA PRA ESSE LAÇO
                 opcao_escolhida = self.__tela_sistema.login()
                 funcao_escolhida = lista_opcoes[opcao_escolhida]
                 funcao_escolhida()
-        
+                login_feito = True 
         else:
             lista_opcoes = {1: self.comodos, 2: self.todos_dispositivos, 3: self.relatorios, 4: self.usuarios, 0: self.encerrar_sistema}
 
@@ -48,9 +49,8 @@ class ControladorSistema():
         print('entrando')
         self.__usuario_atual = self.__controlador_usuarios.entrar_usuario()
 
-
     def cadastra_usuario(self):
-        self.__controlador_usuarios.cadastra_usuario()
+        self.__controlador_usuarios.cadastra_usuario() 
 
     def comodos(self):
         self.__controlador_comodos.lista_comodos()
@@ -58,8 +58,6 @@ class ControladorSistema():
         self.__controlador_comodos.dispositivos_comodo(comodo)
         #self.dispositivos_comodo(comodo)
     
-
-
     
     def todos_dispositivos(self):
         self.__controlador_dispositivos.listar_dispositivos()

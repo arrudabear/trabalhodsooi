@@ -49,7 +49,7 @@ class ControladorUsuario():
         self.__usuarios.append(usuario)
     
     def entrar_usuario(self):
-        nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario
+        nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:
                 if nome_usuario == usuario.nome and codigo_usuario == usuario.codigo:

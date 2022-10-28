@@ -3,17 +3,14 @@ from Entidades.dispositivo import Dispositivo
 class Som(Dispositivo): 
     # adicionar frequencia no UML;
     # metodos aumentar e diminuir frequencia
-    def __init__(self, potencia: float,
+    def __init__(self, nome:str, potencia: float,
                  codigo_dispositivo: int, 
-                 modelo: str, volume:float,
-                 frequencia: float):
-        super().__init__(potencia,
-                        codigo_dispositivo,
-                        modelo)
-        if isinstance(volume, float):
-            self.__volume = volume 
-        if isinstance(frequencia, float):
-            self.__frequencia = frequencia
+                 modelo: str):
+        super().__init__(nome, potencia,
+                         codigo_dispositivo,
+                         modelo)
+        self.__volume = 0 
+        self.__frequencia = 0.0
 
     @property
     def volume(self): 
@@ -23,13 +20,11 @@ class Som(Dispositivo):
     def frequencia(self): 
         return self.__frequencia 
     
-    @volume.setter
-    def volume(self, volume: int): 
+    def escolher_volume(self, volume: int): 
         if isinstance(volume, int): 
             self.__volume = volume 
     
-    @frequencia.setter
-    def frequencia(self, frequencia: float): 
+    def escolher_frequencia(self, frequencia: float): 
         if isinstance(frequencia, float): 
             self.__frequencia = frequencia
     

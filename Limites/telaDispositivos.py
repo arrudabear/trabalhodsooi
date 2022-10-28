@@ -12,24 +12,25 @@ class TelaDispositivos(Tela):
         print("3 - Listar Dispositvos")
         print("4 - Excluir Dispositivo")
         print("5 - Calcular Gasto")
-        print("0 - Lista dispositivos")
+        print("0 - Voltar")
 
-        opcao = int(input("Escolha a opcao: "))
+        opcao = opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
         return opcao
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_dispositivo(self):
         print("-------- DADOS DISPOSITIVO ----------")
-        codigo_dispositivo = input("Código dispositivo: ")
+        nome = input("Nome do dipositivo: ")
         potencia = input("Potência: ")
+        codigo = input("Código dispositivo: ")
         modelo = input("Modelo: ")
 
-        return {"codigo_dispositivo": codigo_dispositivo, "potencia": potencia, "modelo": modelo}
+        return {"nome": nome, "potencia": potencia, "codigo": codigo, "modelo": modelo}
     
-    def mostra_dispositivo(self, nome, codigo, modelo):
-        print("Nome do Dispositivo: ", nome)
-        print("Código: ", codigo)
-        print("Modelo: ", modelo)
+    def mostra_dispositivo(self, dados_dispositivo):
+        print("Nome do dispositivo: ", dados_dispositivo["nome"])
+        print("Código: ", dados_dispositivo["codigo"])
+        print("Modelo: ", dados_dispositivo["modelo"])
 
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")
@@ -50,3 +51,21 @@ class TelaDispositivos(Tela):
         print("0 - Voltar")
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
         return opcao
+    
+    def escolher_tipo_dispositivo(self): 
+        print("1 - Ar Condicionado")
+        print("2 - Cafeteira")
+        print("3 - Cortina")
+        print("4 - Forno")
+        print("5 - Geladeira")
+        print("6 - Lavadoura de Roupa")
+        print("7 - Ponto de luz")
+        print("8 - Som")
+        print("9 - TV")
+        print("10 - Lava louças")
+        print("0 - Voltar")
+    
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6,7,8,9,10])
+        return opcao 
+
+

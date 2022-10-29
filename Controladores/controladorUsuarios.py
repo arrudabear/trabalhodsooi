@@ -1,7 +1,6 @@
 #from Controladores.controladorSistema import ControladorSistema
 from Entidades.usuario import Usuario
 from Limites.telaUsuario import TelaUsuario
-from random import randint
 
 class ControladorUsuario():
     def __init__(self, controlador_sistema):
@@ -73,7 +72,7 @@ class ControladorUsuario():
                 print('entrou no for')
                 print(usuario.nome, usuario.codigo)
                 print(nome_usuario, codigo_usuario)
-                if (nome_usuario == usuario.nome):# and (codigo_usuario == usuario.codigo):
+                if (nome_usuario == usuario.nome) and (codigo_usuario == usuario.codigo):
                     print('confirmou condição')
                     usuario_atual = usuario
                     return usuario_atual

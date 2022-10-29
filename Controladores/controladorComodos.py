@@ -17,6 +17,7 @@ class ControladorComodos():
         return None 
 
     def incluir_comodo(self): 
+        print('incluindo comodo')
         dados_comodo = self.__tela_comodos.pega_dados_comodo() 
         comodo = self.find_comodo(dados_comodo["nome_comodo"])
         try:
@@ -30,9 +31,22 @@ class ControladorComodos():
             self.__tela_comodos.mostrar_mensagem("Cômodo já existente na lista!") 
     
     def lista_comodos(self):
-        self.__tela_comodos.mostrar_mensagem("-------- CÔMODOS CADASTRADOS ----------")
-        for comodo in self.__comodos: 
-            self.__tela_comodos.mostra_comodo({"nome_comodo": comodo.nome_comodo})
+        if self.__comodos == []:
+            self.__tela_comodos.mostrar_mensagem("Ainda não há cômodos cadastrados")
+            self.__tela_comodos.mostrar_mensagem("Deseja criar um novo cômodo? [SIM: 1 / NÃO: 0]")
+            opcao = self.__tela_comodos.seleciona_opcao("Escolha a opção: ", [0,1])
+            if opcao == 1:
+                self.incluir_comodo()
+                self.lista_comodos()
+            else:
+                self.lista_comodos()
+            
+        else:
+            self.__tela_comodos.mostrar_mensagem("-------- CÔMODOS CADASTRADOS ----------")
+            for comodo in self.__comodos: 
+                self.__tela_comodos.mostra_comodo({"nome_comodo": comodo.nome_comodo})
+            comodo = self.__tela_comodos.escolhe_comodo()
+            self.dispositivos_comodo(comodo)
 
     def excluir_comodo(self): 
         self.lista_comodos()
@@ -74,6 +88,12 @@ class ControladorComodos():
             opcoes[self.__tela_comodos.tela_opcoes()]() 
     
     def dispositivos_comodo(self, comodo: Comodo):
+        if comodo.dispositivos == []:
+            self.__tela_comodos.mostrar_mensagem("Ainda não há dispositivos cadastrados neste comodo.")
+            self.__tela_comodos.mostrar_mensagem("Deseja adicionar um novo dispositivos à esse comodo? [SIM: 1/NÃO: 0]")
+            opcao = self.__tela_comodos.seleciona_opcao("Escolha sua opção: ", [0,1])
+            if opcao == 1:
+                self.adicionar_dispositivo_comodo(comodo)
         self.__tela_comodos.mostrar_mensagem("Dispositivos no Comodo: ", comodo.nome_comodo)
         for dispositivo in comodo.dispositivos:
             self.__controlador_sistema.__controlador_dispositivos.mostra_dispositivo(dispositivo)
@@ -81,8 +101,10 @@ class ControladorComodos():
         self.__controlador_sistema.__controlador_dispositivos.controla_dispositivo(disp)
 
 
-    def adicionar_dispositivo_comodo(self): 
+    def adicionar_dispositivo_comodo(self, comodo: Comodo): 
         self.__controlador_sistema.controlador_dispositivos.lista_dispositivos() 
+        disp = self.__controlador_sistema.__controlador.dispositivos.pega_disp()
+        comodo.adicionar_dispositivo(disp)
 
 
     #def voltar(self):

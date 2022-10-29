@@ -6,4 +6,4 @@ c = ControladorComodos()
 c.abre_tela()'''
 
 c = ControladorSistema() 
-c.abre_tela() 
+c.abre_tela()

@@ -1,4 +1,7 @@
 
+from Entidades.dispositivo import Dispositivo
+
+
 class Comodo: 
 
     def __init__(self, nome_comodo: str): 
@@ -17,7 +20,13 @@ class Comodo:
     @nome_comodo.setter
     def nome_comodo(self, nome_comodo: str): 
         if isinstance(nome_comodo, str): 
-            return self.__nome_comodo
+            return self.__nome_comod
+
+    def adicionar_dispositivo(self, dispositivo: Dispositivo):
+        if isinstance(dispositivo, Dispositivo):
+            self.__dispositivos.append(dispositivo)
+    
+    
 
 
 

@@ -37,7 +37,7 @@ class ControladorSistema():
                 opcao_escolhida = self.__tela_sistema.login()
                 funcao_escolhida = lista_opcoes[opcao_escolhida]
                 funcao_escolhida()
-                 
+
             else:
                 self.tela_logado()
     
@@ -59,13 +59,10 @@ class ControladorSistema():
 
     def comodos(self):
         self.__controlador_comodos.lista_comodos()
-        comodo = self.__controlador_comodos.__tela_comodos.pega_comodo()
-        self.__controlador_comodos.dispositivos_comodo(comodo)
-        #self.dispositivos_comodo(comodo)
     
     
     def todos_dispositivos(self):
-        self.__controlador_dispositivos.listar_dispositivos()
+        self.__controlador_dispositivos.lista_dispositivos()
         pass
 
     def relatorios(self):

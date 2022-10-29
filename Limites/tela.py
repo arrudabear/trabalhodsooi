@@ -18,3 +18,7 @@ class Tela():
     
     def mostrar_mensagem(self, msg):
         print(msg)
+
+    def seleciona_opcao(self, msg, opcoes):
+      opcao = self.le_num_inteiro(msg, opcoes)
+      return opcao

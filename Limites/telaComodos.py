@@ -33,4 +33,9 @@ class TelaComodos(Tela):
     
     def mostra_comodo(self, dados_comodo):
       print("Nome do cômodo: ", dados_comodo["nome_comodo"])
+    
+    def criar_comodo(self):
+      opcao = self.le_num_inteiro("Escolha a opção: ", [0,1])
+      return opcao
+
 

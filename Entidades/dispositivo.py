@@ -15,9 +15,9 @@ class Dispositivo(ABC):
         if isinstance(modelo, str): 
             self.__modelo = modelo
         self.__estado = False 
-        self.__tempo_ligado = 0
-        self.__timer_ligar = 0 
-        self.__timer_desligar = 0
+        self.__tempo_ligado = 0.0
+        self.__timer_ligar = 0.0
+        self.__timer_desligar = 0.0
 
     @property
     def nome(self):

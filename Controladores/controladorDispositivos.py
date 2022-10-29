@@ -111,6 +111,13 @@ class ControladorDispositivos():
         while continua: 
             opcoes[self.__tela_dispositivos.tela_opcoes()]()
     
+    def calcular_gasto(self): 
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        
+
+
     def controla_dispositivo(self, dispositivo: Dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
         self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo_dispositivo, dispositivo.modelo)

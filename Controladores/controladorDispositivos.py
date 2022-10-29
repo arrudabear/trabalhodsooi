@@ -138,6 +138,10 @@ class ControladorDispositivos():
     def info_disp(self, dispositivo):
         pass
 
+    def escolhe_dispositivo(self):
+        disp = self.__tela_dispositivos.escolhe_dispositivo()
+        return disp
+
     '''def dipositivos_comodo(self, comodo):
         for dispositivo in self.__dipositivos:
             if dispositivo.comodo == comodo:'''

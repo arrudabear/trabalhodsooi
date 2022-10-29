@@ -106,8 +106,9 @@ class ControladorComodos():
 
 
     def adicionar_dispositivo_comodo(self, comodo: Comodo): 
-        self.__controlador_sistema.__controlador_dispositivos.lista_dispositivos() 
-        disp = self.__controlador_sistema.__controlador.dispositivos.pega_disp()
+        
+        self.__controlador_sistema.controlador_dispositivos.lista_dispositivos() 
+        disp = self.__controlador_sistema.controlador_dispositivos.escolhe_dispositivo()
         comodo.adicionar_dispositivo(disp)
 
 

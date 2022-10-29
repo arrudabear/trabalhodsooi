@@ -54,27 +54,32 @@ class ControladorUsuario():
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
         print('cadastrando 2') #prints pra ver onde ta indo a função
-        codigo = 0
-        nome_usuario = self.__tela.tela_cadastra_usuario()
+        nome_usuario, codigo_usuario = self.__tela.tela_cadastra_usuario()
         #while codigo not in self.__lista_codigos:
         #    codigo = randint(100,999)
         #    if codigo not in self.__lista_codigos:
-        self.__lista_codigos.append(codigo)
-        codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        #self.__lista_codigos.append(codigo)
+        #codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
         usuario = Usuario(nome_usuario, codigo_usuario)
         self.__usuarios.append(usuario)
+        print("-"*20)
+        print(usuario.codigo, usuario.nome)
     
     def entrar_usuario(self):
-        self.lista_usuarios()
-        usuario_atual = self.__tela.escolher_usuario() 
         nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:
-                if nome_usuario == usuario.nome and codigo_usuario == usuario.codigo:
+                print('entrou no for')
+                print(usuario.nome, usuario.codigo)
+                print(nome_usuario, codigo_usuario)
+                if (nome_usuario == usuario.nome):# and (codigo_usuario == usuario.codigo):
+                    print('confirmou condição')
                     usuario_atual = usuario
-            return usuario_atual
-        except:
+                    return usuario_atual
+                else:
+                    raise KeyError
+        except KeyError:
             self.__tela.mostrar_mensagem("Usuário não Cadastrado")
     
 

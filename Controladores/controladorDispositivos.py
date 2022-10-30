@@ -207,6 +207,8 @@ class ControladorDispositivos():
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         if opcao == 1: 
             dispositivo.ligar()
+            usuario = self.__controlador_sistema.usuario_atual
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo)
             print(dispositivo.estado)
             print("ligado")
         else: 

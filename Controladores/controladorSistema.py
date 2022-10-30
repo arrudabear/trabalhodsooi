@@ -25,6 +25,10 @@ class ControladorSistema():
     def controlador_dispositivos(self) -> ControladorDispositivos:
         return self.__controlador_dispositivos
     
+    @property
+    def usuario_atual(self):
+        return self.__usuario_atual
+    
     def inicializa_sistema(self):
         self.abre_tela()
     

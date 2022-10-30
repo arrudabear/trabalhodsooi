@@ -270,10 +270,21 @@ class ControladorDispositivos():
 
 
     def controlar_volume(self, dispositivo):
-        pass
+        self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR VOLUME: 1 / DIMINUIR VOLUME: 2]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
+        if opcao == 1: 
+            dispositivo.aumentar_volume() 
+            self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
+        else: 
+            dispositivo.diminuir_volume() 
+            self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
 
     def controlar_musica(self, dispositivo):
-        pass
+        self.__tela_dispositivos.mostrar_mensagem("--- CONTROLE PLAYER DE MÚSICA ---")
+        self.__tela_dispositivos.mostrar_mensagem("[TOCAR/PAUSAR: 1 / PRÓXIMA MÚSICA: 2 / VOLTAR MÚSICA: 3]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
+        acao = dispositivo.controlar_musica(opcao)
+        self.__tela_dispositivos.mostrar_mensagem(f"O player {acao} a música.")
 
     def void_func(self, dispositivo):
         pass

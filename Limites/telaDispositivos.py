@@ -22,8 +22,8 @@ class TelaDispositivos(Tela):
     def pega_dados_dispositivo(self):
         print("-------- DADOS DISPOSITIVO ----------")
         nome = input("Nome do dipositivo: ")
-        codigo = input("Codigo: ")
-        potencia = input("Potência: ")
+        codigo = self.pegar_valor_int("Codigo: ")
+        potencia = self.pegar_valor_float("Potência: ")
         modelo = input("Modelo: ")
 
         return {"nome": nome,"codigo": codigo, "potencia": potencia, "modelo": modelo}
@@ -35,7 +35,7 @@ class TelaDispositivos(Tela):
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")
         nome = input("Digite o nome do dispositivo que deseja acessar: ")
-        codigo = input("Digite o código do dispositivo que deseja acessar: ")
+        codigo = self.pegar_valor_int("Digite o código do dispositivo que deseja acessar: ")
 
         return {"nome": nome, "codigo": codigo}
 

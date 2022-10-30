@@ -40,7 +40,7 @@ class Tela():
             valor_lido = input(mensagem) 
             try:
                 valor_float = float(valor_lido)
-                if type(valor_float) == int:
+                if type(valor_float) == float:
                     return valor_float
                 else:   
                     raise ValueError

@@ -77,15 +77,16 @@ class ControladorDispositivos():
             opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
             if opcao == 1: 
                 self.incluir_dispositivo() 
-                #self.lista_dispositivos()
-            #else: 
-            #    self.lista_dispositivos()
+                self.lista_dispositivos()
+            else: 
+                self.lista_dispositivos()
+                self.abre_tela()
 
         else:
             self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
             for dispositivo in self.__dispositivos:
-                self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo)
-            self.controla_dispositivo()
+                self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
+        
 
     def excluir_dispositivo(self):
         self.lista_dispositivos()
@@ -99,7 +100,7 @@ class ControladorDispositivos():
             else:
                 raise KeyError
         except KeyError: 
-            self.__tela_comodos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
+            self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
 
     def altera_dispositivo(self):
         self.lista_dispositivos()
@@ -117,10 +118,9 @@ class ControladorDispositivos():
             self.__tela_comodos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
     def abre_tela(self):
-        opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo}
+        opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 6: self.controla_dispositivo}
 
-        continua = True
-        while continua: 
+        while True:
             opcoes[self.__tela_dispositivos.tela_opcoes()]()
     
     def calcular_gasto(self): 
@@ -129,16 +129,16 @@ class ControladorDispositivos():
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
     
     def controla_dispositivo(self):
+        self.lista_dispositivos() 
         dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
-        self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo)
         if type(dispositivo) == ArCondicionado:
             self.__tela_dispositivos.controle_arcondicionado()
         elif type(dispositivo) == Geladeira:
             self.__tela_dispositivos.controle_geladeira()
         elif type(dispositivo) == Forno:
-            self.__tela_dispositivos.controle_forno(dispositivo.nome, dispositivo.codigo)
+            self.__tela_dispositivos.controle_forno()
         elif type(dispositivo) == TV:
             self.__tela_dispositivos.controle_tv()
         elif type(dispositivo) == Som:
@@ -153,11 +153,19 @@ class ControladorDispositivos():
             self.__tela_dispositivos.controle_cortina()
         elif type(dispositivo) == PontoDeLuz:
             self.__tela_dispositivos.controle_luz()
-
+        self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
-    
-    def liga_desliga(self, dispositivo):
-        pass
+    def abre_tela_opcoes_controle(self):
+        opcoes = {1: self.liga_desliga}
+
+        while True:
+            opcoes[self.__tela_dispositivos.controle_forno()]()
+
+    def liga_desliga(self):
+        dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo()
+        dispositivo = self.find_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["nome"])
+        Forno(dispositivo).ligar
+        print("ligar_desligar")
 
     def controlar_temperatura(self, dispositivo):
         pass

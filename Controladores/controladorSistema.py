@@ -58,11 +58,11 @@ class ControladorSistema():
         self.__controlador_usuarios.cadastra_usuario() 
 
     def comodos(self):
-        self.__controlador_comodos.lista_comodos()
+        self.__controlador_comodos.abre_tela()
     
     
-    def todos_dispositivos(self):
-        self.__controlador_dispositivos.lista_dispositivos()
+    def todos_dispositivos(self): 
+        self.__controlador_dispositivos.abre_tela()
         pass
 
     def relatorios(self):

@@ -88,7 +88,8 @@ class ControladorComodos():
         while continua: 
             opcoes[self.__tela_comodos.tela_opcoes()]() 
     
-    def dispositivos_comodo(self, comodo: Comodo):
+    def dispositivos_comodo(self):
+        comodo = self.__tela_comodos.escolhe_comodo()
         if comodo.dispositivos == []:
             self.__tela_comodos.mostrar_mensagem("Ainda não há dispositivos cadastrados neste comodo.")
             self.__tela_comodos.mostrar_mensagem("Deseja adicionar um novo dispositivos à esse comodo? [SIM: 1/NÃO: 0]")

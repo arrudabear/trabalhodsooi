@@ -12,9 +12,10 @@ class TelaDispositivos(Tela):
         print("3 - Listar Dispositvos")
         print("4 - Alterar Dispositivo")
         print("5 - Calcular Gasto")
+        print("6 - Controlar dispositivo")
         print("0 - Voltar")
 
-        opcao = opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
+        opcao = opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
         return opcao
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -27,9 +28,9 @@ class TelaDispositivos(Tela):
 
         return {"nome": nome,"codigo": codigo, "potencia": potencia, "modelo": modelo}
     
-    def mostra_dispositivo(self, nome, codigo):
-        print("Nome do dispositivo: ", nome)
-        print("Codigo: ", codigo)
+    def mostra_dispositivo(self, dados_dispositivo):
+        print("Nome do dispositivo: ", dados_dispositivo["nome"])
+        print("Codigo: ", dados_dispositivo["codigo"])
 
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")
@@ -43,17 +44,17 @@ class TelaDispositivos(Tela):
         pass
     
     def controle_geladeira(self):
-        pass
+        print('geladeira')
 
-    def controle_forno(self, nome, codigo):
-        print("CONTROLE: ", nome)
-        print("Código: ", codigo)
+    def controle_forno(self):
+        #print("CONTROLE: ", dados_dispositivo["nome"])
+        #print("Código: ", dados_dispositivo["codigo"])
         print("1 - Ligar/Desligar")
         print("2 - Temperatura")
         print("3 - Timer")
         print("4 - Informações do Dispositivo")
         print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,8])
         return opcao
     
     def controle_tv(self):

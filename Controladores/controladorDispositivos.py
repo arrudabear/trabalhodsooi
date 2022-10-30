@@ -127,6 +127,7 @@ class ControladorDispositivos():
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        print(dispositivo.potencia)
     
     def controla_dispositivo(self):
         self.lista_dispositivos() 
@@ -162,10 +163,17 @@ class ControladorDispositivos():
             opcoes[self.__tela_dispositivos.controle_forno()]()
 
     def liga_desliga(self):
-        dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo()
-        dispositivo = self.find_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["nome"])
-        Forno(dispositivo).ligar
-        print("ligar_desligar")
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
+        if opcao == 1: 
+            dispositivo.ligar
+            print("ligado")
+        else: 
+            dispositivo.desligar
+            print("desligado")
 
     def controlar_temperatura(self, dispositivo):
         pass

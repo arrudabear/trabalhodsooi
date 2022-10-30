@@ -78,6 +78,16 @@ class TelaDispositivos(Tela):
     def controle_luz(self):
         print('controle luz')
     
+    def pegar_valor_float(self): 
+        valor = input("Valor: ")
+
+        return valor 
+    
+    def pegar_valor_int(self): 
+        valor = input("Valor: ")
+
+        return valor 
+
     def escolher_tipo_dispositivo(self): 
         print("1 - Ar Condicionado")
         print("2 - Cafeteira")

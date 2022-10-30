@@ -157,7 +157,7 @@ class ControladorDispositivos():
         self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
     def abre_tela_opcoes_controle(self):
-        opcoes = {1: self.liga_desliga}
+        opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura}
 
         while True:
             opcoes[self.__tela_dispositivos.controle_forno()]()
@@ -168,16 +168,35 @@ class ControladorDispositivos():
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
         self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
+        dispositivo = self.tipo_dispositivo(dispositivo) 
         if opcao == 1: 
-            dispositivo.ligar
+            dispositivo.ligar()
+            print(dispositivo.estado)
             print("ligado")
         else: 
-            dispositivo.desligar
+            dispositivo.desligar() 
+            print(dispositivo.estado)
             print("desligado")
 
-    def controlar_temperatura(self, dispositivo):
-        pass
-    
+    def controlar_temperatura(self):
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPERATURA: 1 / AUMENTAR TEMPERATURA: 2 / DIMINUIR TEMPERATURA: 3]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
+        dispositivo = self.tipo_dispositivo(dispositivo) 
+        if opcao == 1: 
+            self.__tela_dispositivos.mostrar_mensagem("Escolha o valor da temperatura: ")
+            temperatura = self.__tela_dispositivos.pegar_valor_float()
+            dispositivo.escolher_temperatura(float(temperatura))
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+        elif opcao == 2: 
+            dispositivo.aumentar_temperatura() 
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+        else: 
+            dispositivo.diminuir_temperatura() 
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+
     def controlar_timer(self, dispositivo):
         pass
 
@@ -187,6 +206,30 @@ class ControladorDispositivos():
     def escolhe_dispositivo(self):
         disp = self.__tela_dispositivos.escolhe_dispositivo()
         return disp
+
+    def tipo_dispositivo(self, dispositivo): 
+        if type(dispositivo) == ArCondicionado:
+            dispositivo = ArCondicionado(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == Geladeira:
+            dispositivo = Geladeira(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == Forno:
+            dispositivo = Forno(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == TV:
+            dispositivo = TV(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == Som:
+            dispositivo = Som(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == LavadoraDeRoupa:
+            dispositivo = LavadoraDeRoupa(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == LavaLoucas:
+            dispositivo = LavaLoucas(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == Cafeteira:
+            dispositivo = Cafeteira(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == Cortina:
+            dispositivo = Cortina(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+        elif type(dispositivo) == PontoDeLuz:
+            dispositivo = PontoDeLuz(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
+
+        return dispositivo
 
     '''def dipositivos_comodo(self, comodo):
         for dispositivo in self.__dipositivos:

@@ -30,7 +30,6 @@ class TelaDispositivos(Tela):
     def mostra_dispositivo(self, dados_dispositivo):
         print("Nome do dispositivo: ", dados_dispositivo["nome"])
         print("Codigo: ", dados_dispositivo["codigo"])
-        print("Modelo", dados_dispositivo["modelo"])
 
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")

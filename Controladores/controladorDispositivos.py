@@ -70,10 +70,15 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
-        self.__tela_dispositivos.mostrar_mensagem("-------- DISPOSITIVOS CADASTRADOS ----------")
-        for dispositivo in self.__dispositivos:
-            self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo, "modelo": dispositivo.modelo})
-            self.__tela_dispositivos.mostrar_mensagem(f"--------------------------------")
+        if self.__dispositivos == []:
+            self.incluir_dispositivo() 
+            self.lista_dispositivos()
+
+        else:
+            self.__tela_dispositivos.mostrar_mensagem("-------- DISPOSITIVOS CADASTRADOS ----------")
+            for dispositivo in self.__dispositivos:
+                self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
+            self.controla_dispositivo()
 
     def excluir_dispositivo(self):
         self.lista_dispositivos()
@@ -115,14 +120,14 @@ class ControladorDispositivos():
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-        
-
-
-    def controla_dispositivo(self, dispositivo: Dispositivo):
+    
+    def controla_dispositivo(self):
+        dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
-        self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo_dispositivo, dispositivo.modelo)
+        self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["nome"])
         if type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira or type(dispositivo) == Forno:
-            self.__tela_dispositivos.controle_temp(dispositivo.nome, dispositivo.codigo_dispositivo)
+            self.__tela_dispositivos.controle_temp(dispositivo.nome, dispositivo.codigo)
         else:
             self.__tela_dispositivos.controle
     

@@ -62,6 +62,7 @@ class ControladorUsuario():
         
         usuario = Usuario(nome_usuario, codigo_usuario)
         self.__usuarios.append(usuario)
+        self.__tela.mostrar_mensagem("Usuário Cadastrado")
         print("-"*20)
         print(usuario.codigo, usuario.nome)
     
@@ -76,8 +77,8 @@ class ControladorUsuario():
                     print('confirmou condição')
                     usuario_atual = usuario
                     return usuario_atual
-                else:
-                    raise KeyError
+            else:
+                raise KeyError 
         except KeyError:
             self.__tela.mostrar_mensagem("Usuário não Cadastrado")
     

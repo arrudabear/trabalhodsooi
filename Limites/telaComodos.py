@@ -17,7 +17,7 @@ class TelaComodos(Tela):
         print("6 - Mostrar Dispositivos")
         print("0 - Voltar")
 
-        opcao = int(input("Escolha a opcao: ", [0,1,2,3,4,5,6]))
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
         return opcao
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado

@@ -11,9 +11,15 @@ class Geladeira(Dispositivo):
     def temperatura(self) -> float:
         return self.__temperatura
     
-    def escolher_temperatura(self, temperatura: float):
+    @temperatura.setter 
+    def temperatura(self, temperatura: float):
         if isinstance(temperatura, float):
             self.__temperatura = temperatura
-        
+
+    def aumentar_temperatura(self):
+        self.__temperatura += 1 
+
+    def diminuir_temperatura(self):
+        self.__temperatura -= 1 
 
     

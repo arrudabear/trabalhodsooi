@@ -12,7 +12,11 @@ class LavadoraDeRoupa(Dispositivo):
         return self.__modo
         
     def escolher_modo(self, modo: str):
-        if isinstance(modo, str):
-            self.__modo = modo
-    
+        if isinstance(modo, str): 
+            if modo == 1: 
+                self.__modo = "Delicado"
+            elif modo == 2:
+                self.__modo = "Normal"
+            elif modo == 3:
+                self.__modo = "Rápido"
     

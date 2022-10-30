@@ -15,7 +15,7 @@ class TelaDispositivos(Tela):
         print("6 - Controlar dispositivo")
         print("0 - Voltar")
 
-        opcao = opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
         return opcao
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -41,104 +41,42 @@ class TelaDispositivos(Tela):
 
 #------------------------------------------------------------------------------------------------------------------    
     def controle_arcondicionado(self):
-        print("--- Controle Ar Condicionado ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Temperatura")
-        print("3 - Timer")
-        print("4 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
-        return opcao
+        pass
     
     def controle_geladeira(self):
-        print("--- Controle Geladeira ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Temperatura")
-        print("3 - Timer")
-        print("4 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
-        return opcao
+        print('geladeira')
 
     def controle_forno(self):
-        print("--- Controle Forno ---")
+        #print("CONTROLE: ", dados_dispositivo["nome"])
+        #print("Código: ", dados_dispositivo["codigo"])
         print("1 - Ligar/Desligar")
         print("2 - Temperatura")
         print("3 - Timer")
         print("4 - Informações do Dispositivo")
         print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,8])
         return opcao
     
     def controle_tv(self):
-        print("--- Contorle TV ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Canal")
-        print("3 - Volume")
-        print("4 - Timer")
-        print("5 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
-        return opcao
+        print('TV')
 
     def controle_som(self):
-        print("--- Controle Som ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Trocar Música")
-        print("3 - Volume")
-        print("4 - Timer")
-        print("5 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
-        return opcao
+        print('som')
 
     def controle_lavadoras(self):
-        print("--- Controle Lavadora de Roupa ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Modo")
-        print("3 - Timer")
-        print("4 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
-        return opcao
-
+        print('Controle lavadora')
+    
     def controle_lavaloucas(self):
-        print("--- Controle Lava Louças ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Modo")
-        print("3 - Timer")
-        print("4 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
-        return opcao
-
+        print('lava louças')
     
     def controle_cafeteira(self):
-        print("--- Controle Cafeteira ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Timer")
-        print("3 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
-        return opcao
+        pass
 
     def controle_cortina(self):
-        print("--- Controle Cortina ---")
-        print("1 - Abrir/Fechar")
-        print("2 - Timer")
-        print("3 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
-        return opcao
+        pass
 
     def controle_luz(self):
-        print("--- Controle Luz ---")
-        print("1 - Ligar/Desligar")
-        print("2 - Timer")
-        print("3 - Informações do Dispositivo")
-        print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
-        return opcao
+        print('controle luz')
     
     def pegar_valor_float(self): 
         valor = input("Valor: ")

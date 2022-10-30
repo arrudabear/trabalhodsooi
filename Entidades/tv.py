@@ -6,7 +6,9 @@ class TV(Dispositivo):
         super().__init__(nome, potencia,
                          codigo, modelo)
         self.__volume = 0 
-        self.__canal = 0.0 
+        self.__canal = 0
+        self.__canal_max = 100
+        self.__canal_min = 1
             
     @property
     def volume(self) -> int:
@@ -32,5 +34,14 @@ class TV(Dispositivo):
     def diminuir_volume(self, volume: int):
         if isinstance(volume, int):
             self.__volume -= volume
+
+    @property
+    def canal_max(self): 
+        self.__canal_max 
+    
+    @property 
+    def canal_min(self):
+        self.__canal_min 
+    
     
     

@@ -8,7 +8,6 @@ class Som(Dispositivo):
         super().__init__(nome, potencia,
                          codigo, modelo)
         self.__volume = 0 
-        self.__musica = None
 
     @property
     def volume(self): 
@@ -18,15 +17,23 @@ class Som(Dispositivo):
     def musica(self): 
         return self.__musica 
     
-    def escolher_musica(self, musica: float): 
-        if isinstance(musica, float): 
-            self.__musica= musica
+    def controlar_musica(self, opcao: int): 
+        if opcao == 1: 
+            acao = "Tocou/Pausou"
+        elif opcao == 2:
+            acao = "Passou"
+        elif opcao == 3:
+            acao = "Voltou"
+
+        return acao 
     
     def aumentar_volume(self): 
-        self.__volume += 1 
+        if self.__volume < 100:
+            self.__volume += 1 
     
     def diminuir_volume(self): 
-        self.__volume -= 1
+        if self.__volume > 0:
+            self.__volume -= 1
 
     @volume.setter
     def volume(self, volume: int): 

@@ -170,15 +170,13 @@ class ControladorDispositivos():
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         dispositivo = self.tipo_dispositivo(dispositivo) 
         if opcao == 1: 
-            dispositivo.estado  = dispositivo.ligar()
+            dispositivo.ligar()
             print(dispositivo.estado)
             print("ligado")
         else: 
-            dispositivo.estado  = dispositivo.desligar() 
+            dispositivo.desligar() 
             print(dispositivo.estado)
             print("desligado")
-
-        return dispositivo.estado 
 
     def controlar_temperatura(self):
         self.lista_dispositivos() 
@@ -204,7 +202,8 @@ class ControladorDispositivos():
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TIMER LIGAR: 1 / ESCOLHER TIMER DESLIGAR: 0]")
+        print(dispositivo.estado)
+        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR 1 / ESCOLHER TEMPO TIMER DESLIGAR]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,0])
         dispositivo = self.tipo_dispositivo(dispositivo) 
         self.__tela_dispositivos.mostrar_mensagem("Escolha o valor do timer: ")
@@ -216,6 +215,15 @@ class ControladorDispositivos():
             tempo = self.__tela_dispositivos.pegar_valor_float() 
             dispositivo.timer_desligar(float(tempo)) 
             self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
+
+    def escolher_modo(self): 
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        dispositivo = self.tipo_dispositivo(dispositivo) 
+        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR 1 / ESCOLHER TEMPO TIMER DESLIGAR]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
+        dispositivo.escolher_modo() 
 
     def info_disp(self):
         self.lista_dispositivos() 

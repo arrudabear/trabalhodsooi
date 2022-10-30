@@ -6,3 +6,4 @@ class Cortina(Dispositivo):
         super().__init__(nome, potencia,
                          codigo, modelo)
     
+    

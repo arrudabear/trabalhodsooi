@@ -5,7 +5,7 @@ class LavadoraDeRoupa(Dispositivo):
                  codigo: int, modelo: str):
         super().__init__(nome, potencia,
                          codigo, modelo)
-        self.__modo = ''
+        self.__modo = None
 
     @property
     def modo(self) -> str:

@@ -6,11 +6,3 @@ class PontoDeLuz(Dispositivo):
                  codigo: int, modelo: str):
         super().__init__(nome, potencia,
                          codigo, modelo)
-    
-    def ligar(self): 
-        self.__estado = True 
-        return self.__estado 
-
-    def desligar(self):
-        self.__estado = False 
-        return self.__estado

@@ -14,10 +14,5 @@ class Forno(Dispositivo):
     def escolher_temperatura(self, temperatura: float):
         if isinstance(temperatura, float):
             self.__temperatura = temperatura
-        
-    def aumentar_temperatura(self):
-        self.__temperatura += 1 
-    
-    def diminuir_temperatura(self):
-        self.__temepratura -= 1 
+
     

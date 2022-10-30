@@ -15,11 +15,5 @@ class Geladeira(Dispositivo):
         if isinstance(temperatura, float):
             self.__temperatura = temperatura
         
-    def aumentar_temperatura(self, temperatura: float):
-        if isinstance(temperatura, float):
-            self.__temperatura += temperatura
-    
-    def diminuir_temperatura(self, temperatura: float):
-        if isinstance(temperatura, float):
-            self.__temperatura -= temperatura
+
     

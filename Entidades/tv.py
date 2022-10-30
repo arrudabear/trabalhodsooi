@@ -12,7 +12,8 @@ class TV(Dispositivo):
     def volume(self) -> int:
         return self.__volume
     
-    def escolher_volume(self, volume: int): 
+    @volume.setter
+    def volume(self, volume: int): 
         if isinstance(volume, int): 
             self.__volume = volume 
     

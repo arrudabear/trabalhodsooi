@@ -22,3 +22,15 @@ class Tela():
     def seleciona_opcao(self, msg, opcoes):
       opcao = self.le_num_inteiro(msg, opcoes)
       return opcao
+    
+    def le_num(self, mensagem = ""):
+        while True:
+            valor_lido = input(mensagem) 
+            try:
+                valor_int = int(valor_lido)
+                if type(valor_int) == int:
+                    return valor_int
+                else:   
+                    raise ValueError
+            except ValueError:
+                print("Digite apenas números.")

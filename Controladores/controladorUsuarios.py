@@ -7,7 +7,6 @@ class ControladorUsuario():
     def __init__(self, controlador_sistema):
         self.__cotrolador_sistema = controlador_sistema
         self.__usuarios = []
-        self.__lista_codigos = []
         self.__tela = TelaUsuario()
     
     @property
@@ -33,20 +32,40 @@ class ControladorUsuario():
         except KeyError:
             self.__tela.mostrar_mensagem("Usuario ja cadastrado")
 
-    def excluir_usuario(self, usuario: Usuario):
-        if isinstance(usuario, Usuario):
-            self.__usuarios.remove(usuario)
-    
+    def excluir_usuario(self):
+        self.lista_usuarios() 
+        usuario_escolhido = self.__tela.escolher_usuario() 
+        usuario = self.find_usuario(int(usuario_escolhido["codigo"]), usuario_escolhido["nome"])
+        try: 
+            if (usuario is not None):
+                self.__disposistivos.remove(usuario)
+                self.__tela.mostrar_mensagem("USUARIO EXCLUIDO")
+                self.lista_usuarios() 
+            else: 
+                raise KeyError
+        except KeyError: 
+             self.__tela_dispositivos.mostrar_mensagem("USUARIO NÃO EXISTENTE!!")
+
     def lista_usuarios(self):
         for usuario in self.__usuarios: 
             self.__tela.mostra_usuario({"nome": usuario.nome, "codigo": usuario.codigo})
         return self.__usuarios
     
-    def altera_usuario(self, usuario: Usuario, novo_nome, novo_codigo):
-        for user in self.__usuarios:
-            if user == usuario:
-                user.nome = novo_nome
-    
+    def altera_usuario(self):
+        self.lista_usuarios() 
+        usuario_escolhido = self.__tela.escolher_usuario() 
+        usuario = self.find_usuario(int(usuario_escolhido["codigo"]), usuario_escolhido["nome"])
+        try: 
+            if (usuario is not None): 
+                self.__usuarios.remove(usuario) 
+                self.incluir_usuario() 
+                self.__tela.mostrar_mensagem("USUARIO ALTERADO!!")
+                self.lista_usuarios() 
+            else: 
+                raise KeyError
+        except KeyError: 
+            self.__tela.mostrar_mensagem("USUARIO NÃO EXISTENTE!!")
+
     def find_usuario(self, codigo: int):
         for usuario in self.__usuarios:
             if usuario.codigo_usuario == codigo:

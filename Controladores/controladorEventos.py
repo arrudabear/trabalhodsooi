@@ -1,5 +1,6 @@
 #from Controladores.controladorSistema import ControladorSistema
 import datetime
+from typing import Type
 from Entidades.evento import Evento
 from Entidades.usuario import Usuario
 from Entidades.dispositivo import Dispositivo
@@ -16,11 +17,15 @@ class ControladorEventos():
         return self.__eventos
     
     def registrar_evento(self, usuario, dispositivo):
+        datahora = datetime.datetime.now()
         try:
             if isinstance(usuario, Usuario) and isinstance(dispositivo, Dispositivo):
-                self.__eventos.append(Evento)
-        except:
-            self.__tela_eventos
+                evento = Evento(usuario, dispositivo, datahora)
+                self.__eventos.append(evento)
+            else:
+                raise TypeError
+        except TypeError:
+            self.__tela_eventos.mostrar_mensagem("Falha ao registrar o evento.")
     
     def lista_eventos(self):
         return self.__eventos

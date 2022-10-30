@@ -27,9 +27,9 @@ class TelaDispositivos(Tela):
 
         return {"nome": nome,"codigo": codigo, "potencia": potencia, "modelo": modelo}
     
-    def mostra_dispositivo(self, dados_dispositivo):
-        print("Nome do dispositivo: ", dados_dispositivo["nome"])
-        print("Codigo: ", dados_dispositivo["codigo"])
+    def mostra_dispositivo(self, nome, codigo):
+        print("Nome do dispositivo: ", nome)
+        print("Codigo: ", codigo)
 
     def escolhe_dispositivo(self):
         print("--- Escolha o Dispositivo ---")
@@ -37,8 +37,15 @@ class TelaDispositivos(Tela):
         codigo = input("Digite o código do dispositivo que deseja acessar: ")
 
         return {"nome": nome, "codigo": codigo}
+
+#------------------------------------------------------------------------------------------------------------------    
+    def controle_arcondicionado(self):
+        pass
     
-    def controle_temp(self, nome, codigo):
+    def controle_geladeira(self):
+        pass
+
+    def controle_forno(self, nome, codigo):
         print("CONTROLE: ", nome)
         print("Código: ", codigo)
         print("1 - Ligar/Desligar")
@@ -48,6 +55,27 @@ class TelaDispositivos(Tela):
         print("0 - Voltar")
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
         return opcao
+    
+    def controle_tv(self):
+        print('TV')
+
+    def controle_som(self):
+        print('som')
+
+    def controle_lavadoras(self):
+        print('Controle lavadora')
+    
+    def controle_lavaloucas(self):
+        print('lava louças')
+    
+    def controle_cafeteira(self):
+        pass
+
+    def controle_cortina(self):
+        pass
+
+    def controle_luz(self):
+        print('controle luz')
     
     def escolher_tipo_dispositivo(self): 
         print("1 - Ar Condicionado")

@@ -1,4 +1,5 @@
 
+from dis import dis
 from Limites.telaDispositivos import TelaDispositivos
 from Entidades.dispositivo import Dispositivo
 from Entidades.arCondicionado import ArCondicionado
@@ -76,14 +77,14 @@ class ControladorDispositivos():
             opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
             if opcao == 1: 
                 self.incluir_dispositivo() 
-                self.lista_dispositivos()
-            else: 
-                self.lista_dispositivos()
+                #self.lista_dispositivos()
+            #else: 
+            #    self.lista_dispositivos()
 
         else:
-            self.__tela_dispositivos.mostrar_mensagem("-------- DISPOSITIVOS CADASTRADOS ----------")
+            self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
             for dispositivo in self.__dispositivos:
-                self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
+                self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo)
             self.controla_dispositivo()
 
     def excluir_dispositivo(self):
@@ -131,11 +132,29 @@ class ControladorDispositivos():
         dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
-        self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["nome"])
-        if type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira or type(dispositivo) == Forno:
-            self.__tela_dispositivos.controle_temp(dispositivo.nome, dispositivo.codigo)
-        else:
-            self.__tela_dispositivos.controle
+        self.__tela_dispositivos.mostra_dispositivo(dispositivo.nome, dispositivo.codigo)
+        if type(dispositivo) == ArCondicionado:
+            self.__tela_dispositivos.controle_arcondicionado()
+        elif type(dispositivo) == Geladeira:
+            self.__tela_dispositivos.controle_geladeira()
+        elif type(dispositivo) == Forno:
+            self.__tela_dispositivos.controle_forno(dispositivo.nome, dispositivo.codigo)
+        elif type(dispositivo) == TV:
+            self.__tela_dispositivos.controle_tv()
+        elif type(dispositivo) == Som:
+            self.__tela_dispositivos.controle_som()
+        elif type(dispositivo) == LavadoraDeRoupa:
+            self.__tela_dispositivos.controle_lavadoras()
+        elif type(dispositivo) == LavaLoucas:
+            self.__tela_dispositivos.controle_lavaloucas()
+        elif type(dispositivo) == Cafeteira:
+            self.__tela_dispositivos.controle_cafeteira()
+        elif type(dispositivo) == Cortina:
+            self.__tela_dispositivos.controle_cortina()
+        elif type(dispositivo) == PontoDeLuz:
+            self.__tela_dispositivos.controle_luz()
+
+#-----------------------------------------------------------------------------------------------------------------
     
     def liga_desliga(self, dispositivo):
         pass

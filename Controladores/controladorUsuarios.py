@@ -1,4 +1,5 @@
 #from Controladores.controladorSistema import ControladorSistema
+from logging import exception
 from Entidades.usuario import Usuario
 from Limites.telaUsuario import TelaUsuario
 
@@ -52,29 +53,31 @@ class ControladorUsuario():
                 return usuario
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
-        print('cadastrando 2') #prints pra ver onde ta indo a função
-        nome_usuario, codigo_usuario = self.__tela.tela_cadastra_usuario()
-        #while codigo not in self.__lista_codigos:
-        #    codigo = randint(100,999)
-        #    if codigo not in self.__lista_codigos:
-        #self.__lista_codigos.append(codigo)
-        #codigo_usuario = codigo #consetar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        cadastrando = True
+        while cadastrando == True:
+            nome_usuario, codigo_usuario = self.__tela.tela_cadastra_usuario()
+            try:
+                for usuario in self.__usuarios:
+                    if usuario.codigo == codigo_usuario:
+                        raise KeyError
+                usuario = Usuario(nome_usuario, codigo_usuario)
+                self.__usuarios.append(usuario)
+                self.__tela.mostrar_mensagem("Usuário Cadastrado.")
+                print("-"*20)
+                print(usuario.codigo, usuario.nome)
+                cadastrando = False
+                
+            except KeyError:
+                self.__tela.mostrar_mensagem("Código em uso, por favor digite outro.")
         
-        usuario = Usuario(nome_usuario, codigo_usuario)
-        self.__usuarios.append(usuario)
-        self.__tela.mostrar_mensagem("Usuário Cadastrado")
-        print("-"*20)
-        print(usuario.codigo, usuario.nome)
     
     def entrar_usuario(self):
         nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:
-                print('entrou no for')
                 print(usuario.nome, usuario.codigo)
                 print(nome_usuario, codigo_usuario)
                 if (nome_usuario == usuario.nome) and (codigo_usuario == usuario.codigo):
-                    print('confirmou condição')
                     usuario_atual = usuario
                     return usuario_atual
             else:

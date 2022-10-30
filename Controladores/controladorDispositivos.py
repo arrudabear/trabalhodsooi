@@ -71,8 +71,14 @@ class ControladorDispositivos():
 
     def lista_dispositivos(self): 
         if self.__dispositivos == []:
-            self.incluir_dispositivo() 
-            self.lista_dispositivos()
+            self.__tela_dispositivos.mostrar_mensagem("Ainda não há dispositivos cadastrados")
+            self.__tela_dispositivos.mostrar_mensagem("Deseja criar um novo dispositivo? [SIM: 1 / NÃO: 0]")
+            opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
+            if opcao == 1: 
+                self.incluir_dispositivo() 
+                self.lista_dispositivos()
+            else: 
+                self.lista_dispositivos()
 
         else:
             self.__tela_dispositivos.mostrar_mensagem("-------- DISPOSITIVOS CADASTRADOS ----------")

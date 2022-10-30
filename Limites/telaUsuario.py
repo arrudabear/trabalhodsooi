@@ -16,11 +16,10 @@ class TelaUsuario(Tela):
             codigo_usuario = self.pegar_valor_int("Codigo do Usuário: ")
             return nome_usuario, codigo_usuario
     
-    
     def pega_dados_usuario(self): 
         print("------------")
         nome = input("Nome do usuario: ").title()
-        codigo = input("Codigo do usuario")
+        codigo = input("Codigo do usuario: ")
 
         return {"nome": nome, "codigo": codigo}
 

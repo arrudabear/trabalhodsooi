@@ -14,8 +14,8 @@ class TelaSistema(Tela):
     def opcoes_usuario(self, usuario):
         print("BEM VINDO ", usuario)
         print("Escolha sua opção:")
-        print("1 - Listar Dispositivo por Cômodos")
-        print("2 - Listar Todos os Dispositivos")
+        print("1 - Menu comodos")
+        print("2 - Menu dispositivos")
         print("3 - Gerar Relatório")
         print("4 - Usuários da Casa")
         print("0 - Finalizar sistema")

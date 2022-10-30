@@ -78,7 +78,6 @@ class ControladorDispositivos():
                 self.incluir_dispositivo() 
                 self.lista_dispositivos()
             else: 
-                self.lista_dispositivos()
                 self.abre_tela()
 
         else:

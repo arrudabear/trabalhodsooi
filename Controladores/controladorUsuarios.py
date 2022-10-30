@@ -89,7 +89,6 @@ class ControladorUsuario():
             except KeyError:
                 self.__tela.mostrar_mensagem("Código em uso, por favor digite outro.")
         
-    
     def entrar_usuario(self):
         nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
         try:

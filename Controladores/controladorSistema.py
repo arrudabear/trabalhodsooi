@@ -53,7 +53,6 @@ class ControladorSistema():
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
 
-    
     def entrar_usuario(self):
         print('entrando')
         self.__usuario_atual = self.__controlador_usuarios.entrar_usuario()
@@ -76,10 +75,8 @@ class ControladorSistema():
         funcao_escolhida()
 
     def usuarios(self):
-        pass
+        self.__controlador_usuarios.lista_usuarios() 
 
-
-    
     def encerrar_sistema(self):
         exit(0)
     

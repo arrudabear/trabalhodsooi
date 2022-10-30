@@ -14,10 +14,11 @@ class TelaComodos(Tela):
         print("3 - Listar Comodo")
         print("4 - Alterar Comodo")
         print("5 - Calcular Gasto no Comodo")
-        print("6 - Mostrar Dispositivos")
+        print("6 - Adicionar Dispositivo Comodo")
+        print("7 - Mostrar Dispositivos")
         print("0 - Voltar")
 
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6,7])
         return opcao
 
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
@@ -30,7 +31,7 @@ class TelaComodos(Tela):
     def escolhe_comodo(self): 
       nome_comodo = input("Digite o nome do cômodo  que deseja acessar: ")
       
-      return {"nome_comodo": nome_comodo} 
+      return nome_comodo 
     
     def mostra_comodo(self, dados_comodo):
       print("Nome do cômodo: ", dados_comodo["nome_comodo"])

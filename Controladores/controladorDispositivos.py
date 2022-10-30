@@ -138,61 +138,61 @@ class ControladorDispositivos():
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_arcondicionado()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == Geladeira:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_geladeira()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
             
         elif type(dispositivo) == Forno:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_forno()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == TV:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_canal,3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_tv()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == Som:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_musica, 3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_som()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == LavadoraDeRoupa:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_lavadoras()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == LavaLoucas:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_lavaloucas()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == Cafeteira:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_cafeteira()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == Cortina:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_cortina()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         elif type(dispositivo) == PontoDeLuz:
             lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
             opcao_escolhida = self.__tela_dispositivos.controle_luz()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
-            funcao_escolhida()
+            funcao_escolhida(dispositivo)
 
         #self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
@@ -202,13 +202,9 @@ class ControladorDispositivos():
         while True:
             opcoes[self.__tela_dispositivos.controle_forno()]()
 
-    def liga_desliga(self):
-        self.lista_dispositivos() 
-        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+    def liga_desliga(self, dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
-        dispositivo = self.tipo_dispositivo(dispositivo) 
         if opcao == 1: 
             dispositivo.ligar()
             print(dispositivo.estado)
@@ -218,34 +214,21 @@ class ControladorDispositivos():
             print(dispositivo.estado)
             print("desligado")
 
-    def controlar_temperatura(self):
-        self.lista_dispositivos() 
-        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+    def controlar_temperatura(self, dispositivo):
         print(dispositivo.estado)
-        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPERATURA: 1 / AUMENTAR TEMPERATURA: 2 / DIMINUIR TEMPERATURA: 3]")
-        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
-        dispositivo = self.tipo_dispositivo(dispositivo) 
+        self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR TEMPERATURA: 1 / DIMINUIR TEMPERATURA: 2]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
         if opcao == 1: 
-            self.__tela_dispositivos.mostrar_mensagem("Escolha o valor da temperatura: ")
-            temperatura = self.__tela_dispositivos.pegar_valor_float()
-            dispositivo.escolher_temperatura(float(temperatura))
-            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
-        elif opcao == 2: 
             dispositivo.aumentar_temperatura() 
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         else: 
             dispositivo.diminuir_temperatura() 
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
 
-    def controlar_timer(self):
-        self.lista_dispositivos() 
-        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+    def controlar_timer(self, dispositivo):
         print(dispositivo.estado)
-        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR 1 / ESCOLHER TEMPO TIMER DESLIGAR]")
+        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR: 1 / ESCOLHER TEMPO TIMER DESLIGAR: 0]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,0])
-        dispositivo = self.tipo_dispositivo(dispositivo) 
         self.__tela_dispositivos.mostrar_mensagem("Escolha o valor do timer: ")
         if opcao == 1: 
             tempo = self.__tela_dispositivos.pegar_valor_float() 
@@ -256,21 +239,13 @@ class ControladorDispositivos():
             dispositivo.timer_desligar(float(tempo)) 
             self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
 
-    def escolher_modo(self): 
-        self.lista_dispositivos() 
-        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-        dispositivo = self.tipo_dispositivo(dispositivo) 
-        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR 1 / ESCOLHER TEMPO TIMER DESLIGAR]")
+    def escolher_modo(self, dispositivo): 
+        self.__tela_dispositivos.mostrar_mensagem("--- MODOS ---\n1 - DELICADO\n2 - NORMAL\n3 - RÁPIDO")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
         dispositivo.escolher_modo() 
 
-    def info_disp(self):
-        self.lista_dispositivos() 
-        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+    def info_disp(self, dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("INFORMAÇÔES DISPOSITIIVO")
-        dispositivo = self.tipo_dispositivo(dispositivo)
         self.__tela_dispositivos.mostrar_mensagem(f"Nome: {dispositivo.nome}")
         self.__tela_dispositivos.mostrar_mensagem(f"Código: {dispositivo.codigo}")
         self.__tela_dispositivos.mostrar_mensagem(f"Modelo: {dispositivo.modelo}")
@@ -278,16 +253,29 @@ class ControladorDispositivos():
         self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         self.__tela_dispositivos.mostrar_mensagem(f"Estado: {dispositivo.estado}")
     
-    def controlar_canal(self):
+    def controlar_canal(self, dispositivo):
+        controlando_canal = True
+        while controlando_canal == True:
+            self.__tela_dispositivos.mostrar_mensagem("Digite o canal de sua escolha: ")
+            canal = self.__tela_dispositivos.pegar_valor_int()
+            try:
+                if canal >= dispositivo.canal_max or canal <= dispositivo.canal_min:
+                    dispositivo.escolher_canal(canal)
+                    self.__tela_dispositivos.mostrar_mensagem("Canal trocado com sucesso!")
+                    controlando_canal = False
+                else:
+                    raise ValueError
+            except ValueError:
+                self.__tela_dispositivos.mostrar_mensagem(f"Digite apenas canais dentro do intervalo:\nMínimo: {dispositivo.canal_min}\nMáximo: {dispositivo.canal_max}")
+
+
+    def controlar_volume(self, dispositivo):
         pass
 
-    def controlar_volume(self):
+    def controlar_musica(self, dispositivo):
         pass
 
-    def controlar_musica(self):
-        pass
-
-    def void_func(self):
+    def void_func(self, dispositivo):
         pass
                 
 

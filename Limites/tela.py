@@ -23,7 +23,7 @@ class Tela():
       opcao = self.le_num_inteiro(msg, opcoes)
       return opcao
     
-    def le_num(self, mensagem = ""):
+    def pegar_valor_int(self, mensagem = ""):
         while True:
             valor_lido = input(mensagem) 
             try:
@@ -34,3 +34,18 @@ class Tela():
                     raise ValueError
             except ValueError:
                 print("Digite apenas números.")
+    
+    def pegar_valor_float(self, mensagem = ""): 
+        while True:
+            valor_lido = input(mensagem) 
+            try:
+                valor_float = float(valor_lido)
+                if type(valor_float) == int:
+                    return valor_float
+                else:   
+                    raise ValueError
+            except ValueError:
+                print("Digite apenas números.")
+    
+    
+   

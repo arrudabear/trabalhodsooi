@@ -115,7 +115,7 @@ class ControladorDispositivos():
             else:
                 raise KeyError 
         except KeyError: 
-            self.__tela_comodos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
+            self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
     def abre_tela(self):
         opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 6: self.controla_dispositivo}
@@ -157,7 +157,7 @@ class ControladorDispositivos():
         self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
     def abre_tela_opcoes_controle(self):
-        opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura}
+        opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp}
 
         while True:
             opcoes[self.__tela_dispositivos.controle_forno()]()
@@ -170,18 +170,21 @@ class ControladorDispositivos():
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         dispositivo = self.tipo_dispositivo(dispositivo) 
         if opcao == 1: 
-            dispositivo.ligar()
+            dispositivo.estado  = dispositivo.ligar()
             print(dispositivo.estado)
             print("ligado")
         else: 
-            dispositivo.desligar() 
+            dispositivo.estado  = dispositivo.desligar() 
             print(dispositivo.estado)
             print("desligado")
+
+        return dispositivo.estado 
 
     def controlar_temperatura(self):
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        print(dispositivo.estado)
         self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPERATURA: 1 / AUMENTAR TEMPERATURA: 2 / DIMINUIR TEMPERATURA: 3]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
         dispositivo = self.tipo_dispositivo(dispositivo) 
@@ -189,19 +192,44 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Escolha o valor da temperatura: ")
             temperatura = self.__tela_dispositivos.pegar_valor_float()
             dispositivo.escolher_temperatura(float(temperatura))
-            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         elif opcao == 2: 
             dispositivo.aumentar_temperatura() 
-            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         else: 
             dispositivo.diminuir_temperatura() 
-            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura{dispositivo.temperatura}")
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
 
-    def controlar_timer(self, dispositivo):
-        pass
+    def controlar_timer(self):
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TIMER LIGAR: 1 / ESCOLHER TIMER DESLIGAR: 0]")
+        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,0])
+        dispositivo = self.tipo_dispositivo(dispositivo) 
+        self.__tela_dispositivos.mostrar_mensagem("Escolha o valor do timer: ")
+        if opcao == 1: 
+            tempo = self.__tela_dispositivos.pegar_valor_float() 
+            dispositivo.escolher_timer_ligar(float(tempo))
+            self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
+        else: 
+            tempo = self.__tela_dispositivos.pegar_valor_float() 
+            dispositivo.timer_desligar(float(tempo)) 
+            self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
 
-    def info_disp(self, dispositivo):
-        pass
+    def info_disp(self):
+        self.lista_dispositivos() 
+        dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
+        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+        self.__tela_dispositivos.mostrar_mensagem("INFORMAÇÔES DISPOSITIIVO")
+        dispositivo = self.tipo_dispositivo(dispositivo)
+        self.__tela_dispositivos.mostrar_mensagem(f"Nome: {dispositivo.nome}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Código: {dispositivo.codigo}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Modelo: {dispositivo.modelo}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Potência: {dispositivo.potencia}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Estado: {dispositivo.estado}")
+                
 
     def escolhe_dispositivo(self):
         disp = self.__tela_dispositivos.escolhe_dispositivo()

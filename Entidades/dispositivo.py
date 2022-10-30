@@ -80,16 +80,6 @@ class Dispositivo(ABC):
     def tempo_ligado(self, tempo_ligado: float): 
         if isinstance(tempo_ligado, float): 
             self.__tempo_ligado = tempo_ligado 
-        
-    @timer_ligar.setter
-    def timer_ligar(self, timer_ligar: float): 
-        if isinstance(timer_ligar, float): 
-                self.__timer_ligar = timer_ligar 
-        
-    @timer_desligar.setter
-    def timer_desligar(self, timer_desligar: float): 
-        if isinstance(timer_desligar, float): 
-            self.__timer_desligar = timer_desligar
 
     def ligar(self): 
         self.__estado = True 
@@ -97,4 +87,11 @@ class Dispositivo(ABC):
 
     def desligar(self):
         self.__estado = False 
+
+    def escolher_timer_desligar(self, timer_desligar): 
+        if isinstance(timer_desligar, float): 
+            self.__timer_desligar = timer_desligar
     
+    def escolher_timer_ligar(self, timer_ligar: float): 
+        if isinstance(timer_ligar, float): 
+            self.__timer_ligar = timer_ligar 

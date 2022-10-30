@@ -41,42 +41,104 @@ class TelaDispositivos(Tela):
 
 #------------------------------------------------------------------------------------------------------------------    
     def controle_arcondicionado(self):
-        pass
-    
-    def controle_geladeira(self):
-        print('geladeira')
-
-    def controle_forno(self):
-        #print("CONTROLE: ", dados_dispositivo["nome"])
-        #print("Código: ", dados_dispositivo["codigo"])
+        print("--- Controle Ar Condicionado ---")
         print("1 - Ligar/Desligar")
         print("2 - Temperatura")
         print("3 - Timer")
         print("4 - Informações do Dispositivo")
         print("0 - Voltar")
-        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,8])
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        return opcao
+    
+    def controle_geladeira(self):
+        print("--- Controle Geladeira ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Temperatura")
+        print("3 - Timer")
+        print("4 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        return opcao
+
+    def controle_forno(self):
+        print("--- Controle Forno ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Temperatura")
+        print("3 - Timer")
+        print("4 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
         return opcao
     
     def controle_tv(self):
-        print('TV')
+        print("--- Contorle TV ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Canal")
+        print("3 - Volume")
+        print("4 - Timer")
+        print("5 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
+        return opcao
 
     def controle_som(self):
-        print('som')
+        print("--- Controle Som ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Trocar Música")
+        print("3 - Volume")
+        print("4 - Timer")
+        print("5 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5])
+        return opcao
 
     def controle_lavadoras(self):
-        print('Controle lavadora')
-    
+        print("--- Controle Lavadora de Roupa ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Modo")
+        print("3 - Timer")
+        print("4 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        return opcao
+
     def controle_lavaloucas(self):
-        print('lava louças')
+        print("--- Controle Lava Louças ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Modo")
+        print("3 - Timer")
+        print("4 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
+        return opcao
+
     
     def controle_cafeteira(self):
-        pass
+        print("--- Controle Cafeteira ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Timer")
+        print("3 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
+        return opcao
 
     def controle_cortina(self):
-        pass
+        print("--- Controle Cortina ---")
+        print("1 - Abrir/Fechar")
+        print("2 - Timer")
+        print("3 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
+        return opcao
 
     def controle_luz(self):
-        print('controle luz')
+        print("--- Controle Luz ---")
+        print("1 - Ligar/Desligar")
+        print("2 - Timer")
+        print("3 - Informações do Dispositivo")
+        print("0 - Voltar")
+        opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
+        return opcao
     
     def pegar_valor_float(self): 
         valor = input("Valor: ")

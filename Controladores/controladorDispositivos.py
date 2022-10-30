@@ -135,26 +135,66 @@ class ControladorDispositivos():
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
         if type(dispositivo) == ArCondicionado:
-            self.__tela_dispositivos.controle_arcondicionado()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_arcondicionado()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == Geladeira:
-            self.__tela_dispositivos.controle_geladeira()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_geladeira()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+            
         elif type(dispositivo) == Forno:
-            self.__tela_dispositivos.controle_forno()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_forno()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == TV:
-            self.__tela_dispositivos.controle_tv()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_canal,3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_tv()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == Som:
-            self.__tela_dispositivos.controle_som()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_musica, 3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_som()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == LavadoraDeRoupa:
-            self.__tela_dispositivos.controle_lavadoras()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_lavadoras()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == LavaLoucas:
-            self.__tela_dispositivos.controle_lavaloucas()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_lavaloucas()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == Cafeteira:
-            self.__tela_dispositivos.controle_cafeteira()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_cafeteira()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == Cortina:
-            self.__tela_dispositivos.controle_cortina()
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_cortina()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
         elif type(dispositivo) == PontoDeLuz:
-            self.__tela_dispositivos.controle_luz()
-        self.abre_tela_opcoes_controle() 
+            lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+            opcao_escolhida = self.__tela_dispositivos.controle_luz()
+            funcao_escolhida = lista_opcoes[opcao_escolhida]
+            funcao_escolhida()
+
+        #self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
     def abre_tela_opcoes_controle(self):
         opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp}
@@ -237,6 +277,18 @@ class ControladorDispositivos():
         self.__tela_dispositivos.mostrar_mensagem(f"Potência: {dispositivo.potencia}")
         self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         self.__tela_dispositivos.mostrar_mensagem(f"Estado: {dispositivo.estado}")
+    
+    def controlar_canal(self):
+        pass
+
+    def controlar_volume(self):
+        pass
+
+    def controlar_musica(self):
+        pass
+
+    def void_func(self):
+        pass
                 
 
     def escolhe_dispositivo(self):

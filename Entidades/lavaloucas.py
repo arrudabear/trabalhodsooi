@@ -5,13 +5,18 @@ class LavaLoucas(Dispositivo):
                  codigo: int, modelo: str):
         super().__init__(nome, potencia,
                          codigo, modelo)
-        self.__modo = None
+        self.__modo = None 
     
     @property
     def modo(self):
         return self.__modo 
     
     def escolher_modo(self, modo: str):
-        if isinstance(modo, str):
-            self.__modo = modo
+        if isinstance(modo, str): 
+            if modo == 1: 
+                self.__modo = "Delicado"
+            elif modo == 2:
+                self.__modo = "Normal"
+            elif modo == 3:
+                self.__modo = "Rápido"
     

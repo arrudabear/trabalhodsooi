@@ -23,7 +23,7 @@ class Tela():
       opcao = self.le_num_inteiro(msg, opcoes)
       return opcao
     
-    def le_num(self, mensagem = ""):
+    def le_int(self, mensagem = ""):
         while True:
             valor_lido = input(mensagem) 
             try:

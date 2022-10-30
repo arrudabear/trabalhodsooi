@@ -6,20 +6,20 @@ class TelaUsuario(Tela):
     def tela_cadastra_usuario(self):
         print("--- Cadastro de Usuario ---")
         nome_usuario = input("Nome do Usuário: ").title()
-        codigo_usuario = self.le_num("Codigo do Usuário: ")
+        codigo_usuario = self.le_int("Codigo do Usuário: ")
         return nome_usuario, codigo_usuario 
     
     def tela_entrar_usuario(self):
         print("--- Entrar com Usuário ---")
         while True:
             nome_usuario = input("Nome do Usuário: ").title()
-            codigo_usuario = self.le_num("Codigo do Usuário: ")
+            codigo_usuario = self.le_int("Codigo do Usuário: ")
             return nome_usuario, codigo_usuario
     
     
     def pega_dados_usuario(self): 
         print("------------")
-        nome = input("Nome do usuario: ")
+        nome = input("Nome do usuario: ").title()
         codigo = input("Codigo do usuario")
 
         return {"nome": nome, "codigo": codigo}

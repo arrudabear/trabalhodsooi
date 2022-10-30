@@ -16,11 +16,11 @@ class ControladorEventos():
     def eventos(self) -> list:
         return self.__eventos
     
-    def registrar_evento(self, usuario, dispositivo):
+    def registrar_evento(self, usuario, dispositivo, acao):
         datahora = datetime.datetime.now()
         try:
             if isinstance(usuario, Usuario) and isinstance(dispositivo, Dispositivo):
-                evento = Evento(usuario, dispositivo, datahora)
+                evento = Evento(usuario, dispositivo, acao, datahora)
                 self.__eventos.append(evento)
             else:
                 raise TypeError
@@ -28,11 +28,44 @@ class ControladorEventos():
             self.__tela_eventos.mostrar_mensagem("Falha ao registrar o evento.")
     
     def lista_eventos(self):
-        return self.__eventos
-    
-    def find_evento(self, data: str, horario:str):
+        num = 0
+        self.__tela_eventos.mostrar_mensagem("--- Registro de Eventos ---")
         for evento in self.__eventos:
-            if evento.data == data and evento.horario == horario:
-                return evento
+            num += 1
+            self.__tela_eventos.mostrar_mensagem("-"*15)
+            self.__tela_eventos.mostrar_mensagem(f"Evento - {num}")
+            self.__tela_eventos.mostrar_mensagem(f"Data e Hora: {evento.datahora}")
+            self.__tela_eventos.mostrar_mensagem(f"Usuário: {evento.usuario.nome}")
+            self.__tela_eventos.mostrar_mensagem(f"Dispositivo: {evento.dispositivo.nome}")
+            self.__tela_eventos.mostrar_mensagem(f"Código do dispositivo: {evento.dispositivo.codigo}")
+            self.__tela_eventos.mostrar_mensagem(f"Ação registrada: {evento.acao}")
+
+    
+    def evento_usuario(self, usuario):
+        num = 0
+        for evento in self.__eventos:
+            if evento.usuario == usuario:
+                num += 1
+                self.__tela_eventos.mostrar_mensagem("-"*15)
+                self.__tela_eventos.mostrar_mensagem(f"Evento - {num}")
+                self.__tela_eventos.mostrar_mensagem(f"Data e Hora: {evento.datahora}")
+                self.__tela_eventos.mostrar_mensagem(f"Usuário: {evento.usuario.nome}")
+                self.__tela_eventos.mostrar_mensagem(f"Dispositivo: {evento.dispositivo.nome}")
+                self.__tela_eventos.mostrar_mensagem(f"Código do dispositivo: {evento.dispositivo.codigo}")
+                self.__tela_eventos.mostrar_mensagem(f"Ação registrada: {evento.acao}")
+    
+    def evento_dispositivo(self, dispositivo):
+        num = 0
+        for evento in self.__eventos:
+            if evento.dispositivo == dispositivo:
+                num += 1
+                self.__tela_eventos.mostrar_mensagem("-"*15)
+                self.__tela_eventos.mostrar_mensagem(f"Evento - {num}")
+                self.__tela_eventos.mostrar_mensagem(f"Data e Hora: {evento.datahora}")
+                self.__tela_eventos.mostrar_mensagem(f"Usuário: {evento.usuario.nome}")
+                self.__tela_eventos.mostrar_mensagem(f"Dispositivo: {evento.dispositivo.nome}")
+                self.__tela_eventos.mostrar_mensagem(f"Código do dispositivo: {evento.dispositivo.codigo}")
+                self.__tela_eventos.mostrar_mensagem(f"Ação registrada: {evento.acao}")
+    
     
     

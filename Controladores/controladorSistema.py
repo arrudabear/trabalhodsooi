@@ -66,16 +66,28 @@ class ControladorSistema():
     
     def todos_dispositivos(self): 
         self.__controlador_dispositivos.abre_tela()
-        pass
 
     def relatorios(self):
-        lista_opcoes = {}
+        lista_opcoes = {1: self.relatorio_eventos, 2: self.relatorio_usuario, 3: self.relatorio_dispositivo, 0: self.void_func}
         opcao_escolhida = self.__tela_sistema.relatorios()
         funcao_escolhida = lista_opcoes[opcao_escolhida]
         funcao_escolhida()
 
     def usuarios(self):
         self.__controlador_usuarios.lista_usuarios() 
+    
+    def relatorio_eventos(self):
+        self.__controlador_eventos.lista_eventos()
+    
+    def relatorio_usuario(self):
+        pass
+
+    def relatorio_dispositivo(self):
+        pass
+
+    
+    def void_func(self):
+        pass
 
     def voltar(self):
         self.__usuario_atual = None 

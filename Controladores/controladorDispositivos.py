@@ -117,7 +117,7 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
     def abre_tela(self):
-        opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 6: self.controla_dispositivo, 0: self.voltar}
+        opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 5: self.calcular_gasto, 6: self.controla_dispositivo, 0: self.voltar}
 
         while True:
             opcoes[self.__tela_dispositivos.tela_opcoes()]()

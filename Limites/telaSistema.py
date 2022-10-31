@@ -25,9 +25,9 @@ class TelaSistema(Tela):
     def relatorios(self):
         print("--- RELATÓRIOS ---")
         print("Escolha sua opção:")
-        print("1 - ")
-        print("2 - ")
-        print("3 - ")
-        print("0 - Finalizar sistema")
+        print("1 - Relatório de Eventos")
+        print("2 - Relatório de Eventos por Usuário")
+        print("3 - Relatório de Eventos por Dispositivo")
+        print("0 - Voltar")
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
         return opcao

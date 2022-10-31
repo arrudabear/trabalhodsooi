@@ -35,6 +35,9 @@ class TelaComodos(Tela):
     
     def mostra_comodo(self, dados_comodo):
       print("Nome do cômodo: ", dados_comodo["nome_comodo"])
+
+    def mostrar_mensagem(self, msg):
+       return super().mostrar_mensagem(msg)
     
 
 

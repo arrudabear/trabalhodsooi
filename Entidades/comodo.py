@@ -20,7 +20,7 @@ class Comodo:
     @nome_comodo.setter
     def nome_comodo(self, nome_comodo: str): 
         if isinstance(nome_comodo, str): 
-            return self.__nome_comod
+            return self.__nome_comodo
 
     def adicionar_dispositivo(self, dispositivo: Dispositivo):
         if isinstance(dispositivo, Dispositivo):

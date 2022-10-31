@@ -87,33 +87,28 @@ class ControladorComodos():
         while continua: 
             opcoes[self.__tela_comodos.tela_opcoes()]() 
     
-    def dispositivos_comodo(self): 
-        self.lista_comodos() 
-        comodo = self.__tela_comodos.pega_dados_comodo() 
-        comodo = self.find_comodo(comodo["nome_comodo"])
+    def dispositivos_comodo(self, comodo): 
         if comodo.dispositivos == []:
             self.__tela_comodos.mostrar_mensagem("Ainda não há dispositivos cadastrados neste comodo.")
             self.__tela_comodos.mostrar_mensagem("Deseja adicionar um novo dispositivos à esse comodo? [SIM: 1/NÃO: 0]")
             opcao = self.__tela_comodos.seleciona_opcao("Escolha sua opção: ", [0,1])
             if opcao == 1:
                 self.adicionar_dispositivo_comodo(comodo)
-                for dispositivo in comodo.dispositivos:
-                    self.__controlador_sistema.__controlador_dispositivos.lista_dispositivos()
             else:
                 self.lista_comodos()
         else:
-            self.__tela_comodos.mostrar_mensagem("Dispositivos no Comodo: ", comodo.nome_comodo)
+            #self.__tela_comodos.mostrar_mensagem("Dispositivos no Comodo: ", comodo.nome_comodo)
             for dispositivo in comodo.dispositivos:
                 self.__controlador_sistema.__controlador_dispositivos.mostra_dispositivo(dispositivo)
             #disp = self.__controlador_sistema.__controlador_dispositivos.pega_dispositivo
             #self.__controlador_sistema.__controlador_dispositivos.controla_dispositivo(disp)
 
-    def adicionar_dispositivo_comodo(self, comodo): 
-        self.lista_comodos() 
+    def adicionar_dispositivo_comodo(self, comodo):  
         self.__controlador_sistema.controlador_dispositivos.lista_dispositivos() 
         disp = self.__controlador_sistema.controlador_dispositivos.escolhe_dispositivo()
         disp = self.__controlador_sistema.controlador_dispositivos.find_dispositivo(disp["codigo"], disp["nome"])
         comodo.adicionar_dispositivo(disp)
+        self.dispositivos_comodo(comodo) 
         
     def pegar_comodo(self): 
         comodo = self.__tela_comodos.escolhe_comodo() 

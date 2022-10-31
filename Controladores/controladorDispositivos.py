@@ -126,8 +126,9 @@ class ControladorDispositivos():
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-
-        print(dispositivo.potencia)
+        tempo_ligado = self.__tela_dispositivos.pegar_valor_int("Digite o tempo, em horas, que o dispositivo ficou ligado: ")
+        gasto_energia = dispositivo.potencia * tempo_ligado
+        self.__tela_dispositivos.mostrar_mensagem(f"O dispositivo gastou: {gasto_energia} W/h")
     
     def controla_dispositivo(self):
         self.lista_dispositivos() 
@@ -330,7 +331,7 @@ class ControladorDispositivos():
         return disp
     def mostra_dispositivo(self, dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("Nome: ", dispositivo.nome)
-        
+
     def voltar(self): 
         self.__controlador_sistema.abre_tela() 
 

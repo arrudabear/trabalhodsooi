@@ -208,31 +208,36 @@ class ControladorDispositivos():
             opcoes[self.__tela_dispositivos.controle_forno()]()
 
     def liga_desliga(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         if opcao == 1: 
             dispositivo.ligar()
-            usuario = self.__controlador_sistema.usuario_atual
-            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo)
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Ligar")
             print(dispositivo.estado)
             print("ligado")
         else: 
             dispositivo.desligar() 
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Desligar")
             print(dispositivo.estado)
             print("desligado")
 
     def controlar_temperatura(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         print(dispositivo.estado)
         self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR TEMPERATURA: 1 / DIMINUIR TEMPERATURA: 2]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
         if opcao == 1: 
-            dispositivo.aumentar_temperatura() 
+            dispositivo.aumentar_temperatura()
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Aumentou Temperatura")
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         else: 
             dispositivo.diminuir_temperatura() 
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Diminuiu Temperatura")
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
 
     def controlar_timer(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         print(dispositivo.estado)
         self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR: 1 / ESCOLHER TEMPO TIMER DESLIGAR: 0]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,0])
@@ -241,15 +246,20 @@ class ControladorDispositivos():
             tempo = self.__tela_dispositivos.pegar_valor_float() 
             dispositivo.escolher_timer_ligar(float(tempo))
             self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Definiu Timer para Ligar")
         else: 
             tempo = self.__tela_dispositivos.pegar_valor_float() 
             dispositivo.timer_desligar(float(tempo)) 
             self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.temperatura}")
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Definiu Timer para Desligar")
 
-    def escolher_modo(self, dispositivo): 
+    def escolher_modo(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("--- MODOS ---\n1 - DELICADO\n2 - NORMAL\n3 - RÁPIDO")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
-        dispositivo.escolher_modo() 
+        dispositivo.escolher_modo(opcao)
+        self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Definiu Timer Modo para o Dispositivo")
+
 
     def info_disp(self, dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("INFORMAÇÔES DISPOSITIIVO")
@@ -261,6 +271,7 @@ class ControladorDispositivos():
         self.__tela_dispositivos.mostrar_mensagem(f"Estado: {dispositivo.estado}")
     
     def controlar_canal(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         controlando_canal = True
         while controlando_canal == True:
             self.__tela_dispositivos.mostrar_mensagem("Digite o canal de sua escolha: ")
@@ -268,6 +279,7 @@ class ControladorDispositivos():
             try:
                 if canal >= dispositivo.canal_max or canal <= dispositivo.canal_min:
                     dispositivo.escolher_canal(canal)
+                    self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Trocou Canal")
                     self.__tela_dispositivos.mostrar_mensagem("Canal trocado com sucesso!")
                     controlando_canal = False
                 else:
@@ -277,21 +289,27 @@ class ControladorDispositivos():
 
 
     def controlar_volume(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR VOLUME: 1 / DIMINUIR VOLUME: 2]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
         if opcao == 1: 
             dispositivo.aumentar_volume() 
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Aumentou Volume")
             self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
         else: 
-            dispositivo.diminuir_volume() 
+            dispositivo.diminuir_volume()
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Diminuiu Volume")
             self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
 
     def controlar_musica(self, dispositivo):
+        usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("--- CONTROLE PLAYER DE MÚSICA ---")
         self.__tela_dispositivos.mostrar_mensagem("[TOCAR/PAUSAR: 1 / PRÓXIMA MÚSICA: 2 / VOLTAR MÚSICA: 3]")
         opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
         acao = dispositivo.controlar_musica(opcao)
         self.__tela_dispositivos.mostrar_mensagem(f"O player {acao} a música.")
+        self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, f"{acao} a Música")
+
 
     def void_func(self, dispositivo):
         pass

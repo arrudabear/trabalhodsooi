@@ -46,7 +46,7 @@ class ControladorSistema():
                 self.tela_logado()
     
     def tela_logado(self):
-        lista_opcoes = {1: self.comodos, 2: self.todos_dispositivos, 3: self.relatorios, 4: self.usuarios, 0: self.encerrar_sistema}
+        lista_opcoes = {1: self.comodos, 2: self.todos_dispositivos, 3: self.relatorios, 4: self.usuarios, 0: self.voltar}
 
         while True:
             opcao_escolhida = self.__tela_sistema.opcoes_usuario(self.__usuario_atual.nome)
@@ -76,6 +76,10 @@ class ControladorSistema():
 
     def usuarios(self):
         self.__controlador_usuarios.lista_usuarios() 
+
+    def voltar(self):
+        self.__usuario_atual = None 
+        self.abre_tela()
 
     def encerrar_sistema(self):
         exit(0)

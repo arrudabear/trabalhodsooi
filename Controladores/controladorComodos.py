@@ -45,6 +45,7 @@ class ControladorComodos():
             self.__tela_comodos.mostrar_mensagem("-------- CÔMODOS CADASTRADOS ----------")
             for comodo in self.__comodos: 
                 self.__tela_comodos.mostra_comodo({"nome_comodo": comodo.nome_comodo})
+                self.__tela_comodos.mostrar_mensagem("-----------------------------------")
 
 
     def excluir_comodo(self): 
@@ -80,7 +81,7 @@ class ControladorComodos():
             self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
 
     def abre_tela(self):
-        opcoes = {1: self.incluir_comodo, 2: self.excluir_comodo, 3: self.lista_comodos, 4: self.altera_comodo, 5: self.adicionar_dispositivo_comodo, 6: self.dispositivos_comodo}
+        opcoes = {1: self.incluir_comodo, 2: self.excluir_comodo, 3: self.lista_comodos, 4: self.altera_comodo, 5: self.adicionar_dispositivo_comodo, 6: self.dispositivos_comodo, 0: self.voltar}
 
         continua = True
         while continua: 
@@ -111,6 +112,7 @@ class ControladorComodos():
         comodo.adicionar_dispositivo(disp)
         self.dispositivos_comodo(comodo)
 
-
+    def voltar(self): 
+        self.__controlador_sistema.abre_tela() 
     #def voltar(self):
         #self.__controlador_sistema.abre_tela()

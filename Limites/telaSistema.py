@@ -18,7 +18,7 @@ class TelaSistema(Tela):
         print("2 - Menu dispositivos")
         print("3 - Gerar Relatório")
         print("4 - Usuários da Casa")
-        print("0 - Finalizar sistema")
+        print("0 - Voltar")
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4])
         return opcao
 

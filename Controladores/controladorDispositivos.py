@@ -329,8 +329,9 @@ class ControladorDispositivos():
     def escolhe_dispositivo(self):
         disp = self.__tela_dispositivos.escolhe_dispositivo()
         return disp
+
     def mostra_dispositivo(self, dispositivo):
-        self.__tela_dispositivos.mostrar_mensagem("Nome: ", dispositivo.nome)
+        self.__tela_dispositivos.mostrar_mensagem(f"Nome: {dispositivo.nome}")
 
     def voltar(self): 
         self.__controlador_sistema.abre_tela() 

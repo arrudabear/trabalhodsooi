@@ -26,6 +26,10 @@ class ControladorSistema():
         return self.__controlador_dispositivos
     
     @property
+    def controlador_comodos(self) -> ControladorComodos:
+        return self.__controlador_comodos
+    
+    @property
     def usuario_atual(self):
         return self.__usuario_atual
     

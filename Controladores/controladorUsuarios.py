@@ -66,10 +66,6 @@ class ControladorUsuario():
         except KeyError: 
             self.__tela.mostrar_mensagem("USUARIO NÃO EXISTENTE!!")
 
-    def find_usuario(self, codigo: int):
-        for usuario in self.__usuarios:
-            if usuario.codigo_usuario == codigo:
-                return usuario
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
         cadastrando = True

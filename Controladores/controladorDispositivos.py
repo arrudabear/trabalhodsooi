@@ -266,7 +266,7 @@ class ControladorDispositivos():
         self.__tela_dispositivos.mostrar_mensagem(f"Nome: {dispositivo.nome}")
         self.__tela_dispositivos.mostrar_mensagem(f"Código: {dispositivo.codigo}")
         self.__tela_dispositivos.mostrar_mensagem(f"Modelo: {dispositivo.modelo}")
-        self.__tela_dispositivos.mostrar_mensagem(f"Potência: {dispositivo.potencia}")
+        self.__tela_dispositivos.mostrar_mensagem(f"Potência: {dispositivo.potencia} Watts")
         if type(dispositivo) == Forno or type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira:
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
         if type(dispositivo) == TV:
@@ -287,7 +287,7 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Digite o canal de sua escolha: ")
             canal = self.__tela_dispositivos.pegar_valor_int()
             try:
-                if canal >= dispositivo.canal_max or canal <= dispositivo.canal_min:
+                if  dispositivo.canal_min <= canal <= dispositivo.canal_max:
                     dispositivo.escolher_canal(canal)
                     self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Trocou Canal")
                     self.__tela_dispositivos.mostrar_mensagem("Canal trocado com sucesso!")
@@ -324,38 +324,9 @@ class ControladorDispositivos():
     def void_func(self, dispositivo):
         pass
                 
-
     def escolhe_dispositivo(self):
         disp = self.__tela_dispositivos.escolhe_dispositivo()
         return disp
-
-    def tipo_dispositivo(self, dispositivo): 
-        if type(dispositivo) == ArCondicionado:
-            dispositivo = ArCondicionado(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == Geladeira:
-            dispositivo = Geladeira(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == Forno:
-            dispositivo = Forno(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == TV:
-            dispositivo = TV(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == Som:
-            dispositivo = Som(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == LavadoraDeRoupa:
-            dispositivo = LavadoraDeRoupa(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == LavaLoucas:
-            dispositivo = LavaLoucas(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == Cafeteira:
-            dispositivo = Cafeteira(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == Cortina:
-            dispositivo = Cortina(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-        elif type(dispositivo) == PontoDeLuz:
-            dispositivo = PontoDeLuz(dispositivo.nome, dispositivo.codigo, dispositivo.potencia, dispositivo.modelo)
-
-        return dispositivo
-
-    '''def dipositivos_comodo(self, comodo):
-        for dispositivo in self.__dipositivos:
-            if dispositivo.comodo == comodo:'''
 
     def voltar(self): 
         self.__controlador_sistema.abre_tela() 

@@ -37,11 +37,11 @@ class TV(Dispositivo):
 
     @property
     def canal_max(self): 
-        self.__canal_max 
+        return self.__canal_max 
     
     @property 
     def canal_min(self):
-        self.__canal_min 
+        return self.__canal_min 
     
     
     

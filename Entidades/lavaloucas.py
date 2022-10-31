@@ -11,12 +11,12 @@ class LavaLoucas(Dispositivo):
     def modo(self):
         return self.__modo 
     
-    def escolher_modo(self, modo: int):
-        if isinstance(modo, int): 
-            if modo == 1: 
+    def escolher_modo(self, opcao: int):
+        if isinstance(opcao, int): 
+            if opcao == 1: 
                 self.__modo = "Delicado"
-            elif modo == 2:
+            elif opcao == 2:
                 self.__modo = "Normal"
-            elif modo == 3:
+            elif opcao == 3:
                 self.__modo = "Rápido"
     

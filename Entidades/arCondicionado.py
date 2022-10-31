@@ -18,11 +18,9 @@ class ArCondicionado(Dispositivo):
             self.__temperatura = temperatura
 
     def aumentar_temperatura(self):
-        self.__temperatura += 1 
-        if self.__temperatura > 30: 
-            self.__temperatura = 15
+        if self.__temperatura < 30: 
+            self.__temperatura += 1 
 
     def diminuir_temperatura(self):
-        self.__temperatura -= 1 
-        if self.__temperatura < 15:
-            self.__temperatura = 30 
+        if self.__temperatura > 15:
+            self.__temperatura -= 1

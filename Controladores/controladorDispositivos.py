@@ -166,13 +166,13 @@ class ControladorDispositivos():
                     funcao_escolhida(dispositivo)
 
                 elif type(dispositivo) == LavadoraDeRoupa:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                    lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
                     opcao_escolhida = self.__tela_dispositivos.controle_lavadoras()
                     funcao_escolhida = lista_opcoes[opcao_escolhida]
                     funcao_escolhida(dispositivo)
 
                 elif type(dispositivo) == LavaLoucas:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                    lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
                     opcao_escolhida = self.__tela_dispositivos.controle_lavaloucas()
                     funcao_escolhida = lista_opcoes[opcao_escolhida]
                     funcao_escolhida(dispositivo)
@@ -267,8 +267,18 @@ class ControladorDispositivos():
         self.__tela_dispositivos.mostrar_mensagem(f"Código: {dispositivo.codigo}")
         self.__tela_dispositivos.mostrar_mensagem(f"Modelo: {dispositivo.modelo}")
         self.__tela_dispositivos.mostrar_mensagem(f"Potência: {dispositivo.potencia}")
-        self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
-        self.__tela_dispositivos.mostrar_mensagem(f"Estado: {dispositivo.estado}")
+        if type(dispositivo) == Forno or type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira:
+            self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
+        if type(dispositivo) == TV:
+            self.__tela_dispositivos.mostrar_mensagem(f"Canal: {dispositivo.canal}")
+        if type(dispositivo) == TV or type(dispositivo) == Som:
+            self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
+        if dispositivo.estado == True:
+            self.__tela_dispositivos.mostrar_mensagem("Estado: Ligado")
+        elif dispositivo.estado == False:
+            self.__tela_dispositivos.mostrar_mensagem("Estado: Desligado")
+        if type(dispositivo) == LavadoraDeRoupa or type(dispositivo) == LavaLoucas: 
+            self.__tela_dispositivos.mostrar_mensagem(f"Modo: {dispositivo.modo}")
     
     def controlar_canal(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual

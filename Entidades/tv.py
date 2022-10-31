@@ -27,13 +27,13 @@ class TV(Dispositivo):
         if isinstance(canal, int):
             self.__canal = canal
     
-    def aumentar_volume(self, volume: int):
-        if isinstance(volume, int):
-            self.__volume += volume
+    def aumentar_volume(self):
+        if self.__volume < 100: 
+            self.__volume += 1
     
-    def diminuir_volume(self, volume: int):
-        if isinstance(volume, int):
-            self.__volume -= volume
+    def diminuir_volume(self):
+        if self.__volume > 0:
+            self.__volume -= 1 
 
     @property
     def canal_max(self): 

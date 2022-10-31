@@ -126,6 +126,7 @@ class ControladorDispositivos():
         self.lista_dispositivos() 
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo() 
         dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+
         print(dispositivo.potencia)
     
     def controla_dispositivo(self):
@@ -327,10 +328,9 @@ class ControladorDispositivos():
     def escolhe_dispositivo(self):
         disp = self.__tela_dispositivos.escolhe_dispositivo()
         return disp
-
     def mostra_dispositivo(self, dispositivo):
         self.__tela_dispositivos.mostrar_mensagem("Nome: ", dispositivo.nome)
-
+        
     def voltar(self): 
         self.__controlador_sistema.abre_tela() 
 

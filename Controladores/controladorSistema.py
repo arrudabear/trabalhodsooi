@@ -80,10 +80,15 @@ class ControladorSistema():
         self.__controlador_eventos.lista_eventos()
     
     def relatorio_usuario(self):
-        pass
+        self.__controlador_usuarios.lista_usuarios()
+        usuario =  self.__controlador_usuarios.pega_usuario()
+        self.__controlador_eventos.evento_usuario(usuario)
 
     def relatorio_dispositivo(self):
-        pass
+        self.__controlador_dispositivos.lista_dispositivos()
+        dados_dispositivo = self.__controlador_dispositivos.escolhe_dispositivo()
+        dispositivo = self.__controlador_dispositivos.find_dispositivo(dados_dispositivo["código"], dados_dispositivo["nome"])
+        self.__controlador_eventos.evento_dispositivo(dispositivo)
 
     
     def void_func(self):

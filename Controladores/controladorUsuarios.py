@@ -19,6 +19,11 @@ class ControladorUsuario():
                 return usuario 
         return None 
 
+    def pega_usuario(self):
+        dados_usuario = self.__tela.pega_dados_usuario()
+        usuario = self.find_usuario(dados_usuario["nome"], int(dados_usuario["codigo"]))
+        return usuario
+        
     def incluir_usuario(self):
         dados_usuario = self.__tela.pega_dados_usuario() 
         usuario = self.find_usuario(dados_usuario["nome"], int(dados_usuario["codigo"]))

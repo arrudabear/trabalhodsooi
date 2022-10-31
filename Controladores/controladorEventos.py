@@ -43,6 +43,7 @@ class ControladorEventos():
     
     def evento_usuario(self, usuario):
         num = 0
+        self.__tela_eventos.mostrar_mensagem(f"Eventos do Usuário: {usuario.nome}")
         for evento in self.__eventos:
             if evento.usuario == usuario:
                 num += 1
@@ -56,6 +57,7 @@ class ControladorEventos():
     
     def evento_dispositivo(self, dispositivo):
         num = 0
+        self.__tela_eventos.mostrar_mensagem(f"Eventos do Dispositivo: {dispositivo.nome}")
         for evento in self.__eventos:
             if evento.dispositivo == dispositivo:
                 num += 1

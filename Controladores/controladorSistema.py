@@ -87,7 +87,7 @@ class ControladorSistema():
     def relatorio_dispositivo(self):
         self.__controlador_dispositivos.lista_dispositivos()
         dados_dispositivo = self.__controlador_dispositivos.escolhe_dispositivo()
-        dispositivo = self.__controlador_dispositivos.find_dispositivo(dados_dispositivo["código"], dados_dispositivo["nome"])
+        dispositivo = self.__controlador_dispositivos.find_dispositivo(dados_dispositivo["codigo"], dados_dispositivo["nome"])
         self.__controlador_eventos.evento_dispositivo(dispositivo)
 
     

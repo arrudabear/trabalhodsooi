@@ -25,6 +25,8 @@ class ControladorDispositivos():
             if (dispositivo.codigo == codigo) and (dispositivo.nome == nome): 
                 return dispositivo
 
+        return None 
+        
     def incluir_dispositivo(self): 
         dados_dispositivo = self.__tela_dispositivos.pega_dados_dispositivo()
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])

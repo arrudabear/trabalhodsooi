@@ -62,7 +62,10 @@ class ControladorSistema():
         self.__usuario_atual = self.__controlador_usuarios.entrar_usuario()
 
     def cadastra_usuario(self):
-        self.__controlador_usuarios.cadastra_usuario() 
+        if self.__controlador_usuarios.cadastra_usuario() == None:
+            self.abre_tela() 
+        else:
+            self.__controlador_usuarios.cadastra_usuario() 
 
     def comodos(self):
         self.__controlador_comodos.abre_tela()

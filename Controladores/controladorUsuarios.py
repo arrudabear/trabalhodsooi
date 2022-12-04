@@ -78,7 +78,6 @@ class ControladorUsuario():
             try:
                 dados_usuario = self.__tela.tela_cadastra_usuario()
                 if dados_usuario["codigo_usuario"] == '':
-                    print("Impossivel cadastrar")
                     raise KeyError
                 else: 
                     for usuario in self.__usuarios:
@@ -92,8 +91,9 @@ class ControladorUsuario():
                     cadastrando = False
                     
             except KeyError:
-                self.__tela.mostrar_mensagem("Código em uso, por favor digite outro.")
-    
+                self.__tela.mostrar_mensagem("Código em uso ou texto não existente.")
+                return None 
+
     def entrar_usuario(self):
         dados_usuario = self.__tela.tela_entrar_usuario()
         try:

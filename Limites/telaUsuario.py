@@ -17,7 +17,7 @@ class TelaUsuario(Tela):
             [sg.Text('-------- Cadastro de Usuário ----------', font=("Helvica", 25))],
             [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome_usuario')],
             [sg.Text('Código', size=(15, 1)), sg.InputText('', key='codigo_usuario')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            [sg.Button('Confirmar'), sg.Cancel('Voltar')]
         ]
         self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
 
@@ -43,7 +43,7 @@ class TelaUsuario(Tela):
                 [sg.Text('-------- Entrar com Usuário ----------', font=("Helvica", 25))],
                 [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome_usuario')],
                 [sg.Text('Código', size=(15, 1)), sg.InputText('', key='codigo_usuario')],
-                [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+                [sg.Button('Confirmar'), sg.Cancel('Voltar')]
             ]
             self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
 

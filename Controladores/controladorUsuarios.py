@@ -5,7 +5,7 @@ from Limites.telaUsuario import TelaUsuario
 
 class ControladorUsuario():
     def __init__(self, controlador_sistema):
-        self.__cotrolador_sistema = controlador_sistema
+        self.__controlador_sistema = controlador_sistema
         self.__usuarios = []
         self.__tela = TelaUsuario()
     
@@ -75,34 +75,36 @@ class ControladorUsuario():
     def cadastra_usuario(self):
         cadastrando = True
         while cadastrando == True:
-            nome_usuario, codigo_usuario = self.__tela.tela_cadastra_usuario()
             try:
-                for usuario in self.__usuarios:
-                    if usuario.codigo == codigo_usuario:
-                        raise KeyError
-                usuario = Usuario(nome_usuario, codigo_usuario)
-                self.__usuarios.append(usuario)
-                self.__tela.mostrar_mensagem("Usuário Cadastrado.")
-                print("-"*20)
-                print(usuario.codigo, usuario.nome)
-                cadastrando = False
-                
+                dados_usuario = self.__tela.tela_cadastra_usuario()
+                if dados_usuario["codigo_usuario"] == '':
+                    print("Impossivel cadastrar")
+                    raise KeyError
+                else: 
+                    for usuario in self.__usuarios:
+                        if usuario.codigo == int(dados_usuario['codigo_usuario']):
+                            raise KeyError
+                    usuario = Usuario(dados_usuario['nome_usuario'], int(dados_usuario['codigo_usuario']))
+                    self.__usuarios.append(usuario)
+                    self.__tela.mostrar_mensagem("Usuário Cadastrado.")
+                    print("-"*20)
+                    print(usuario.codigo, usuario.nome)
+                    cadastrando = False
+                    
             except KeyError:
                 self.__tela.mostrar_mensagem("Código em uso, por favor digite outro.")
-        
+    
     def entrar_usuario(self):
-        nome_usuario, codigo_usuario = self.__tela.tela_entrar_usuario()
+        dados_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:
-                print(usuario.nome, usuario.codigo)
-                print(nome_usuario, codigo_usuario)
-                if (nome_usuario == usuario.nome) and (codigo_usuario == usuario.codigo):
+                # print(usuario.nome, usuario.codigo)
+                # print(nome_usuario, codigo_usuario)
+                if (dados_usuario['nome_usuario'] == usuario.nome) and (int(dados_usuario['codigo_usuario']) == usuario.codigo):
                     usuario_atual = usuario
                     return usuario_atual
             else:
                 raise KeyError 
         except KeyError:
             self.__tela.mostrar_mensagem("Usuário não Cadastrado")
-    
-
-
+ 

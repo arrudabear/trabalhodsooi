@@ -53,7 +53,7 @@ class ControladorSistema():
         lista_opcoes = {1: self.comodos, 2: self.todos_dispositivos, 3: self.relatorios, 4: self.usuarios, 0: self.voltar}
 
         while True:
-            opcao_escolhida = self.__tela_sistema.opcoes_usuario(self.__usuario_atual.nome)
+            opcao_escolhida = self.__tela_sistema.opcoes_usuario()
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
 
@@ -66,7 +66,6 @@ class ControladorSistema():
 
     def comodos(self):
         self.__controlador_comodos.abre_tela()
-    
     
     def todos_dispositivos(self): 
         self.__controlador_dispositivos.abre_tela()

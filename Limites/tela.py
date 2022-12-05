@@ -1,3 +1,4 @@
+import PySimpleGUI as sg 
 from abc import ABC
 
 class Tela(ABC):
@@ -17,7 +18,8 @@ class Tela(ABC):
 
     
     def mostrar_mensagem(self, msg):
-        print(msg)
+        sg.Popup(msg)
+        # print(msg)
 
     def seleciona_opcao(self, msg, opcoes):
       opcao = self.le_num_inteiro(msg, opcoes)

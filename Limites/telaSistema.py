@@ -5,6 +5,8 @@ class TelaSistema(Tela):
     def __init__(self): 
         self.__window = None 
         self.init_components1()
+        self.init_components2()
+
 
     # def login(self):
     #     print("--- SISTEMA SMART-HOUSE ---")
@@ -66,9 +68,6 @@ class TelaSistema(Tela):
     #     opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3])
     #     return opcao
 
-    def close(self):
-        self.__window.Close()
-
     def init_components1(self):
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
@@ -77,7 +76,7 @@ class TelaSistema(Tela):
             [sg.Radio('Entrar com um usuário',"RD1", key='1')],
             [sg.Radio('Criar usuário novo',"RD1", key='2')],
             [sg.Radio('Finalizar sistema',"RD1", key='0')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            [sg.Button('Confirmar'), sg.Cancel('Sair')]
         ]
         self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
     
@@ -95,3 +94,5 @@ class TelaSistema(Tela):
         ]
         self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
     
+    def close(self):
+        self.__window.Close()

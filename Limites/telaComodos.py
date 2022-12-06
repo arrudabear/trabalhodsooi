@@ -95,8 +95,8 @@ class TelaComodos(Tela):
     def mostra_comodo(self, dados_comodo): 
         string_comodos = ''
         for dado in dados_comodo:
-            string_comodos = (dado['nome_comodo'])
-
+            string_comodos = string_comodos + "Nome Cômodo: " + (dado['nome_comodo']) + '\n'
+            
         sg.Popup('-------- LISTA DE CÔMODOS ----------', string_comodos)
 
     def mostrar_mensagem(self, msg):

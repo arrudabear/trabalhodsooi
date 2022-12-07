@@ -1,10 +1,54 @@
+import PySimpleGUI as sg 
 from Limites.tela import Tela 
 
-class TelaDispositivos(Tela): 
+class TelaDispositivos(Tela):
+    def __init__(self):
+        self.__window = None 
+        self.init_components()
     #metodo mostrar opcoes em todas as telas; 
     #metodo pegar dados em todas as telas;
     # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
+    def init_components(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('Menu Dispositivos', font=("Helvica",25))],
+            [sg.Text('Escolha sua opção', font=("Helvica",15))],
+            [sg.Radio('Incluir Dispositivo',"RD1", key='1')],
+            [sg.Radio('Excluir Dispositivo',"RD1", key='2')],
+            [sg.Radio('Listar Dispositivo',"RD1", key='3')],
+            [sg.Radio('Alterar Dispositivo',"RD1", key='4')],
+            [sg.Radio('Calcular Gasto',"RD1", key='5')],
+            [sg.Radio('Controlar Dispositivo',"RD1", key='6')],
+            [sg.Radio('Voltar',"RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+
     def tela_opcoes(self):
+        self.init_components() 
+        button, values = self.__window.Read() 
+        opcao = 0 
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3
+        if values['4']:
+            opcao = 4
+        if values['5']:
+            opcao = 5
+        if values['6']:
+            opcao = 6
+        if values['0'] or button in (None,'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
+    
+    def close(self):
+        self.__window.Close()
+        
+    '''def tela_opcoes(self):
         print("-------- MENU DISPOSITIVOS ----------")
         print("Escolha uma opcao")
         print("1 - Incluir Dispositivo")
@@ -16,8 +60,7 @@ class TelaDispositivos(Tela):
         print("0 - Voltar")
 
         opcao = opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6])
-        return opcao
-
+        return opcao'''
   # fazer aqui tratamento dos dados, caso a entrada seja diferente do esperado
     def pega_dados_dispositivo(self):
         print("-------- DADOS DISPOSITIVO ----------")

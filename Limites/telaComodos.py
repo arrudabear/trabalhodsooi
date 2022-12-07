@@ -106,7 +106,7 @@ class TelaComodos(Tela):
     def init_components(self):
         sg.ChangeLookAndFeel('DarkTeal4')
         layout = [
-            [sg.Text('Bem vindo ao sistema da casa inteligente!', font=("Helvica",25))],
+            [sg.Text('Menu Comodos', font=("Helvica",25))],
             [sg.Text('Escolha sua opção', font=("Helvica",15))],
             [sg.Radio('Incluir Cômodo',"RD1", key='1')],
             [sg.Radio('Excluir Cômodo',"RD1", key='2')],

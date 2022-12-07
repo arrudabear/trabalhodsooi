@@ -2,7 +2,19 @@ import PySimpleGUI as sg
 from abc import ABC
 
 class Tela(ABC):
+    def __init__(self):
+        pass
+
+    def mostrar_mensagem(self, msg):
+        sg.Popup(msg)
     
+    def close(self):
+        self.__window.Close()
+    
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
+
     def le_num_inteiro(self, mensagem = "", ints_validos = None):
         while True:
             valor_lido = input(mensagem)

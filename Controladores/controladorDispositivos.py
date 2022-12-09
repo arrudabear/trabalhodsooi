@@ -72,6 +72,7 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
+        dados_dispositivo = []
         if self.__dispositivos == []:
             self.__tela_dispositivos.mostrar_mensagem("Ainda não há dispositivos cadastrados")
             self.__tela_dispositivos.mostrar_mensagem("Deseja criar um novo dispositivo? [SIM: 1 / NÃO: 0]")
@@ -83,11 +84,12 @@ class ControladorDispositivos():
                 self.abre_tela()
 
         else:
-            self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
+            # self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
             for dispositivo in self.__dispositivos:
-                self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
-                self.__tela_dispositivos.mostrar_mensagem("-----------------------------------")
-        
+                dados_dispositivo.append({'nome_disp': dispositivo.nome, 'codigo_disp': dispositivo.codigo})
+                # self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
+                # self.__tela_dispositivos.mostrar_mensagem("-----------------------------------")
+            self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo)
 
     def excluir_dispositivo(self):
         self.lista_dispositivos()
@@ -214,7 +216,8 @@ class ControladorDispositivos():
     def liga_desliga(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
-        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
+        # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
+        opcao = self.__tela_dispositivos.seleciona_opcao()
         if opcao == 1: 
             dispositivo.ligar()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Ligar")

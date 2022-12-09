@@ -87,7 +87,7 @@ class TelaDispositivos(Tela):
 
         button, values = self.open()
         nome_disp = values['nome_disp']
-        codigo_disp = values['codig_disp']
+        codigo_disp = values['codigo_disp']
         potencia_disp = values['potencia_disp']
         modelo_disp = values['modelo_disp']
 
@@ -105,8 +105,12 @@ class TelaDispositivos(Tela):
         '''
     
     def mostra_dispositivo(self, dados_dispositivo):
-        msg = "Nome: " + dados_dispositivo["nome"] + "\nCodigo: "+ dados_dispositivo["codigo"]
-        sg.Popup("Dados Dispositivo", msg )
+        string_dispositivos = ''
+        for dado in dados_dispositivo:
+            string_dispositivos = string_dispositivos + "Nome Dispositivo: " + (dado['nome_disp']) + '\n'
+            string_dispositivos = string_dispositivos + "Codigo Dispositivo: " + str(dado['codigo_disp']) + '\n\n'
+
+        sg.Popup("-------- LISTA DE DISPOSITIVOS ----------", string_dispositivos )
 
         '''
         print("Nome do dispositivo: ", dados_dispositivo["nome"])
@@ -126,7 +130,7 @@ class TelaDispositivos(Tela):
 
         button, values = self.open()
         nome_disp = values['nome_disp']
-        codigo_disp = values['codig_disp']
+        codigo_disp = values['codigo_disp']
 
         self.close()
         return {"nome": nome_disp, "codigo": codigo_disp}

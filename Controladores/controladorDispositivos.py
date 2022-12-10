@@ -217,7 +217,7 @@ class ControladorDispositivos():
         usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
-        opcao = self.__tela_dispositivos.seleciona_opcao()
+        opcao = self.__tela_dispositivos.controle_ligar_desligar() 
         if opcao == 1: 
             dispositivo.ligar()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Ligar")

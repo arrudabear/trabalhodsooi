@@ -582,5 +582,24 @@ class TelaDispositivos(Tela):
         opcao = self.le_num_inteiro("Escolha a opção: ", [0,1,2,3,4,5,6,7,8,9,10])
         return opcao 
         '''
-
+    def controle_ligar_desligar(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('Controle Ponto de Luz', font=("Helvica",25))],
+            [sg.Text('Escolha a ação', font=("Helvica",15))],
+            [sg.Radio('Ligar',"RD1", key='1')],
+            [sg.Radio('Desligar',"RD1", key='2')],
+            [sg.Button('Confirmar'), sg.Cancel('Voltar')]
+            ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+        button, values = self.__window.Read() 
+        opcao = 0 
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['0'] or button in (None,'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
 

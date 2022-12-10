@@ -207,23 +207,24 @@ class ControladorDispositivos():
 
         #self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
-    def abre_tela_opcoes_controle(self):
-        opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp}
+    # def abre_tela_opcoes_controle(self):
+    #     opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp}
 
-        while True:
-            opcoes[self.__tela_dispositivos.controle_forno()]()
+    #     while True:
+    #         opcoes[self.__tela_dispositivos.controle_forno()]()
 
     def liga_desliga(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
-        self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
+        # self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         opcao = self.__tela_dispositivos.controle_ligar_desligar() 
+        print("a")
         if opcao == 1: 
             dispositivo.ligar()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Ligar")
             print(dispositivo.estado)
             print("ligado")
-        else: 
+        elif opcao == 2: 
             dispositivo.desligar() 
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Desligar")
             print(dispositivo.estado)
@@ -232,13 +233,14 @@ class ControladorDispositivos():
     def controlar_temperatura(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
         print(dispositivo.estado)
-        self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR TEMPERATURA: 1 / DIMINUIR TEMPERATURA: 2]")
-        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
+        # self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR TEMPERATURA: 1 / DIMINUIR TEMPERATURA: 2]")
+        # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
+        opcao = self.__tela_dispositivos.controle_temperatura() 
         if opcao == 1: 
             dispositivo.aumentar_temperatura()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Aumentou Temperatura")
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")
-        else: 
+        elif opcao == 2:
             dispositivo.diminuir_temperatura() 
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Diminuiu Temperatura")
             self.__tela_dispositivos.mostrar_mensagem(f"Temperatura: {dispositivo.temperatura}")

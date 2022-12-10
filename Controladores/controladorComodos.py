@@ -19,16 +19,19 @@ class ControladorComodos():
     def incluir_comodo(self): 
         print('incluindo comodo')
         dados_comodo = self.__tela_comodos.pega_dados_comodo() 
-        comodo = self.find_comodo(dados_comodo["nome_comodo"])
-        try:
-            if comodo == None:
-                comodo = Comodo(dados_comodo["nome_comodo"])
-                self.__comodos.append(comodo)
-                self.__tela_comodos.mostrar_mensagem("Cômodo adicionado na lista!")
-            else:
-                raise KeyError
-        except KeyError:
-            self.__tela_comodos.mostrar_mensagem("Cômodo já existente na lista!") 
+        if dados_comodo == None: 
+            pass
+        else:
+            comodo = self.find_comodo(dados_comodo["nome_comodo"])
+            try:
+                if comodo == None:
+                    comodo = Comodo(dados_comodo["nome_comodo"])
+                    self.__comodos.append(comodo)
+                    self.__tela_comodos.mostrar_mensagem("Cômodo adicionado na lista!")
+                else:
+                    raise KeyError
+            except KeyError:
+                self.__tela_comodos.mostrar_mensagem("Cômodo já existente na lista!") 
     
     def lista_comodos(self):
         dados_comodo = [] 
@@ -52,35 +55,41 @@ class ControladorComodos():
 
     def excluir_comodo(self): 
         self.lista_comodos()
-        nome_comodo = self.__tela_comodos.escolhe_comodo() 
-        comodo = self.find_comodo(nome_comodo) 
-        try: 
-            if(comodo is not None):
-                self.__comodos.remove(comodo)
-                self.__tela_comodos.mostrar_mensagem("CÔMODO EXCLUIDO!!")
-                self.lista_comodos() 
-            else:
-                raise KeyError
-        except KeyError:
-            self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
+        nome_comodo = self.__tela_comodos.escolhe_comodo()
+        if nome_comodo == None: 
+            pass
+        else: 
+            comodo = self.find_comodo(nome_comodo) 
+            try: 
+                if(comodo is not None):
+                    self.__comodos.remove(comodo)
+                    self.__tela_comodos.mostrar_mensagem("CÔMODO EXCLUIDO!!")
+                    self.lista_comodos() 
+                else:
+                    raise KeyError
+            except KeyError:
+                self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
         
 
     def altera_comodo(self): 
         self.lista_comodos()
         nome_comodo = self.__tela_comodos.escolhe_comodo()
-        comodo = self.find_comodo(nome_comodo) 
-        try:
-            if (comodo is not None): 
-                novo_nome_comodo = self.__tela_comodos.pega_dados_comodo()
-                novo_comodo = Comodo(novo_nome_comodo["nome_comodo"])
-                self.__comodos.remove(comodo)
-                self.__comodos.append(novo_comodo)
-                self.__tela_comodos.mostrar_mensagem("CÔMODO ALTERADO!!")
-                self.lista_comodos()
-            else:
-                raise KeyError
-        except KeyError:
-            self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
+        if nome_comodo == None: 
+            pass
+        else: 
+            comodo = self.find_comodo(nome_comodo) 
+            try:
+                if (comodo is not None): 
+                    novo_nome_comodo = self.__tela_comodos.pega_dados_comodo()
+                    novo_comodo = Comodo(novo_nome_comodo["nome_comodo"])
+                    self.__comodos.remove(comodo)
+                    self.__comodos.append(novo_comodo)
+                    self.__tela_comodos.mostrar_mensagem("CÔMODO ALTERADO!!")
+                    self.lista_comodos()
+                else:
+                    raise KeyError
+            except KeyError:
+                self.__tela_comodos.mostrar_mensagem("CÔMODO NÃO EXISTENTE!!")
 
     def abre_tela(self):
         opcoes = {1: self.incluir_comodo, 2: self.excluir_comodo, 3: self.lista_comodos, 4: self.altera_comodo, 5: self.adicionar_dispositivo_comodo, 6: self.dispositivos_comodo, 0: self.voltar}

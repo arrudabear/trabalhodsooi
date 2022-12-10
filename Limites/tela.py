@@ -38,6 +38,13 @@ class Tela(ABC):
       return opcao
     
     # def seleciona_opcao(self):
+    #     sg.ChangeLookAndFeel('DarkTeal4')
+    #     layout = [
+    #         [sg.Text('Menu Comodos', font=("Helvica",25))],
+    #         [sg.Text('Escolha sua opção', font=("Helvica",15))],
+    #         [sg.Radio('Sim',"RD1", key='1')],]
+
+    #     self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
     #     self.init_components() 
     #     button, values = self.__window.Read() 
     #     opcao = 0 
@@ -47,15 +54,6 @@ class Tela(ABC):
     #         opcao = 2
     #     self.close()
     #     return opcao
-
-    # def init_components(self):
-    #     sg.ChangeLookAndFeel('DarkTeal4')
-    #     layout = [
-    #         [sg.Text('Menu Comodos', font=("Helvica",25))],
-    #         [sg.Text('Escolha sua opção', font=("Helvica",15))],
-    #         [sg.Radio('Incluir Cômodo',"RD1", key='1')],]
-
-    #     self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
 
     def pegar_valor_int(self, mensagem):
         valor_lido = mensagem
@@ -68,7 +66,6 @@ class Tela(ABC):
         except ValueError:
             self.mostrar_mensagem("Digite apenas números.")
 
-    
     def pegar_valor_float(self, mensagem = ""): 
         while True:
             valor_lido = input(mensagem) 
@@ -81,5 +78,7 @@ class Tela(ABC):
             except ValueError:
                 print("Digite apenas números.")
     
+
+
     
    

@@ -65,9 +65,11 @@ class TelaComodos(Tela):
 
         button, values = self.open()
         nome_comodo = values['nome_comodo']
-
-        self.close()
-        return {"nome_comodo": nome_comodo}
+        if button in (None,'Voltar'):
+            self.close()
+        else:
+            self.close()
+            return {"nome_comodo": nome_comodo}
 
     # def escolhe_comodo(self): 
     #   nome_comodo = input("Digite o nome do cômodo  que deseja acessar: ")
@@ -85,9 +87,12 @@ class TelaComodos(Tela):
 
         button, values = self.open()
         nome_comodo = values['nome_comodo']
+        if button in (None,'Voltar'):
+            self.close()
+        else:
+            self.close()
+            return {"nome_comodo": nome_comodo}
 
-        self.close()
-        return nome_comodo
     
     # def mostra_comodo(self, dados_comodo):
     #   print("Nome do cômodo: ", dados_comodo["nome_comodo"])

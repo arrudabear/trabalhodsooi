@@ -50,6 +50,7 @@ class TelaUsuario(Tela):
             button, values = self.open()
             nome_usuario = values['nome_usuario']
             codigo_usuario = values['codigo_usuario']
+            self.pegar_valor_int(codigo_usuario)
 
             self.close()
             return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}

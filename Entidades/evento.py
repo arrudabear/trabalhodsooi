@@ -1,4 +1,5 @@
 from datetime import datetime
+import uuid
 from Entidades.usuario import Usuario
 from Entidades.dispositivo import Dispositivo
 
@@ -10,6 +11,7 @@ class Evento():
             self.__dispositivo = dispositivo
         self.__acao = acao
         self.__datahora = datahora
+        self.__id = uuid.uuid1()
         
         
     @property
@@ -27,3 +29,7 @@ class Evento():
     @property
     def acao(self):
         return self.__acao
+    
+    @property
+    def id(self):
+        return self.__id

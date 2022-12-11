@@ -102,6 +102,7 @@ class ControladorUsuario():
                 return None 
 
     def entrar_usuario(self):
+        self.__usuarios = self.__usuario_DAO.get_all()
         dados_usuario = self.__tela.tela_entrar_usuario()
         try:
             for usuario in self.__usuarios:

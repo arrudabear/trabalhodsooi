@@ -58,7 +58,6 @@ class ControladorSistema():
             funcao_escolhida()
 
     def entrar_usuario(self):
-        print('entrando')
         self.__usuario_atual = self.__controlador_usuarios.entrar_usuario()
 
     def cadastra_usuario(self):

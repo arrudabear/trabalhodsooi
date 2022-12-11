@@ -2,11 +2,13 @@
 from logging import exception
 from Entidades.usuario import Usuario
 from Limites.telaUsuario import TelaUsuario
+from DAOs.usuarios_dao import UsuarioDAO
 
 class ControladorUsuario():
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__usuarios = []
+        self.__usuario_DAO = UsuarioDAO()
+        self.__usuarios = self.__usuario_DAO.get_all()
         self.__tela = TelaUsuario()
     
     @property
@@ -30,7 +32,7 @@ class ControladorUsuario():
         try:
             if usuario == None:
                 usuario = Usuario(dados_usuario["nome"], int(dados_usuario["codigo"]))
-                self.__usuarios.append(usuario)
+                self.__usuario_DAO.add(usuario)
                 self.__tela.mostrar_mensagem("Usuario Cadastrado")
             else:
                 raise KeyError
@@ -43,7 +45,8 @@ class ControladorUsuario():
         usuario = self.find_usuario(int(usuario_escolhido["codigo"]), usuario_escolhido["nome"])
         try: 
             if (usuario is not None):
-                self.__disposistivos.remove(usuario)
+                #self.__disposistivos.remove(usuario)
+                self.__usuario_DAO.remove(usuario_escolhido["codigo"])
                 self.__tela.mostrar_mensagem("USUARIO EXCLUIDO")
                 self.lista_usuarios() 
             else: 
@@ -52,6 +55,7 @@ class ControladorUsuario():
              self.__tela_dispositivos.mostrar_mensagem("USUARIO NÃO EXISTENTE!!")
 
     def lista_usuarios(self):
+        self.__usuarios = self.__usuario_DAO.get_all()
         for usuario in self.__usuarios: 
             self.__tela.mostra_usuario({"nome": usuario.nome, "codigo": usuario.codigo})
         return self.__usuarios
@@ -62,10 +66,13 @@ class ControladorUsuario():
         usuario = self.find_usuario(int(usuario_escolhido["codigo"]), usuario_escolhido["nome"])
         try: 
             if (usuario is not None): 
-                self.__usuarios.remove(usuario) 
+                '''self.__usuarios.remove(usuario) 
                 self.incluir_usuario() 
+                self.lista_usuarios() '''
+                dados = self.__tela.pega_dados_usuario()
+                user_update = Usuario(dados["nome"], dados["codigo"])
+                self.__usuario_DAO.update(user_update)
                 self.__tela.mostrar_mensagem("USUARIO ALTERADO!!")
-                self.lista_usuarios() 
             else: 
                 raise KeyError
         except KeyError: 
@@ -73,6 +80,7 @@ class ControladorUsuario():
 
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
+        self.__usuarios = self.__usuario_DAO.get_all()
         cadastrando = True
         while cadastrando == True:
             try:
@@ -85,10 +93,8 @@ class ControladorUsuario():
                         if usuario.codigo == int(dados_usuario['codigo_usuario']):
                             raise KeyError
                     usuario = Usuario(dados_usuario['nome_usuario'], int(dados_usuario['codigo_usuario']))
-                    self.__usuarios.append(usuario)
+                    self.__usuario_DAO.add(usuario)
                     self.__tela.mostrar_mensagem("Usuário Cadastrado.")
-                    print("-"*20)
-                    print(usuario.codigo, usuario.nome)
                     cadastrando = False
                     
             except KeyError:

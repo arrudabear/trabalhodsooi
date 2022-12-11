@@ -76,6 +76,28 @@ class Tela(ABC):
                 raise ValueError
         except ValueError:
             self.mostrar_mensagem("Digite apenas números.")
+
+
+    def tela_int(self, mensagem):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text(mensagem, font=("Helvica",15))],
+            [sg.Text('Digite um valor inteiro:', size=(15, 1)), sg.InputText('', key='valor_int')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+
+        button, values = self.open()
+        valor = values['valor_int']
+        try:
+            valor_int = int(valor)
+            if isinstance(valor_int, int):
+                self.close()
+                return valor_int
+            else:
+                raise ValueError
+        except ValueError:
+            self.mostrar_mensagem("Digite apenas números inteiros")
     
 
 

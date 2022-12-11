@@ -12,15 +12,18 @@ from Entidades.lavaloucas import LavaLoucas
 from Entidades.pontoDeluz import PontoDeLuz
 from Entidades.som import Som
 from Entidades.tv import TV
+from DAOs.dispositivos_dao import DispositivoDAO
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
     def __init__(self, controlador_sistema):
-        self.__dispositivos = [] 
         self.__controlador_sistema = controlador_sistema
+        self.__dispositivo_DAO = DispositivoDAO()
+        self.__dispositivos = self.__dispositivo_DAO.get_all()
         self.__tela_dispositivos = TelaDispositivos() 
     
     def find_dispositivo(self, codigo: int, nome: str): 
+        self.__dispositivos = self.__dispositivo_DAO.get_all()
         for dispositivo in self.__dispositivos:
             if (dispositivo.codigo == codigo) and (dispositivo.nome == nome): 
                 return dispositivo
@@ -28,6 +31,7 @@ class ControladorDispositivos():
         return None 
         
     def incluir_dispositivo(self): 
+        self.__dispositivos = self.__dispositivo_DAO.get_all()
         dados_dispositivo = self.__tela_dispositivos.pega_dados_dispositivo()
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
@@ -64,7 +68,7 @@ class ControladorDispositivos():
                     dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                              dados_dispositivo["modelo"])
 
-                self.__dispositivos.append(dispositivo)
+                self.__dispositivo_DAO.add(dispositivo)
                 self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
             else:
                 raise KeyError
@@ -72,6 +76,7 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
+        self.__dispositivos = self.__dispositivo_DAO.get_all()
         dados_dispositivo = []
         if self.__dispositivos == []:
             self.__tela_dispositivos.mostrar_mensagem("Ainda não há dispositivos cadastrados")

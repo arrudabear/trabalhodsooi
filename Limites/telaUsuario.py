@@ -24,10 +24,13 @@ class TelaUsuario(Tela):
         button, values = self.open()
         nome_usuario = values['nome_usuario']
         codigo_usuario = values['codigo_usuario']
-        
-        self.close()
-        return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}
-
+        if button in (None, 'Voltar'):
+            self.close() 
+        else:
+            self.pegar_valor_int(codigo_usuario)
+            self.close()
+            return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}
+    
 
     # def tela_entrar_usuario(self):
     #     print("--- Entrar com Usuário ---")
@@ -50,11 +53,14 @@ class TelaUsuario(Tela):
             button, values = self.open()
             nome_usuario = values['nome_usuario']
             codigo_usuario = values['codigo_usuario']
-            self.pegar_valor_int(codigo_usuario)
-
-            self.close()
-            return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}
-    
+            if button in (None, 'Voltar'):
+                self.close()
+                break 
+            else:
+                self.pegar_valor_int(codigo_usuario)
+                self.close()
+                return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}
+        
     def pega_dados_usuario(self): 
         print("------------")
         nome = input("Nome do usuario: ").title()

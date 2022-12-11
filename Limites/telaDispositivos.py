@@ -627,3 +627,90 @@ class TelaDispositivos(Tela):
             opcao = 0
         self.close()
         return opcao
+
+    def controle_timer(self): 
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('Menu Dispositivos', font=("Helvica",25))],
+            [sg.Text('Controlar Timer', font=("Helvica",15))],
+            [sg.Radio('Timer ligar',"RD1", key='1')],
+            [sg.Radio('Timer desligar',"RD1", key='2')],
+            [sg.Radio('Voltar',"RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+        button, values = self.__window.Read() 
+        opcao = 0 
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['0'] or button in (None,'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
+    
+    def controle_modo(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+            [sg.Text('Menu Dispositivos', font=("Helvica",25))],
+            [sg.Text('Controlar Modo', font=("Helvica",15))],
+            [sg.Radio('Delicado',"RD1", key='1')],
+            [sg.Radio('Normal',"RD1", key='2')],
+            [sg.Radio('Rápido',"RD1", key='3')],
+            [sg.Radio('Voltar',"RD1", key='0')],
+            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+        button, values = self.__window.Read() 
+        opcao = 0 
+        if values['1']:
+            opcao = 1
+        if values['2']:
+            opcao = 2
+        if values['3']:
+            opcao = 3 
+        if values['0'] or button in (None,'Cancelar'):
+            opcao = 0
+        self.close()
+        return opcao
+
+    def mostrar_info_disp(self, dados_dispositivo): 
+        string_info_dispositivo = ''
+        for dado in dados_dispositivo:
+            string_info_dispositivo = string_info_dispositivo + "Nome: " + str(dado.nome) + '\n'
+        # string_info_dispositivo = string_info_dispositivo + "Codigo: " + str(dados_dispositivo.codigo) + '\n'
+        # string_info_dispositivo = string_info_dispositivo + "Modelo: " + str(dados_dispositivo.modelo) + '\n'
+        # string_info_dispositivo = string_info_dispositivo + "Potencia " + str(dados_dispositivo.potencia) + '\n'
+
+
+        sg.Popup('-------- INFORMAÇÔES DISPOSITIIVO --------', string_info_dispositivo)
+
+
+
+    def valor_float(self): 
+        while True: 
+            sg.ChangeLookAndFeel('DarkTeal4')
+            layout = [
+                [sg.Text('-------- Escolher valor ----------', font=("Helvica", 25))],
+                [sg.Text('Valor:', size=(15, 1)), sg.InputText('', key='valor')],
+                [sg.Button('Confirmar'), sg.Cancel('Voltar')]
+            ]
+            self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+
+            button, values = self.open() 
+            valor = values['valor']
+            self.close()
+            if button in (None, 'Voltar'): 
+                self.close() 
+                break 
+            else:
+                try:
+                    valor_float = float(valor)
+                    if type(valor_float) == float:
+                        return valor_float
+                    else:  
+                        raise ValueError
+                except ValueError:
+                    self.mostrar_mensagem("Digite apenas números.")
+    

@@ -66,17 +66,16 @@ class Tela(ABC):
         except ValueError:
             self.mostrar_mensagem("Digite apenas números.")
 
-    def pegar_valor_float(self, mensagem = ""): 
-        while True:
-            valor_lido = input(mensagem) 
-            try:
-                valor_float = float(valor_lido)
-                if type(valor_float) == float:
-                    return valor_float
-                else:   
-                    raise ValueError
-            except ValueError:
-                print("Digite apenas números.")
+    def pegar_valor_float(self, mensagem):
+        valor_lido = mensagem  
+        try:
+            valor_float = float(valor_lido)
+            if type(valor_float) == float:
+                return valor_float
+            else:   
+                raise ValueError
+        except ValueError:
+            self.mostrar_mensagem("Digite apenas números.")
     
 
 

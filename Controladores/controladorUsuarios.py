@@ -80,22 +80,26 @@ class ControladorUsuario():
 
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
-        self.__usuarios = self.__usuario_DAO.get_all()
         cadastrando = True
         while cadastrando == True:
             try:
                 dados_usuario = self.__tela.tela_cadastra_usuario()
-                codigo = self.__tela.pegar_valor_int(dados_usuario["codigo_usuario"])
-                if dados_usuario["codigo_usuario"] == '' or type(codigo) != int:
-                    raise KeyError
+                if dados_usuario == None:
+                    break
                 else: 
-                    for usuario in self.__usuarios:
-                        if usuario.codigo == int(dados_usuario['codigo_usuario']):
-                            raise KeyError
-                    usuario = Usuario(dados_usuario['nome_usuario'], int(dados_usuario['codigo_usuario']))
-                    self.__usuario_DAO.add(usuario)
-                    self.__tela.mostrar_mensagem("Usuário Cadastrado.")
-                    cadastrando = False
+                    codigo = self.__tela.pegar_valor_int(dados_usuario["codigo_usuario"])
+                    if dados_usuario["codigo_usuario"] == '' or type(codigo) != int:
+                        raise KeyError
+                    else: 
+                        for usuario in self.__usuarios:
+                            if usuario.codigo == int(dados_usuario['codigo_usuario']):
+                                raise KeyError
+                        usuario = Usuario(dados_usuario['nome_usuario'], int(dados_usuario['codigo_usuario']))
+                        self.__usuarios.append(usuario)
+                        self.__tela.mostrar_mensagem("Usuário Cadastrado.")
+                        print("-"*20)
+                        print(usuario.codigo, usuario.nome)
+                        cadastrando = False
                     
             except KeyError:
                 self.__tela.mostrar_mensagem("Código em uso ou inválido.")
@@ -104,15 +108,17 @@ class ControladorUsuario():
     def entrar_usuario(self):
         self.__usuarios = self.__usuario_DAO.get_all()
         dados_usuario = self.__tela.tela_entrar_usuario()
-        try:
-            for usuario in self.__usuarios:
-                # print(usuario.nome, usuario.codigo)
-                # print(nome_usuario, codigo_usuario)
-                if (dados_usuario['nome_usuario'] == usuario.nome) and (int(dados_usuario['codigo_usuario']) == usuario.codigo):
-                    usuario_atual = usuario
-                    return usuario_atual
-            else:
-                raise KeyError 
-        except KeyError:
-            self.__tela.mostrar_mensagem("Usuário não Cadastrado")
- 
+        if dados_usuario == None:
+            pass 
+        else: 
+            try:
+                for usuario in self.__usuarios:
+                    # print(usuario.nome, usuario.codigo)
+                    # print(nome_usuario, codigo_usuario)
+                    if (dados_usuario['nome_usuario'] == usuario.nome) and (int(dados_usuario['codigo_usuario']) == usuario.codigo):
+                        usuario_atual = usuario
+                        return usuario_atual
+                else:
+                    raise KeyError 
+            except KeyError:
+                self.__tela.mostrar_mensagem("Usuário não Cadastrado")

@@ -17,7 +17,7 @@ class Geladeira(Dispositivo):
             self.__temperatura = temperatura
 
     def aumentar_temperatura(self):
-        if self.__temepratura < 7: 
+        if self.__temperatura < 7: 
             self.__temperatura += 1 
 
     def diminuir_temperatura(self):

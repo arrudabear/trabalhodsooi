@@ -126,7 +126,7 @@ class TelaDispositivos(Tela):
             [sg.Text('Digite os dados do dispositivo que deseja acessar', font=("Helvica",15))],
             [sg.Text('Nome do Dispositivo:', size=(15, 1)), sg.InputText('', key='nome_disp')],
             [sg.Text('Codigo do Dispositivo:', size=(15, 1)), sg.InputText('', key='codigo_disp')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            [sg.Button('Confirmar'), sg.Cancel('Voltar')]
             ]
         self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
 

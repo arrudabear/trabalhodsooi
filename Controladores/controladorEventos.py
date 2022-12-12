@@ -32,7 +32,17 @@ class ControladorEventos():
     
     def lista_eventos(self):
         self.__eventos = self.__evento_DAO.get_all()
-        self.__tela_eventos.mostrar_evento(self.__eventos)
+        dados_eventos = []
+        for evento in self.__eventos:
+            dados_eventos.append({'id' : evento.id})
+            dados_eventos.append({'data' : evento.datahora})
+            dados_eventos.append({'usuario' : evento.usuario.nome})
+            dados_eventos.append({'dispositivo_nome' : evento.dispositivo.nome})
+            dados_eventos.append({'dispositivo_codigo' : evento.dispositivo.codigo})
+            dados_eventos.append({'acao' : evento.acao})
+
+        self.__tela_eventos.mostrar_evento(dados_eventos)
+
         '''self.__tela_eventos.mostrar_mensagem("--- Registro de Eventos ---")
         for evento in self.__eventos:
             self.__tela_eventos.mostrar_mensagem("-"*15)

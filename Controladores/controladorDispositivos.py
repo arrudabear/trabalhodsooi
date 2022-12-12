@@ -76,52 +76,47 @@ class ControladorDispositivos():
 
     def lista_dispositivos(self): 
         dados_dispositivo = []
-        if self.__dispositivos == []:
-            self.__tela_dispositivos.mostrar_mensagem("Ainda não há dispositivos cadastrados")
-            self.__tela_dispositivos.mostrar_mensagem("Deseja criar um novo dispositivo? [SIM: 1 / NÃO: 0]")
-            opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
-            if opcao == 1: 
-                self.incluir_dispositivo() 
-                self.lista_dispositivos()
-            else: 
-                self.abre_tela()
-
-        else:
-            # self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
-            for dispositivo in self.__dispositivos:
-                dados_dispositivo.append({'nome_disp': dispositivo.nome, 'codigo_disp': dispositivo.codigo})
-                # self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
-                # self.__tela_dispositivos.mostrar_mensagem("-----------------------------------")
-            self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo)
+        # self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
+        for dispositivo in self.__dispositivos:
+            dados_dispositivo.append({'nome_disp': dispositivo.nome, 'codigo_disp': dispositivo.codigo})
+            # self.__tela_dispositivos.mostra_dispositivo({"nome": dispositivo.nome, "codigo": dispositivo.codigo})
+            # self.__tela_dispositivos.mostrar_mensagem("-----------------------------------")
+        self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo)
 
     def excluir_dispositivo(self):
         self.lista_dispositivos()
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo()  
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-        try: 
-            if (dispositivo is not None): 
-                self.__dispositivos.remove(dispositivo)
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO EXCLUIDO!!")
-                self.lista_dispositivos()
-            else:
-                raise KeyError
-        except KeyError: 
-            self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
+        if dispositivo_escolhido == None:
+            pass 
+        else: 
+            dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+            try: 
+                if (dispositivo is not None): 
+                    self.__dispositivos.remove(dispositivo)
+                    self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO EXCLUIDO!!")
+                    self.lista_dispositivos()
+                else:
+                    raise KeyError
+            except KeyError: 
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
 
     def altera_dispositivo(self):
         self.lista_dispositivos()
         dispositivo_escolhido = self.__tela_dispositivos.escolhe_dispositivo()  
-        dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
-        try:
-            if (dispositivo is not None):
-                self.__dispositivos.remove(dispositivo)
-                self.incluir_dispositivo() 
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO ALTERADO!!")
-                self.lista_dispositivos() 
-            else:
-                raise KeyError 
-        except KeyError: 
-            self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
+        if dispositivo_escolhido == None:
+            pass
+        else:
+            dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
+            try:
+                if (dispositivo is not None):
+                    self.__dispositivos.remove(dispositivo)
+                    self.incluir_dispositivo() 
+                    self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO ALTERADO!!")
+                    self.lista_dispositivos() 
+                else:
+                    raise KeyError 
+            except KeyError: 
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
     def abre_tela(self):
         opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 5: self.calcular_gasto, 6: self.controla_dispositivo, 0: self.voltar}
@@ -139,74 +134,77 @@ class ControladorDispositivos():
     
     def controla_dispositivo(self):
         self.lista_dispositivos() 
-        dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo() 
-        dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
-        try:
-            if (dispositivo is not None):
-                # self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
-                if type(dispositivo) == ArCondicionado:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_arcondicionado()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+        dados_dispositivo = self.__tela_dispositivos.escolhe_dispositivo()
+        if dados_dispositivo == None:
+            pass 
+        else: 
+            dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
+            try:
+                if (dispositivo is not None):
+                    # self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
+                    if type(dispositivo) == ArCondicionado:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_arcondicionado()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == Geladeira:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_geladeira()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
-                    
-                elif type(dispositivo) == Forno:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_forno()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == Geladeira:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_geladeira()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
+                        
+                    elif type(dispositivo) == Forno:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_forno()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == TV:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_canal,3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_tv()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == TV:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_canal,3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_tv()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == Som:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_musica, 3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_som()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == Som:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_musica, 3: self.controlar_volume, 4: self.controlar_timer, 5: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_som()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == LavadoraDeRoupa:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_lavadoras()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == LavadoraDeRoupa:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_lavadoras()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == LavaLoucas:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_lavaloucas()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == LavaLoucas:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.escolher_modo, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_lavaloucas()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == Cafeteira:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_cafeteira()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == Cafeteira:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_cafeteira()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == Cortina:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_cortina()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
+                    elif type(dispositivo) == Cortina:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_cortina()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
 
-                elif type(dispositivo) == PontoDeLuz:
-                    lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
-                    opcao_escolhida = self.__tela_dispositivos.controle_luz()
-                    funcao_escolhida = lista_opcoes[opcao_escolhida]
-                    funcao_escolhida(dispositivo)
-            else:
-                raise KeyError
-        except KeyError: 
-            self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
+                    elif type(dispositivo) == PontoDeLuz:
+                        lista_opcoes = {1: self.liga_desliga, 2: self.controlar_timer, 3: self.info_disp, 0: self.void_func}
+                        opcao_escolhida = self.__tela_dispositivos.controle_luz()
+                        funcao_escolhida = lista_opcoes[opcao_escolhida]
+                        funcao_escolhida(dispositivo)
+                else:
+                    raise KeyError
+            except KeyError: 
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
 
         #self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
@@ -382,8 +380,8 @@ class ControladorDispositivos():
         disp = self.__tela_dispositivos.escolhe_dispositivo()
         return disp
 
-    def mostra_dispositivo(self, dispositivo):
-        self.__tela_dispositivos.mostrar_mensagem(f"Nome: {dispositivo.nome}")
+    def mostra_dispositivo(self, dados_dispositivo):
+        self.__tela_dispositivos.mostra_dispositivo(dados_dispositivo) 
 
     def voltar(self): 
         self.__controlador_sistema.abre_tela() 

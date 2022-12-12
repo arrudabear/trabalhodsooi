@@ -64,6 +64,7 @@ class Tela(ABC):
             else:   
                 raise ValueError
         except ValueError:
+            self.close() 
             self.mostrar_mensagem("Digite apenas números.")
 
     def pegar_valor_float(self, mensagem):
@@ -75,6 +76,7 @@ class Tela(ABC):
             else:   
                 raise ValueError
         except ValueError:
+            self.close() 
             self.mostrar_mensagem("Digite apenas números.")
 
 

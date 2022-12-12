@@ -81,7 +81,7 @@ class TelaDispositivos(Tela):
             [sg.Text('Codigo do Dispositivo:', size=(15, 1)), sg.InputText('', key='codigo_disp')],
             [sg.Text('Potência do Dispositivo:', size=(15, 1)), sg.InputText('', key='potencia_disp')],
             [sg.Text('Modelo do Dispositivo:', size=(15, 1)), sg.InputText('', key='modelo_disp')],
-            [sg.Button('Confirmar'), sg.Cancel('Cancelar')]
+            [sg.Button('Confirmar'), sg.Cancel('Voltar')]
             ]
         self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
 
@@ -90,9 +90,11 @@ class TelaDispositivos(Tela):
         codigo_disp = values['codigo_disp']
         potencia_disp = values['potencia_disp']
         modelo_disp = values['modelo_disp']
-
-        self.close()
-        return {"nome": nome_disp, "codigo": codigo_disp, "potencia": potencia_disp, "modelo": modelo_disp}
+        if button in (None,'Voltar'):
+            self.close()
+        else:
+            self.close()
+            return {"nome": nome_disp, "codigo": codigo_disp, "potencia": potencia_disp, "modelo": modelo_disp}
 
         '''
         print("-------- DADOS DISPOSITIVO ----------")
@@ -131,9 +133,12 @@ class TelaDispositivos(Tela):
         button, values = self.open()
         nome_disp = values['nome_disp']
         codigo_disp = values['codigo_disp']
-
-        self.close()
-        return {"nome": nome_disp, "codigo": codigo_disp}
+        if button in (None,'Voltar'):
+            self.close()
+        else:
+            self.pegar_valor_int(codigo_disp)
+            self.close()
+            return {"nome": nome_disp, "codigo": codigo_disp}
 
         '''
         print("--- Escolha o Dispositivo ---")
@@ -736,6 +741,7 @@ class TelaDispositivos(Tela):
             opcao = 0
         self.close()
         return opcao
+
     def valor_float(self): 
         while True: 
             sg.ChangeLookAndFeel('DarkTeal4')

@@ -29,47 +29,50 @@ class ControladorDispositivos():
         
     def incluir_dispositivo(self): 
         dados_dispositivo = self.__tela_dispositivos.pega_dados_dispositivo()
-        dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
-        tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
-        try:
-            if dispositivo == None:
-                if tipo_dispositivo == 1:
-                    dispositivo = ArCondicionado(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                                 dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 2: 
-                    dispositivo = Cafeteira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+        if dados_dispositivo == None:
+            pass
+        else:
+            dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
+            tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
+            try:
+                if dispositivo == None:
+                    if tipo_dispositivo == 1:
+                        dispositivo = ArCondicionado(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                    dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 2: 
+                        dispositivo = Cafeteira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 3:
+                        dispositivo = Cortina(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                             dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 3:
-                    dispositivo = Cortina(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                          dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 4:
-                    dispositivo = Forno(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                    elif tipo_dispositivo == 4:
+                        dispositivo = Forno(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                            dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 5:
+                        dispositivo = Geladeira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 6: 
+                        dispositivo = LavadoraDeRoupa(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 7: 
+                        dispositivo = PontoDeLuz(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 8: 
+                        dispositivo = Som(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                         dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 5:
-                    dispositivo = Geladeira(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                            dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 6: 
-                    dispositivo = LavadoraDeRoupa(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                            dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 7: 
-                    dispositivo = PontoDeLuz(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                            dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 8: 
-                    dispositivo = Som(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                      dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 9: 
-                    dispositivo = TV(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                     dados_dispositivo["modelo"])
-                elif tipo_dispositivo == 10: 
-                    dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
-                                             dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 9: 
+                        dispositivo = TV(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                        dados_dispositivo["modelo"])
+                    elif tipo_dispositivo == 10: 
+                        dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
+                                                dados_dispositivo["modelo"])
 
-                self.__dispositivos.append(dispositivo)
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
-            else:
-                raise KeyError
-        except KeyError:
-            self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
+                    self.__dispositivos.append(dispositivo)
+                    self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
+                else:
+                    raise KeyError
+            except KeyError:
+                self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
         dados_dispositivo = []
@@ -364,10 +367,10 @@ class ControladorDispositivos():
         # self.__tela_dispositivos.mostrar_mensagem("--- CONTROLE PLAYER DE MÚSICA ---")
         # self.__tela_dispositivos.mostrar_mensagem("[TOCAR/PAUSAR: 1 / PRÓXIMA MÚSICA: 2 / VOLTAR MÚSICA: 3]")
         opcao = self.__tela_dispositivos.controle_musica() 
+        acao = dispositivo.controlar_musica(opcao)
         if acao == None:
             pass
         else:
-            acao = dispositivo.controlar_musica(opcao)
             self.__tela_dispositivos.mostrar_mensagem(f"O player {acao} a música.")
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, f"{acao} a Música")
 

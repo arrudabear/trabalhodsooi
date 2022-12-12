@@ -61,12 +61,26 @@ class TelaUsuario(Tela):
                 self.close()
                 return {"nome_usuario": nome_usuario, "codigo_usuario": codigo_usuario}
         
-    def pega_dados_usuario(self): 
-        print("------------")
+    def pega_dados_usuario(self):
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+                [sg.Text('-------- Digite os dados do usuário escolhido ----------', font=("Helvica", 25))],
+                [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome_usuario')],
+                [sg.Text('Código', size=(15, 1)), sg.InputText('', key='codigo_usuario')],
+                [sg.Button('Confirmar'), sg.Cancel('Voltar')]
+                ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+
+        button, values = self.open()
+        nome_usuario = values['nome_usuario']
+        codigo_usuario = values['codigo_usuario']
+        self.close()
+        return {"nome": nome_usuario, "codigo": codigo_usuario}
+        '''print("------------")
         nome = input("Nome do usuario: ").title()
         codigo = input("Codigo do usuario: ")
 
-        return {"nome": nome, "codigo": codigo}
+        return {"nome": nome, "codigo": codigo}'''
 
     def mostra_usuario(self, lista_usuarios):
         string_usuarios = ''
@@ -80,11 +94,25 @@ class TelaUsuario(Tela):
         print("Codigo", dados_usuario["codigo"])'''
     
     def escolher_usuario(self):
-        print("------")
+        sg.ChangeLookAndFeel('DarkTeal4')
+        layout = [
+                [sg.Text('-------- Digite os dados do usuário escolhido ----------', font=("Helvica", 25))],
+                [sg.Text('Nome:', size=(15, 1)), sg.InputText('', key='nome_usuario')],
+                [sg.Text('Código', size=(15, 1)), sg.InputText('', key='codigo_usuario')],
+                [sg.Button('Confirmar'), sg.Cancel('Voltar')]
+                ]
+        self.__window = sg.Window('Sistema Casa Inteligente').Layout(layout)
+
+        button, values = self.open()
+        nome_usuario = values['nome_usuario']
+        codigo_usuario = values['codigo_usuario']
+        self.close()
+        return {"nome": nome_usuario, "codigo": codigo_usuario}
+        '''print("------")
         nome = input("Digite o nome do usuario que deseja acessar: ")
         codigo = input("Digite o codigo do usuario que deseja acessar: ")
 
-        return {"nome": nome, "codigo": codigo}
+        return {"nome": nome, "codigo": codigo}'''
 
     def close(self):
         self.__window.Close()

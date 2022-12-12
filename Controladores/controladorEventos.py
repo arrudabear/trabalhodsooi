@@ -32,26 +32,7 @@ class ControladorEventos():
     
     def lista_eventos(self):
         self.__eventos = self.__evento_DAO.get_all()
-        dados_eventos = []
-        for evento in self.__eventos:
-            dados_eventos.append({'id' : evento.id})
-            dados_eventos.append({'data' : evento.datahora})
-            dados_eventos.append({'usuario' : evento.usuario.nome})
-            dados_eventos.append({'dispositivo_nome' : evento.dispositivo.nome})
-            dados_eventos.append({'dispositivo_codigo' : evento.dispositivo.codigo})
-            dados_eventos.append({'acao' : evento.acao})
-
-        self.__tela_eventos.mostrar_evento(dados_eventos)
-
-        '''self.__tela_eventos.mostrar_mensagem("--- Registro de Eventos ---")
-        for evento in self.__eventos:
-            self.__tela_eventos.mostrar_mensagem("-"*15)
-            self.__tela_eventos.mostrar_mensagem(f"Evento - {evento.id}")
-            self.__tela_eventos.mostrar_mensagem(f"Data e Hora: {evento.datahora}")
-            self.__tela_eventos.mostrar_mensagem(f"Usuário: {evento.usuario.nome}")
-            self.__tela_eventos.mostrar_mensagem(f"Dispositivo: {evento.dispositivo.nome}")
-            self.__tela_eventos.mostrar_mensagem(f"Código do dispositivo: {evento.dispositivo.codigo}")
-            self.__tela_eventos.mostrar_mensagem(f"Ação registrada: {evento.acao}")'''
+        self.__tela_eventos.mostrar_evento(self.__eventos)
 
     
     def evento_usuario(self, usuario):
@@ -62,6 +43,7 @@ class ControladorEventos():
                 self.__tela_eventos.mostrar_mensagem(f"Eventos do Usuário: {usuario.nome}")
                 for evento in self.__eventos:
                     if evento.usuario == usuario:
+                        print('aaa')
                         lista_eventos.append(evento)
 
                         '''self.__tela_eventos.mostrar_mensagem("-"*15)

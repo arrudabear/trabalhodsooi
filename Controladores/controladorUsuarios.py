@@ -16,6 +16,7 @@ class ControladorUsuario():
         return self.__usuarios
 
     def find_usuario(self, nome: str, codigo: int): 
+        self.__usuarios = self.__usuario_DAO.get_all()
         for usuario in self.__usuarios: 
             if (usuario.nome == nome) and (usuario.codigo == codigo):
                 return usuario 

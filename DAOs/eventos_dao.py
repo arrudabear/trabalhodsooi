@@ -6,11 +6,11 @@ class EventosDAO(DAO):
         super().__init__('eventos.pkl')
     
     def add(self, evento: Evento):
-        if ((evento is not None) and isinstance(evento, Evento) and isinstance(evento.id, int)):
+        if ((evento is not None) and isinstance(evento, Evento)):
             super().add(evento.id, evento)
 
     def update(self, evento: Evento):
-        if ((evento is not None) and isinstance(evento, Evento) and isinstance(evento.id, int)):
+        if ((evento is not None) and isinstance(evento, Evento)):
             super().update(evento.id, evento)
 
     def get(self, key:int):

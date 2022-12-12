@@ -56,8 +56,9 @@ class ControladorUsuario():
 
     def lista_usuarios(self):
         self.__usuarios = self.__usuario_DAO.get_all()
-        for usuario in self.__usuarios: 
-            self.__tela.mostra_usuario({"nome": usuario.nome, "codigo": usuario.codigo})
+        '''for usuario in self.__usuarios: 
+            self.__tela.mostra_usuario({"nome": usuario.nome, "codigo": usuario.codigo})'''
+        self.__tela.mostra_usuario(self.__usuarios)
         return self.__usuarios
     
     def altera_usuario(self):

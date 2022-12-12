@@ -68,10 +68,16 @@ class TelaUsuario(Tela):
 
         return {"nome": nome, "codigo": codigo}
 
-    def mostra_usuario(self, dados_usuario):
-        print("--------")
+    def mostra_usuario(self, lista_usuarios):
+        string_usuarios = ''
+        for usuario in lista_usuarios:
+            string_usuarios = string_usuarios + "Nome: " + usuario.nome + '\n'
+            string_usuarios = string_usuarios + "Código: " + str(usuario.codigo) + '\n'
+            string_usuarios = string_usuarios + ('-'*10) + '\n'
+        sg.Popup("--- Usuario Cadastrados ---", string_usuarios)
+        '''print("--------")
         print("Nome", dados_usuario["nome"])
-        print("Codigo", dados_usuario["codigo"])
+        print("Codigo", dados_usuario["codigo"])'''
     
     def escolher_usuario(self):
         print("------")

@@ -12,17 +12,20 @@ from Entidades.lavaloucas import LavaLoucas
 from Entidades.pontoDeluz import PontoDeLuz
 from Entidades.som import Som
 from Entidades.tv import TV
+from DAOs.dispositivos_dao import DispositivoDAO
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
     def __init__(self, controlador_sistema):
-        self.__dispositivos = [] 
+        self.__dispositivo_DAO = DispositivoDAO()
+        self.__dispositivos = self.__dispositivo_DAO.get_all() 
         self.__controlador_sistema = controlador_sistema
         self.__tela_dispositivos = TelaDispositivos() 
     
     def find_dispositivo(self, codigo: int, nome: str): 
+        self.__dispositivo = self.__dispositivo_DAO.get_all() 
         for dispositivo in self.__dispositivos:
-            if (dispositivo.codigo == codigo) and (dispositivo.nome == nome): 
+            if (dispositivo.codigo == codigo) or (dispositivo.nome == nome): 
                 return dispositivo
 
         return None 
@@ -67,7 +70,7 @@ class ControladorDispositivos():
                         dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                                 dados_dispositivo["modelo"])
 
-                    self.__dispositivos.append(dispositivo)
+                    self.__dispositivo_DAO.add(dispositivo)
                     self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
                 else:
                     raise KeyError
@@ -75,6 +78,7 @@ class ControladorDispositivos():
                 self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
+        self.__dispositivos = self.__dispositivo_DAO.get_all() 
         dados_dispositivo = []
         # self.__tela_dispositivos.mostrar_mensagem("------ DISPOSITIVOS CADASTRADOS ------")
         for dispositivo in self.__dispositivos:
@@ -89,16 +93,16 @@ class ControladorDispositivos():
         if dispositivo_escolhido == None:
             pass 
         else: 
-            dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
             try: 
+                dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
                 if (dispositivo is not None): 
-                    self.__dispositivos.remove(dispositivo)
+                    self.__dispositivo_DAO.remove(dispositivo_escolhido["codigo"])
                     self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO EXCLUIDO!!")
                     self.lista_dispositivos()
                 else:
                     raise KeyError
             except KeyError: 
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE!!")
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE OU CÓDIGO INVÁLIDO!!")
 
     def altera_dispositivo(self):
         self.lista_dispositivos()
@@ -106,17 +110,17 @@ class ControladorDispositivos():
         if dispositivo_escolhido == None:
             pass
         else:
-            dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
             try:
+                dispositivo = self.find_dispositivo(int(dispositivo_escolhido["codigo"]), dispositivo_escolhido["nome"])
                 if (dispositivo is not None):
-                    self.__dispositivos.remove(dispositivo)
+                    self.__dispositivo_DAO.remove(dispositivo_escolhido["codigo"])
                     self.incluir_dispositivo() 
                     self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO ALTERADO!!")
                     self.lista_dispositivos() 
                 else:
                     raise KeyError 
             except KeyError: 
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE OU CÓDIGO INVÁLIDO!!")
 
     def abre_tela(self):
         opcoes = {1: self.incluir_dispositivo, 2: self.excluir_dispositivo, 3: self.lista_dispositivos, 4: self.altera_dispositivo, 5: self.calcular_gasto, 6: self.controla_dispositivo, 0: self.voltar}
@@ -138,8 +142,8 @@ class ControladorDispositivos():
         if dados_dispositivo == None:
             pass 
         else: 
-            dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
             try:
+                dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
                 if (dispositivo is not None):
                     # self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
                     if type(dispositivo) == ArCondicionado:
@@ -204,7 +208,7 @@ class ControladorDispositivos():
                 else:
                     raise KeyError
             except KeyError: 
-                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVOS NÃO EXISTENTE!!")
+                self.__tela_dispositivos.mostrar_mensagem("DISPOSITIVO NÃO EXISTENTE OU CÓDIGO INVÁLIDO!!")
 
         #self.abre_tela_opcoes_controle() 
 #-----------------------------------------------------------------------------------------------------------------
@@ -219,21 +223,18 @@ class ControladorDispositivos():
         # self.__tela_dispositivos.mostrar_mensagem("[LIGAR: 1 / DESLIGAR: 0]")
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [0,1])
         opcao = self.__tela_dispositivos.controle_ligar_desligar() 
-        print("a")
         if opcao == 1: 
             dispositivo.ligar()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Ligar")
-            print(dispositivo.estado)
-            print("ligado")
+            self.__tela_dispositivos.mostrar_mensagem("Ligado")
+
         elif opcao == 2: 
             dispositivo.desligar() 
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Desligar")
-            print(dispositivo.estado)
-            print("desligado")
+            self.__tela_dispositivos.mostrar_mensagem("Desligado")
 
     def controlar_temperatura(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
-        print(dispositivo.estado)
         # self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR TEMPERATURA: 1 / DIMINUIR TEMPERATURA: 2]")
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
         opcao = self.__tela_dispositivos.controle_temperatura() 
@@ -248,7 +249,6 @@ class ControladorDispositivos():
 
     def controlar_timer(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
-        print(dispositivo.estado)
         # self.__tela_dispositivos.mostrar_mensagem("[ESCOLHER TEMPO TIMER LIGAR: 1 / ESCOLHER TEMPO TIMER DESLIGAR: 0]")
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,0])
         opcao = self.__tela_dispositivos.controle_timer() 

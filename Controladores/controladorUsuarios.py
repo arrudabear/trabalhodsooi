@@ -81,6 +81,7 @@ class ControladorUsuario():
 
 #------------------------------------------------------------------------------------------------------------------------------
     def cadastra_usuario(self):
+        self_usuarios = self.__usuario_DAO.get_all()
         cadastrando = True
         while cadastrando == True:
             try:
@@ -107,6 +108,7 @@ class ControladorUsuario():
                 return None 
 
     def entrar_usuario(self):
+        self.__usuarios =  self.__usuario_DAO.get_all()
         dados_usuario = self.__tela.tela_entrar_usuario()
         if dados_usuario == None:
             pass 

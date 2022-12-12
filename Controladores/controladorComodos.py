@@ -2,13 +2,15 @@
 #from Controladores.controladorSistema import ControladorSistema
 from Limites.telaComodos import TelaComodos
 from Entidades.comodo import Comodo
+from DAOs.comodos_dao import ComodoDAO
 
 class ControladorComodos(): 
     #colocar contolador sistema no UML 
     def __init__(self, controlador_sistema):
-        self.__comodos = [] 
+        self.__comodo_DAO = ComodoDAO() 
+        self.__comodos = self.__comodo_DAO.get_all() 
         self.__controlador_sistema = controlador_sistema
-        self.__tela_comodos = TelaComodos() 
+        self.__tela_comodos = TelaComodos()  
     
     def find_comodo(self, nome_comodo: str): 
         for comodo in self.__comodos:
@@ -17,7 +19,6 @@ class ControladorComodos():
         return None 
 
     def incluir_comodo(self): 
-        print('incluindo comodo')
         dados_comodo = self.__tela_comodos.pega_dados_comodo() 
         if dados_comodo == None: 
             pass
@@ -26,7 +27,7 @@ class ControladorComodos():
             try:
                 if comodo == None:
                     comodo = Comodo(dados_comodo["nome_comodo"])
-                    self.__comodos.append(comodo)
+                    self.__comodo_DAO.add(comodo)
                     self.__tela_comodos.mostrar_mensagem("Cômodo adicionado na lista!")
                 else:
                     raise KeyError
@@ -34,6 +35,7 @@ class ControladorComodos():
                 self.__tela_comodos.mostrar_mensagem("Cômodo já existente na lista!") 
     
     def lista_comodos(self):
+        self.__comodos = self.__comodo_DAO.get_all()
         dados_comodo = [] 
         # self.__tela_comodos.mostrar_mensagem("-------- CÔMODOS CADASTRADOS ----------")
         for comodo in self.__comodos: 
@@ -51,7 +53,7 @@ class ControladorComodos():
             comodo = self.find_comodo(nome_comodo['nome_comodo']) 
             try: 
                 if(comodo is not None):
-                    self.__comodos.remove(comodo)
+                    self.__comodo_DAO.remove(nome_comodo['nome_comodo'])
                     self.__tela_comodos.mostrar_mensagem("CÔMODO EXCLUIDO!!")
                     self.lista_comodos() 
                 else:
@@ -71,8 +73,8 @@ class ControladorComodos():
                 if (comodo is not None): 
                     novo_nome_comodo = self.__tela_comodos.pega_dados_comodo()
                     novo_comodo = Comodo(novo_nome_comodo["nome_comodo"])
-                    self.__comodos.remove(comodo)
-                    self.__comodos.append(novo_comodo)
+                    self.__comodo_DAO.remove(nome_comodo['nome_comodo'])
+                    self.__comodo_DAO.add(novo_comodo)
                     self.__tela_comodos.mostrar_mensagem("CÔMODO ALTERADO!!")
                     self.lista_comodos()
                 else:

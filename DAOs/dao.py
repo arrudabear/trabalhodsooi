@@ -20,7 +20,7 @@ class DAO(ABC):
     #esse método precisa chamar o self.__dump()
     def add(self, key, obj):
         self.__cache[key] = obj
-        self.__dump()  #atualiza o arquivo depois de add novo amigo
+        self.__dump()  
 
     #cuidado: esse update só funciona se o objeto com essa chave já existe
     def update(self, key, obj):
@@ -29,13 +29,13 @@ class DAO(ABC):
                 self.__cache[key] = obj #atualiza a entrada
                 self.__dump()  #atualiza o arquivo
         except KeyError:
-            pass  # implementar aqui o tratamento da exceção
+            pass  
 
     def get(self, key):
         try:
             return self.__cache[key]
         except KeyError:
-            pass #implementar aqui o tratamento da exceção
+            pass 
 
     # esse método precisa chamar o self.__dump()
     def remove(self, key):
@@ -43,7 +43,7 @@ class DAO(ABC):
             self.__cache.pop(key)
             self.__dump() #atualiza o arquivo depois de remover um objeto
         except KeyError:
-            pass #implementar aqui o tratamento da exceção
+            pass 
 
     def get_all(self):
         return self.__cache.values()

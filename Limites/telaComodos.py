@@ -100,7 +100,7 @@ class TelaComodos(Tela):
     def mostra_comodo(self, dados_comodo): 
         string_comodos = ''
         for dado in dados_comodo:
-            string_comodos = string_comodos + "Nome Cômodo: " + str((dado['nome_comodo'])) + '\n\n'
+            string_comodos = string_comodos + "Nome Cômodo: " + (dado['nome_comodo']) + '\n\n'
             
         sg.Popup('-------- LISTA DE CÔMODOS ----------', string_comodos)
 

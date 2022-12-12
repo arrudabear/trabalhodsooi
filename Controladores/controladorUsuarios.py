@@ -95,7 +95,7 @@ class ControladorUsuario():
                             if usuario.codigo == int(dados_usuario['codigo_usuario']):
                                 raise KeyError
                         usuario = Usuario(dados_usuario['nome_usuario'], int(dados_usuario['codigo_usuario']))
-                        self.__usuarios.append(usuario)
+                        self.__usuario_DAO.add(usuario)
                         self.__tela.mostrar_mensagem("Usuário Cadastrado.")
                         print("-"*20)
                         print(usuario.codigo, usuario.nome)
@@ -106,7 +106,6 @@ class ControladorUsuario():
                 return None 
 
     def entrar_usuario(self):
-        self.__usuarios = self.__usuario_DAO.get_all()
         dados_usuario = self.__tela.tela_entrar_usuario()
         if dados_usuario == None:
             pass 

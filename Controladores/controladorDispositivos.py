@@ -12,18 +12,15 @@ from Entidades.lavaloucas import LavaLoucas
 from Entidades.pontoDeluz import PontoDeLuz
 from Entidades.som import Som
 from Entidades.tv import TV
-from DAOs.dispositivos_dao import DispositivoDAO
 
 class ControladorDispositivos(): 
     #colocar contolador sistema no UML 
     def __init__(self, controlador_sistema):
+        self.__dispositivos = [] 
         self.__controlador_sistema = controlador_sistema
-        self.__dispositivo_DAO = DispositivoDAO()
-        self.__dispositivos = self.__dispositivo_DAO.get_all()
         self.__tela_dispositivos = TelaDispositivos() 
     
     def find_dispositivo(self, codigo: int, nome: str): 
-        self.__dispositivos = self.__dispositivo_DAO.get_all()
         for dispositivo in self.__dispositivos:
             if (dispositivo.codigo == codigo) and (dispositivo.nome == nome): 
                 return dispositivo
@@ -31,7 +28,6 @@ class ControladorDispositivos():
         return None 
         
     def incluir_dispositivo(self): 
-        self.__dispositivos = self.__dispositivo_DAO.get_all()
         dados_dispositivo = self.__tela_dispositivos.pega_dados_dispositivo()
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         tipo_dispositivo = self.__tela_dispositivos.escolher_tipo_dispositivo() 
@@ -68,7 +64,7 @@ class ControladorDispositivos():
                     dispositivo = LavaLoucas(dados_dispositivo["nome"], int(dados_dispositivo["codigo"]), float(dados_dispositivo["potencia"]),
                                              dados_dispositivo["modelo"])
 
-                self.__dispositivo_DAO.add(dispositivo)
+                self.__dispositivos.append(dispositivo)
                 self.__tela_dispositivos.mostrar_mensagem("DISPOSIITIVO ADICIONADO NA LISTA!")
             else:
                 raise KeyError
@@ -76,7 +72,6 @@ class ControladorDispositivos():
             self.__tela_dispositivos.mostrar_mensagem("Dispositivo já existente na lista!") 
 
     def lista_dispositivos(self): 
-        self.__dispositivos = self.__dispositivo_DAO.get_all()
         dados_dispositivo = []
         if self.__dispositivos == []:
             self.__tela_dispositivos.mostrar_mensagem("Ainda não há dispositivos cadastrados")
@@ -145,7 +140,7 @@ class ControladorDispositivos():
         dispositivo = self.find_dispositivo(int(dados_dispositivo["codigo"]), dados_dispositivo["nome"])
         try:
             if (dispositivo is not None):
-                self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
+                # self.__tela_dispositivos.mostrar_mensagem("--- Controle do Dispositivo ---")
                 if type(dispositivo) == ArCondicionado:
                     lista_opcoes = {1: self.liga_desliga, 2: self.controlar_temperatura, 3: self.controlar_timer, 4: self.info_disp, 0: self.void_func}
                     opcao_escolhida = self.__tela_dispositivos.controle_arcondicionado()
@@ -265,7 +260,7 @@ class ControladorDispositivos():
                 dispositivo.escolher_timer_ligar(float(tempo))
                 self.__tela_dispositivos.mostrar_mensagem(f"Timer ligar: {dispositivo.timer_ligar}")
                 self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Definiu Timer para Ligar")
-        else: 
+        elif opcao == 2:
             tempo = self.__tela_dispositivos.valor_float() 
             if tempo == None: 
                 pass
@@ -280,6 +275,7 @@ class ControladorDispositivos():
         # opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
         opcao = self.__tela_dispositivos.controle_modo() 
         dispositivo.escolher_modo(opcao)
+        self.__tela_dispositivos.mostrar_mensagem(f"Modo: {dispositivo.modo}")
         self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Definiu Timer Modo para o Dispositivo")
 
 
@@ -303,23 +299,27 @@ class ControladorDispositivos():
     #         self.__tela_dispositivos.mostrar_mensagem(f"Modo: {dispositivo.modo}")
     
     def info_disp(self, dispositivo): 
-        dados_dispositivo = []
-        dados_dispositivo.append({'nome' : dispositivo.nome})
-        dados_dispositivo.append(dispositivo.codigo)
-        dados_dispositivo.append(dispositivo.modelo)
-        dados_dispositivo.append(dispositivo.potencia)
+        dados_dispositivo = {}
+        dados_dispositivo['nome'] = dispositivo.nome
+        dados_dispositivo['codigo'] = dispositivo.codigo 
+        dados_dispositivo['modelo'] = dispositivo.modelo
+        dados_dispositivo['potencia'] = dispositivo.potencia
+        dados_dispositivo['temperatura'] = 'Não existe nesse dispositivo'
+        dados_dispositivo['volume'] = 'Não existe nesse dispositivo'
+        dados_dispositivo['canal'] = 'Não existe nesse dispositivo'
+        dados_dispositivo['modo'] = 'Não existe nesse dispositivo'
         if type(dispositivo) == Forno or type(dispositivo) == ArCondicionado or type(dispositivo) == Geladeira:
-           dados_dispositivo.append(dispositivo.temperatura)
+            dados_dispositivo['temperatura'] = dispositivo.temperatura
         if type(dispositivo) == TV:
-            dados_dispositivo.append(dispositivo.canal)
+            dados_dispositivo['canal'] = dispositivo.canal
         if type(dispositivo) == TV or type(dispositivo) == Som:
-            dados_dispositivo.append(dispositivo.volume)
+            dados_dispositivo['volume'] = dispositivo.volume
         if dispositivo.estado == True:
-            dados_dispositivo.append('Ligado')
+            dados_dispositivo['estado'] = 'Ligado'
         elif dispositivo.estado == False:
-            dados_dispositivo.append('Desligado')
+            dados_dispositivo['estado'] = 'Desligado'
         if type(dispositivo) == LavadoraDeRoupa or type(dispositivo) == LavaLoucas: 
-            dados_dispositivo.append(dispositivo.modo)
+            dados_dispositivo['modo'] = dispositivo.modo
 
         self.__tela_dispositivos.mostrar_info_disp(dados_dispositivo)
         
@@ -329,40 +329,47 @@ class ControladorDispositivos():
         controlando_canal = True
         while controlando_canal == True:
             self.__tela_dispositivos.mostrar_mensagem("Digite o canal de sua escolha: ")
-            canal = self.__tela_dispositivos.pegar_valor_int()
-            try:
-                if  dispositivo.canal_min <= canal <= dispositivo.canal_max:
-                    dispositivo.escolher_canal(canal)
-                    self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Trocou Canal")
-                    self.__tela_dispositivos.mostrar_mensagem("Canal trocado com sucesso!")
-                    controlando_canal = False
-                else:
-                    raise ValueError
-            except ValueError:
-                self.__tela_dispositivos.mostrar_mensagem(f"Digite apenas canais dentro do intervalo:\nMínimo: {dispositivo.canal_min}\nMáximo: {dispositivo.canal_max}")
+            canal = self.__tela_dispositivos.valor_int() 
+            if canal == None:
+                controlando_canal = False 
+                break
+            else:
+                try:
+                    if  dispositivo.canal_min <= canal <= dispositivo.canal_max:
+                        dispositivo.escolher_canal(canal)
+                        self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Trocou Canal")
+                        self.__tela_dispositivos.mostrar_mensagem("Canal trocado com sucesso!")
+                        controlando_canal = False
+                    else:
+                        raise ValueError
+                except ValueError:
+                    self.__tela_dispositivos.mostrar_mensagem(f"Digite apenas canais dentro do intervalo:\nMínimo: {dispositivo.canal_min}\nMáximo: {dispositivo.canal_max}")
 
 
     def controlar_volume(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
         self.__tela_dispositivos.mostrar_mensagem("[AUMENTAR VOLUME: 1 / DIMINUIR VOLUME: 2]")
-        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2]) 
+        opcao = self.__tela_dispositivos.controle_volume() 
         if opcao == 1: 
             dispositivo.aumentar_volume() 
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Aumentou Volume")
             self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
-        else: 
+        elif opcao == 2: 
             dispositivo.diminuir_volume()
             self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, "Diminuiu Volume")
             self.__tela_dispositivos.mostrar_mensagem(f"Volume: {dispositivo.volume}")
 
     def controlar_musica(self, dispositivo):
         usuario = self.__controlador_sistema.usuario_atual
-        self.__tela_dispositivos.mostrar_mensagem("--- CONTROLE PLAYER DE MÚSICA ---")
-        self.__tela_dispositivos.mostrar_mensagem("[TOCAR/PAUSAR: 1 / PRÓXIMA MÚSICA: 2 / VOLTAR MÚSICA: 3]")
-        opcao = self.__tela_dispositivos.seleciona_opcao("Escolha a opção: ", [1,2,3])
-        acao = dispositivo.controlar_musica(opcao)
-        self.__tela_dispositivos.mostrar_mensagem(f"O player {acao} a música.")
-        self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, f"{acao} a Música")
+        # self.__tela_dispositivos.mostrar_mensagem("--- CONTROLE PLAYER DE MÚSICA ---")
+        # self.__tela_dispositivos.mostrar_mensagem("[TOCAR/PAUSAR: 1 / PRÓXIMA MÚSICA: 2 / VOLTAR MÚSICA: 3]")
+        opcao = self.__tela_dispositivos.controle_musica() 
+        if acao == None:
+            pass
+        else:
+            acao = dispositivo.controlar_musica(opcao)
+            self.__tela_dispositivos.mostrar_mensagem(f"O player {acao} a música.")
+            self.__controlador_sistema.controlador_eventos.registrar_evento(usuario, dispositivo, f"{acao} a Música")
 
 
     def void_func(self, dispositivo):
